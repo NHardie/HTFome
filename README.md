@@ -1,5 +1,4 @@
 # bioinfo-group-project
-Group project for Bioinformatics masters degree
 
 
 Little Flask Blog, called flaskr
