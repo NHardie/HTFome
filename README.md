@@ -21,7 +21,8 @@ flaskr             manifest.in  setup.py     venv
 
 Then:
 
-$ pip install -e
+$ pip install -e .
+
 If you don't have pip installed, then install pip, the -e tells it to install the setup.py file, should install in dev mode, but not sure, the . means current directory.
 
 flaskr should install the required dependancies
