@@ -15,20 +15,26 @@ $ ls
 
 Should show: 
 
-documentation.txt  instance     __pycache__  tutorial_full.txt
-flaskr             manifest.in  setup.py     venv
+
+documentation.txt     instance        __pycache__     tutorial_full.txt
+
+
+flaskr                manifest.in     setup.py        venv
 
 
 Then:
 
 $ pip install -e .
 
-If you don't have pip installed, then install pip, the -e tells it to install the setup.py file, should install in dev mode, but not sure, the . means current directory.
+If you don't have pip installed, then install pip, the -e tells it to install the setup.py file, should install in dev mode, but not sure
+
+the . means look in current directory.
 
 flaskr should install the required dependancies
 
 
 Then: 
+
 $ export FLASK_APP=flaskr
 
 $ export FLASK_ENV=development
