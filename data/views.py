@@ -18,13 +18,31 @@ from django.http import HttpResponse
     #return HttpResponse("<h1>Home</h1>")
     # A request returns a HTTPResponse
 
+htfdata = [
+    {
+        "ID": "HTF1",
+        "Family": "HTF_family_1",
+        "Location": "HTF_Location_1",
+    },
+    {
+        "ID": "HTF2",
+        "Family": "HTF_family_2",
+        "Location": "HTF_Location_2",
+    }
+]
+
+
 def home(request):
     # Define function, what to do when a request comes
     return render(request, "data/home.html")
     # return render of template located in data/templates/data/home.html
 
 def htf(request):
-    return render(request, "data/htf.html")
+    context = {
+        "htfs": htfdata
+    }
+    # Add a dictionary containing htf's, can now display on html page
+    return render(request, "data/htf.html", context)
 
 def drug(request):
     return render(request, "data/drug.html")
