@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# Add URL's here for whole website
+# Empty path("", is the same as website.com/""
+# Includes "data.urls" which is data/urls.py, go there next
 
 urlpatterns = [
     path('admin/', admin.site.urls),
