@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>HTF</title>
-</head>
-<body>
+{% extends "data/base.html" %}
+
+{% block content %}
     <h1>HTF Data Repo</h1>
     {% for htf in htfs %}
-        <h1>HTF: {{ htf.ID }}</h1>
-        <p>Family {{ htf.Family }}</p>
-        <p>Located in {{ htf.Location }}</p>
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ htf.ID }}</a>
+                    <small class="text-muted">{{ htf.Family }}</small>
+                </div>
+                <h2><a class="article-title" href="#">{{ htf.ID }}</a></h2>
+                <p class="article-content">{{ htf.Location }}</p>
+            </div>
+        </article>
     {% endfor %}
-</body>
-</html>
+{% endblock content %}

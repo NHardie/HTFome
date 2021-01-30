@@ -34,7 +34,7 @@ htfdata = [
 
 def home(request):
     # Define function, what to do when a request comes
-    return render(request, "data/home.html")
+    return render(request, "data/home.html", {'title': 'Home'})
     # return render of template located in data/templates/data/home.html
 
 def htf(request):
