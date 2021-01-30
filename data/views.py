@@ -13,16 +13,21 @@ from django.http import HttpResponse
 # htf_web/urls.py -> data/urls.py -> views.py
 
 
-def home(request):
+#def home(request):
     # define the function to deal with home receiving a request
-    return HttpResponse("<h1>Home</h1>")
+    #return HttpResponse("<h1>Home</h1>")
     # A request returns a HTTPResponse
 
+def home(request):
+    # Define function, what to do when a request comes
+    return render(request, "data/home.html")
+    # return render of template located in data/templates/data/home.html
+
 def htf(request):
-    return HttpResponse("<h1>HTF</h1>")
+    return render(request, "data/htf.html")
 
 def drug(request):
-    return HttpResponse("<h1>DRUG</h1>")
+    return render(request, "data/drug.html")
 
 def genexp(request):
-    return HttpResponse("<h1>GENE EXPRESSION</h1>")
+    return render(request, "data/genexp.html")
