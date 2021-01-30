@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'n6sd7yrooaz+#v-47ncnfy8(2p-9x83^6wfx_gby6opj#nl_qw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', 'htf-app.eu-west-2.elasticbeanstalk.com']
 
