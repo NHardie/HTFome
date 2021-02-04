@@ -13,9 +13,9 @@ from django.http import HttpResponse
 # htf_web/urls.py -> data/urls.py -> views.py
 
 
-#def home(request):
+# def home(request):
     # define the function to deal with home receiving a request
-    #return HttpResponse("<h1>Home</h1>")
+    # return HttpResponse("<h1>Home</h1>")
     # A request returns a HTTPResponse
 
 htfdata = [
@@ -34,7 +34,7 @@ htfdata = [
 
 def home(request):
     # Define function, what to do when a request comes
-    return render(request, "data/home.html", {'title': 'Home'})
+    return render(request, "data/home.html", {'title': 'The Human Transcription Factor Database'})
     # return render of template located in data/templates/data/home.html
 
 def htf(request):
@@ -42,10 +42,22 @@ def htf(request):
         "htfs": htfdata
     }
     # Add a dictionary containing htf's, can now display on html page
-    return render(request, "data/htf.html", context)
+    return render(request, "data/htf.html", context) # TODO: Fix title
 
 def drug(request):
-    return render(request, "data/drug.html")
+    return render(request, "data/drug.html", {'title': 'Drug Search'})
 
 def genexp(request):
-    return render(request, "data/genexp.html")
+    return render(request, "data/genexp.html", {'title': 'GEO Analyser'})
+
+def download(request):
+    return render(request, "data/download.html", {'title': 'Download'})
+
+def about(request):
+    return render(request, "data/about.html", {'title': 'About'})
+
+def help(request):
+    return render(request, "data/help.html", {'title': 'Help'})
+
+def documentation(request):
+    return render(request, "data/documentation.html", {'title': 'Documentation'})
