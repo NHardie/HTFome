@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.db.models import Q
 from django.http import HttpResponse
-from .models import Htf
+from .models import Htf, Drug
 
 # Create your views here.
 
@@ -62,3 +63,13 @@ def help(request):
 
 def documentation(request):
     return render(request, "data/documentation.html", {'title': 'Documentation'})
+
+def search(request):
+    if request.method == "GET":
+        search = request.GET.get("q")
+        htf = Htf.objects.all().filter(
+            Q(name__icontains=search) | Q(gene_id__icontains=search)
+            | Q(gene_symbol__icontains=search) | Q(family__icontains=search)
+            | Q(cell_location__icontains=search) | Q(gene_regulation__icontains=search)
+        )
+        return render(request, "data/search.html", {"htf":htf})

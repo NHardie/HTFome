@@ -18,5 +18,6 @@ urlpatterns = [
     path('download/', views.download, name="download"),
     path('about/', views.about, name="about"),
     path('help/', views.help, name="help"),
-    path('documentation/', views.documentation, name="documentation")
+    path('documentation/', views.documentation, name="documentation"),
+    path('search/', views.search, name="search_results"),
 ]

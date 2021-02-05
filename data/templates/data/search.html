@@ -1,0 +1,23 @@
+{% extends "data/base.html" %}
+
+{% block content %}
+
+    <h1>HTF Data Search</h1>
+    <form action="{% url 'search_results' %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form>
+
+    <h1>HTF Data Repo</h1>
+    {% for htf in htf %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ htf.gene_id }}</a>
+                    <small class="text-muted">{{ htf.family }}</small>
+                </div>
+                <h2><a class="article-title" href="#">{{ htf.ID }}</a></h2>
+                <p class="article-content">{{ htf.cell_location }}</p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
