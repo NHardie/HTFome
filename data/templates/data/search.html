@@ -12,11 +12,11 @@
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ htf.gene_id }}</a>
-                    <small class="text-muted">{{ htf.family }}</small>
+                    <a class="mr-2" href="#">{{ htf.gene_name }}</a>
+                    <small class="text-muted">{{ htf.function }}</small>
                 </div>
-                <h2><a class="article-title" href="#">{{ htf.ID }}</a></h2>
-                <p class="article-content">{{ htf.cell_location }}</p>
+                <h2><a class="article-title" href="#">{{ htf.ensemble_id }}</a></h2>
+                <p class="article-content">{{ htf.sub_cell_location }}</p>
             </div>
         </article>
     {% endfor %}
