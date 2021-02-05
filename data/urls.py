@@ -20,4 +20,5 @@ urlpatterns = [
     path('help/', views.help, name="help"),
     path('documentation/', views.documentation, name="documentation"),
     path('search/', views.search, name="search_results"),
+    path('data_upload/', views.data_upload, name="data_upload"),
 ]

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.http import HttpResponse
 from .models import Htf, Drug
+from django.contrib import messages
+import csv, io
 
 # Create your views here.
 
@@ -68,8 +70,49 @@ def search(request):
     if request.method == "GET":
         search = request.GET.get("q")
         htf = Htf.objects.all().filter(
-            Q(name__icontains=search) | Q(gene_id__icontains=search)
-            | Q(gene_symbol__icontains=search) | Q(family__icontains=search)
-            | Q(cell_location__icontains=search) | Q(gene_regulation__icontains=search)
+            Q(chromosome_name__icontains=search) | Q(dbd__icontains=search)
+            | Q(ensemble_id__icontains=search)
+            | Q(function__icontains=search) | Q(gene_end__icontains=search)
+            | Q(gene_name__icontains=search) | Q(gene_start__icontains=search)
+            | Q(id__icontains=search) | Q(prot_name__icontains=search)
+            | Q(strand__icontains=search) | Q(sub_cell_location__icontains=search)
+            | Q(uniprot_id__icontains=search)
         )
         return render(request, "data/search.html", {"htf":htf})
+
+def data_upload(request):
+    data = Htf.objects.all()
+    prompt = {
+        "Order": "Order of the CSV should be:"
+                 "Ensemble ID, DBD, Gene name, Chromosome/scaffold name, "
+                 "Gene start (bp), Gene end (bp), Strand, "
+                 "UniProt ID, Protein names, Function [CC], Subcellular location [CC]"
+    }
+    if request.method=="GET":
+        return render(request, "data/data_upload.html", prompt)
+
+    csv_file = request.FILES["file"]
+
+    if not csv_file.name.endswith(".csv"):
+        messages.error(request, "This is not a .csv file")
+
+    data_set = csv_file.read().decode("UTF-8")
+
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Htf.objects.update_or_create(
+            ensemble_id=column[0],
+            dbd=column[1],
+            gene_name=column[2],
+            chromosome_name=column[3],
+            gene_start=column[4],
+            gene_end = column[5],
+            strand = column[6],
+            uniprot_id = column[7],
+            prot_name = column[8],
+            function = column[9],
+            sub_cell_location=column[10]
+        )
+    context = {}
+    return render(request, "data/data_upload.html", context)

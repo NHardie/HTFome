@@ -10,12 +10,17 @@ class Drug(models.Model):
     name = models.CharField(max_length=100)
 
 class Htf(models.Model):
-    name = models.CharField(max_length=30)
-    gene_id = models.CharField(max_length=30)
-    gene_symbol = models.CharField(max_length=30)
-    family = models.CharField(max_length=30)
-    cell_location = models.CharField(max_length=30)
-    gene_regulation = models.CharField(max_length=30)
+    ensemble_id = models.CharField(max_length=30)
+    dbd = models.CharField(max_length=30)
+    gene_name = models.CharField(max_length=30)
+    chromosome_name = models.CharField(max_length=30)
+    gene_start = models.CharField(max_length=30)
+    gene_end = models.CharField(max_length=30)
+    strand = models.CharField(max_length=30)
+    uniprot_id = models.CharField(max_length=30)
+    prot_name = models.CharField(max_length=1000)
+    function = models.CharField(max_length=1000)
+    sub_cell_location = models.CharField(max_length=1000)
     drugs = models.ManyToManyField(Drug)
 
 
