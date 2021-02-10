@@ -12,11 +12,9 @@
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ htf.gene_name }}</a>
-                    <small class="text-muted">{{ htf.function }}</small>
-                </div>
-                <h2><a class="article-title" href="#">{{ htf.ensemble_id }}</a></h2>
-                <p class="article-content">{{ htf.sub_cell_location }}</p>
+                    <li><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></li>
+            <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
+            <p class="card-text">Protein name: {{htf.prot_name}}</p>
             </div>
         </article>
     {% endfor %}
