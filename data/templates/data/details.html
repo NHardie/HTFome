@@ -1,0 +1,26 @@
+{% extends "data/base.html" %}
+
+{% block content %}
+    <h1>HTF Data Search</h1>
+    <form action="{% url 'search_results' %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form>
+
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <li><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></li>
+            <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
+            <p class="card-text">Uniprot ID: {{htf.uniprot_id}}</p>
+            <p class="card-text">Protein name: {{htf.prot_name}}</p>
+            <p class="card-text">DBD name: {{htf.dbd}}</p>
+            <p class="card-text">Chromosome: {{htf.chromosome_name}}</p>
+            <p class="card-text">Gene Start: {{htf.gene_start}}</p>
+            <p class="card-text">Gene End: {{htf.gene_end}}</p>
+            <p class="card-text">Strand: {{htf.strand}}</p>
+            <p class="card-text">{{htf.function}}</p>
+            <p class="card-text">Subcellular Location: {{htf.sub_cell_location}}</p>
+            <p class="card-text">Associated Drug Compounds: {{htf.drugs}}</p>
+        </div>
+    </div>
+{% endblock content %}
