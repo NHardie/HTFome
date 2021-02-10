@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import Htf, Drug
 from django.contrib import messages
 import csv, io
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -28,12 +29,13 @@ def home(request):
     # return render of template located in data/templates/data/home.html
 
 def htf(request):
-    all_htfs = Htf.objects.all()
-    context = {
-        "htfs": Htf.objects.all()
-    }
+    all_htfs = Htf.objects.all().order_by('gene_name')
+
+    paginator = Paginator(all_htfs, 15)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     # Add a dictionary containing htf's, can now display on html page
-    return render(request, "data/htf.html", context) # TODO: Fix title
+    return render(request, "data/htf.html", {'page_obj': page_obj}) # TODO: Fix title
 
 def detail(request, gene_name):
     htf = Htf.objects.get(gene_name=gene_name)
