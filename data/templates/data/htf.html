@@ -5,4 +5,16 @@
     <form action="{% url 'search_results' %}" method="get">
         <input name="q" type="text" placeholder="Search...">
     </form>
+
+
+
+{% for htf in htfs %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <li><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></li>
+            <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
+            <p class="card-text">Protein name: {{htf.prot_name}}</p>
+        </div>
+    </div>
+{% endfor %}
 {% endblock content %}

@@ -22,31 +22,25 @@ import csv, io
     # return HttpResponse("<h1>Home</h1>")
     # A request returns a HTTPResponse
 
-htfdata = [
-    {
-        "ID": "HTF1",
-        "Family": "HTF_family_1",
-        "Location": "HTF_Location_1",
-    },
-    {
-        "ID": "HTF2",
-        "Family": "HTF_family_2",
-        "Location": "HTF_Location_2",
-    }
-]
-
-
 def home(request):
     # Define function, what to do when a request comes
     return render(request, "data/home.html", {'title': 'The Human Transcription Factor Database'})
     # return render of template located in data/templates/data/home.html
 
 def htf(request):
+    all_htfs = Htf.objects.all()
     context = {
         "htfs": Htf.objects.all()
     }
     # Add a dictionary containing htf's, can now display on html page
     return render(request, "data/htf.html", context) # TODO: Fix title
+
+def detail(request, gene_name):
+    htf = Htf.objects.get(gene_name=gene_name)
+    context={
+        "htf":htf
+    }
+    return render(request, "data/details.html", context)
 
 def drug(request):
     return render(request, "data/drug.html", {'title': 'Drug Search'})
@@ -79,6 +73,7 @@ def search(request):
             | Q(uniprot_id__icontains=search)
         )
         return render(request, "data/search.html", {"htf":htf})
+
 
 def data_upload(request):
     data = Htf.objects.all()
