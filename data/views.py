@@ -73,8 +73,11 @@ def search(request):
             | Q(id__icontains=search) | Q(prot_name__icontains=search)
             | Q(strand__icontains=search) | Q(sub_cell_location__icontains=search)
             | Q(uniprot_id__icontains=search)
-        )
-        return render(request, "data/search.html", {"htf":htf})
+        ).order_by('gene_name')
+        paginator = Paginator(htf, 15)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, "data/search.html", {'page_obj': page_obj})
 
 
 def data_upload(request):
