@@ -8,14 +8,14 @@
     </form>
 
     <h1>HTF Data Repo</h1>
-{% for htf in htfs %}
-    <div class="card mb-4">
-        <div class="card-body">
-            <li><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></li>
+    {% for htf in htf %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <li><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></li>
             <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
             <p class="card-text">Protein name: {{htf.prot_name}}</p>
-        </div>
-    </div>
-{% endfor %}
-
+            </div>
+        </article>
+    {% endfor %}
 {% endblock content %}
