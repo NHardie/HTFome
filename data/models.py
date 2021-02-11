@@ -19,8 +19,8 @@ class Htf(models.Model):
     strand = models.CharField(max_length=30)
     uniprot_id = models.CharField(max_length=30)
     prot_name = models.CharField(max_length=1000)
-    function = models.CharField(max_length=1000)
-    sub_cell_location = models.CharField(max_length=1000)
+    function = models.CharField(max_length=100000)
+    sub_cell_location = models.CharField(max_length=100000)
     drugs = models.ManyToManyField(Drug)
 
 

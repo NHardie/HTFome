@@ -100,7 +100,7 @@ def data_upload(request):
 
     io_string = io.StringIO(data_set)
     next(io_string)
-    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+    for column in csv.reader(io_string, delimiter='\t', quotechar="|"):
         _, created = Htf.objects.update_or_create(
             ensemble_id=column[0],
             dbd=column[1],
