@@ -10,8 +10,8 @@
     <div class="card mb-4">
         <div class="card-body">
             <li><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></li>
-            <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
-            <p class="card-text">Uniprot ID: {{htf.uniprot_id}}</p>
+            <p class="card-text text-muted h6"> <a href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g={{ htf.ensemble_id }};r=11:2268495-2270952;t=ENST00000331289/"> Ensemble ID: {{ htf.ensemble_id }} </a></p>
+            <p class="card-text"><a href="https://www.uniprot.org/uniprot/{{htf.uniprot_id}}/"> UniProt ID: {{htf.uniprot_id}}</a></p>
             <p class="card-text">Protein name: {{htf.prot_name}}</p>
             <p class="card-text">DBD name: {{htf.dbd}}</p>
             <p class="card-text">Chromosome: {{htf.chromosome_name}}</p>
