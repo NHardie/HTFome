@@ -1,11 +1,12 @@
 {% extends "data/base.html" %}
 
 {% block content %}
-
     <h1>HTF Data Search</h1>
+    <div class="container" style="padding-bottom: 20px; margin-left:14px">
     <form action="{% url 'search_results' %}" method="get">
         <input name="q" type="text" placeholder="Search...">
     </form>
+    </div>
 
     <h1 style="margin-left: 14px">HTF Data Repo</h1><hr>
     {% for htf in page_obj %}
