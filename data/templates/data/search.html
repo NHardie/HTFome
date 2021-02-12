@@ -7,15 +7,15 @@
         <input name="q" type="text" placeholder="Search...">
     </form>
 
-    <h1>HTF Data Repo</h1>
+    <h1 style="margin-left: 14px">HTF Data Repo</h1><hr>
     {% for htf in page_obj %}
-        <article class="media content-section">
+        <article class="media content-section" style="margin-left:15px">
             <div class="media-body">
                 <div class="article-metadata">
-                    <li><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></li>
+                    <strong><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></strong>
             <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
             <p class="card-text">Protein name: {{htf.prot_name}}</p>
-            </div>
+            </div><hr>
         </article>
     {% endfor %}
 
