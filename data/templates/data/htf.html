@@ -12,7 +12,7 @@
 {% for htf in page_obj %}
     <div class="card mb-4">
         <div class="card-body" style="margin-left:15px">
-            <strong><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></strong>
+            <h5 style="font-weight:600">Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
             <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
             <p class="card-text">Protein name: {{htf.prot_name}}</p>
         </div><hr>

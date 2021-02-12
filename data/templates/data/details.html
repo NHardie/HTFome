@@ -1,17 +1,19 @@
 {% extends "data/base.html" %}
 
 {% block content %}
-    <h1>HTF Data Search</h1>
+    <h1 style="margin-left: 14px">HTF Data Search</h1>
+    <div class="container" style="padding-bottom: 20px; margin-left:14px">
     <form action="{% url 'search_results' %}" method="get">
         <input name="q" type="text" placeholder="Search...">
     </form>
+    </div>
 
 
     <div class="card mb-4">
-        <div class="card-body">
-            <li><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></li>
-            <p class="card-text text-muted h6"> <a href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g={{ htf.ensemble_id }};r=11:2268495-2270952;t=ENST00000331289/"> Ensemble ID: {{ htf.ensemble_id }} </a></p>
-            <p class="card-text"><a href="https://www.uniprot.org/uniprot/{{htf.uniprot_id}}/"> UniProt ID: {{htf.uniprot_id}}</a></p>
+        <div class="card-body" style="margin-left:15px">
+            <h5 style="font-weight:600">Name: {{ htf.gene_name }}</h5>
+            <p class="card-text text-muted h6"> Ensemble ID: <a href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g={{ htf.ensemble_id }};r=11:2268495-2270952;t=ENST00000331289/"> {{ htf.ensemble_id }} </a></p>
+            <p class="card-text"> UniProt ID: <a href="https://www.uniprot.org/uniprot/{{htf.uniprot_id}}/">{{htf.uniprot_id}}</a></p>
             <p class="card-text">Protein name: {{htf.prot_name}}</p>
             <p class="card-text">DBD name: {{htf.dbd}}</p>
             <p class="card-text">Chromosome: {{htf.chromosome_name}}</p>
