@@ -5,6 +5,7 @@ from .models import Htf, Drug
 from django.contrib import messages
 import csv, io
 from django.core.paginator import Paginator
+from .filters import Htffilter
 
 # Create your views here.
 
@@ -62,10 +63,12 @@ def help(request):
 def documentation(request):
     return render(request, "data/documentation.html", {'title': 'Documentation'})
 
+
 def search(request):
+    fil = Htffilter(request.GET, queryset=Htf.objects.all())
     if request.method == "GET":
         search = request.GET.get("q")
-        htf = Htf.objects.all().filter(
+        f = Htffilter(request.GET, queryset=Htf.objects.filter(
             Q(chromosome_name__icontains=search) | Q(dbd__icontains=search)
             | Q(ensemble_id__icontains=search)
             | Q(function__icontains=search) | Q(gene_end__icontains=search)
@@ -73,11 +76,17 @@ def search(request):
             | Q(id__icontains=search) | Q(prot_name__icontains=search)
             | Q(strand__icontains=search) | Q(sub_cell_location__icontains=search)
             | Q(uniprot_id__icontains=search)
-        ).order_by('gene_name')
-        paginator = Paginator(htf, 15)
-        page_number = request.GET.get('page')
+        ))
+        paginator = Paginator(f.qs, 15)
+        page_number = request.GET.get('page', 1)
         page_obj = paginator.get_page(page_number)
-        return render(request, "data/search.html", {'page_obj': page_obj})
+        new_request = ''
+        for i in request.GET:
+            if i != 'page':
+                val = request.GET.get(i)
+                new_request += f"&{i}={val}"
+
+    return render(request, "data/search.html", {'filter': fil, 'page_obj':page_obj,'new_request': new_request})
 
 
 def data_upload(request):
