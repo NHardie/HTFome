@@ -36,7 +36,7 @@ def htf(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     # Add a dictionary containing htf's, can now display on html page
-    return render(request, "data/htf.html", {'page_obj': page_obj}) # TODO: Fix title
+    return render(request, "data/htf.html", {'page_obj': page_obj, 'title': 'HTF Search'})
 
 def detail(request, gene_name):
     htf = Htf.objects.get(gene_name=gene_name)
@@ -49,7 +49,7 @@ def drug(request):
     return render(request, "data/drug.html", {'title': 'Drug Search'})
 
 def genexp(request):
-    return render(request, "data/genexp.html", {'title': 'GEO Analyser'})
+    return render(request, "data/genexp.html", {'title': 'GEO DataSet Analyser'})
 
 def download(request):
     return render(request, "data/download.html", {'title': 'Download'})
