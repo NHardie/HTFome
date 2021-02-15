@@ -1,105 +1,46 @@
 {% extends "data/base.html" %}
 
 {% block content %}
-    <body>
-    <!-- Header with full-height image -->
-<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
-  <div class="container" style="padding:100px">
-    <span class="w3-jumbo w3-hide-small" style="color: #d2e7ee">HTFome</span><br>
-    <span class="w3-xxlarge w3-hide-large w3-hide-medium">HTFome</span><br>
-    <span class="w3-large" style="color:#d2e7ee ">The Human Transcription Factor browser</span>
-    <p><a href="#about" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Learn more about HTFome</a></p>
-  </div>
-</header>
 
-<!-- Tools Section -->
-<div class="w3-container" style="padding:128px 16px" id="about">
-  <h3 class="w3-center">Get started</h3>
-  <div class="w3-row-padding w3-center" style="margin-top:64px">
-    <div class="w3-third">
-      <i class="fa fa-spinner w3-margin-bottom w3-jumbo w3-center"></i>
-      <p class="w3-large">HTF search</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-    <div class="w3-third">
-      <i class="fa fa-flask w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Drug search</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-    <div class="w3-third">
-      <i class="fa fa-desktop w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">GEO Analyser</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-  </div>
-</div>
+    <main role="main" class="home container">
+        <div class="row">
 
-<!-- Detailed Tools Section "HTF Search" -->
-<div class="w3-container w3-light-grey" style="padding:128px 16px">
-  <div class="w3-row-padding">
-    <div class="w3-col m6">
-      <h3>HTF Search</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>tempor incididunt ut labore et dolore.</p>
-      <p><a href="#work" class="w3-button w3-black"><i class="fa fa-spinner"> </i> HTF Search</a></p>
-    </div>
-    <div class="w3-col m6">
-      <img class="w3-image w3-round-large" src="https://www.thesgc.org/sites/default/files/nstruct/img/6el8_structure.png" alt="human-transcription-factor" width="700" height="394">
-    </div>
-  </div>
-</div>
+            <!-- Title and description -->
+            <div class="col-12 col-lg-7">
+                <h1 class="mt-5">HTFome</h1>
+                <p class="lead">Explore human transcription factors</p>
+            </div>
 
-<!-- Detailed Tools Section "Drug Search" -->
-<div class="w3-container w3-white" style="padding:128px 16px">
-  <div class="w3-row-padding">
-    <div class="w3-col m6">
-      <h3>Drug Search</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>tempor incididunt ut labore et dolore.</p>
-      <p><a href="#work" class="w3-button w3-black"><i class="fa fa-flask"> </i> Drug Search</a></p>
-    </div>
-    <div class="w3-col m6">
-      <img class="w3-image w3-round-large" src="https://www.atdbio.com/img/articles/esperamicin-binding-large.png" alt="drug-dna-interaction" width="700" height="394">
-    </div>
-  </div>
-</div>
+            <!-- Cards -->
+            <div class="col-12 col-lg-5">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">HTF Search</h5>
+                            <p class="card-text">Search for human transcription factors.</p>
+                            <a href="{% url 'htf' %}" class="card-link">Get started</a>
+                        </div>
+                    </div>
 
-<!-- Detailed Tools Section "GEO Analyser" -->
-<div class="w3-container w3-light-grey" style="padding:128px 16px">
-  <div class="w3-row-padding">
-    <div class="w3-col m6">
-      <h3>GEO Analyser</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>tempor incididunt ut labore et dolore.</p>
-      <p><a href="#work" class="w3-button w3-black"><i class="fa fa-flask"> </i> GEO Analyser</a></p>
-    </div>
-    <div class="w3-col m6">
-      <img class="w3-image w3-round-large" src="https://www.atdbio.com/img/articles/esperamicin-binding-large.png" alt="drug-dna-interaction" width="700" height="394">
-    </div>
-  </div>
-</div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Drug Search</h5>
+                            <p class="card-text">Search for drugs that target human transcription factors.</p>
+                            <a href="{% url 'drug' %}" class="card-link">Get started</a>
+                        </div>
+                    </div>
 
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">GEO DataSet Analyser</h5>
+                            <p class="card-text">Upload gene expression data from GEO to obtain summary statistics and an estimate of transcription factor activity.</p>
+                            <a href="{% url 'genexp' %}" class="card-link">Get started</a>
+                        </div>
+                    </div>
 
-<!-- HTFome Statistics -->
-<div class="w3-container w3-row w3-center w3-dark-grey w3-padding-64">
-  <div class="w3-quarter">
-    <span class="w3-xxlarge">6</span>
-    <br>Databases
-  </div>
-  <div class="w3-quarter">
-    <span class="w3-xxlarge">1603</span>
-    <br>HTFs
-  </div>
-  <div class="w3-quarter">
-    <span class="w3-xxlarge">89</span>
-    <br>HTF Families
-  </div>
-  <div class="w3-quarter">
-    <span class="w3-xxlarge">150</span>
-    <br>Drugs
-  </div>
-</div>
-
-<!-- Footer -->
-<footer class="w3-center w3-black w3-padding-64">
-  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
-</footer>
+                </div>
+            </div>
+        </div>
+    </main>
 
 {% endblock content %}
