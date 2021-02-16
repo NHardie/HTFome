@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'htf_web',
     'data.apps.DataConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

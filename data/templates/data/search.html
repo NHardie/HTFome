@@ -29,8 +29,7 @@
             {% endfor %}
 
         {% else %}
-            {% if filter.qs %}
-                {% for htf in filter.qs %}
+                {% for htf in page_obj_1 %}
                     <article class="media content-section">
                         <div class="media-body">
                             <div class="article-metadata">
@@ -41,23 +40,39 @@
                         </div>
                     </article>
                 {% endfor %}
-            {% endif %}
+
         {% endif %}
 
         <div class="pagination">
             <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1&q={{ new_request }}">&laquo; first</a>
-                    <a href="?page={{ page_obj.previous_page_number }}&q={{ new_request }}">previous</a>
+                {% if page_obj %}
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1&q={{ new_request }}">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}&q={{ new_request }}">previous</a>
+                    {% endif %}
+                {% else %}
+                    {% if page_obj_1.has_previous %}
+                        <a href="?page=1&q={{ new_request }}">&laquo; first</a>
+                        <a href="?page={{ page_obj_1.previous_page_number }}&q={{ new_request }}">previous</a>
+                    {% endif %}
                 {% endif %}
-
                 <span class="current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    {% if page_obj %}
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    {% else %}
+                        Page {{ page_obj_1.number }} of {{ page_obj_1.paginator.num_pages }}.
+                    {% endif %}
                 </span>
-
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}&q={{ new_request }}">next</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a>
+                {% if page_obj %}
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}&q={{ new_request }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a>
+                    {% endif %}
+                {% else %}
+                    {% if page_obj_1.has_next %}
+                        <a href="?page={{ page_obj_1.next_page_number }}&q={{ new_request }}">next</a>
+                        <a href="?page={{ page_obj_1.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a>
+                    {% endif %}
                 {% endif %}
             </span>
         </div>

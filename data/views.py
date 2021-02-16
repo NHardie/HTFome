@@ -1,20 +1,19 @@
 from django.shortcuts import render
 from django.db.models import Q
-from django.http import HttpResponse
 from .models import Htf, Drug
 from django.contrib import messages
 import csv, io
 from django.core.paginator import Paginator
 from .filters import Htffilter
 
-# Create your views here.
+# Create your views (Webpages) here.
 
 # From data/urls.py
 # Views = webpages
 # Each function defines what to do when the url referenced in data/urls.py
 # is accessed with a http request
-# In these examples, each request to the function returns an httpResponse
-# these are wrapped in <h1></h1> tags, meaning page headers
+# In these examples, each request to the function returns an httpResponse,
+# or a template.
 # Route is as follows:
 # htf_web/urls.py -> data/urls.py -> views.py
 
@@ -31,18 +30,31 @@ def home(request):
 
 def htf(request):
     all_htfs = Htf.objects.all().order_by('gene_name')
+    # This is the model (database table) containing the HTF's, we take the table,
+    # all the HTF's and order them alphabetically by gene_name
 
     paginator = Paginator(all_htfs, 15)
+    # This is the Paginator function working on the HTF list, displaying 15 per page
+
     page_number = request.GET.get('page')
+    # Need to know the page_number, i.e. page 1, 2, 3...109
+
     page_obj = paginator.get_page(page_number)
-    # Add a dictionary containing htf's, can now display on html page
+    # This releases a page object for us to use in the html template
+    # page_object contains the list of HTF's for each page.
+
+    # Add a dictionary containing htf's as a page object, can now display on html page
     return render(request, "data/htf.html", {'page_obj': page_obj, 'title': 'HTF Search'})
 
 def detail(request, gene_name):
     htf = Htf.objects.get(gene_name=gene_name)
+    # Again we want the HTF table but a GET request for the specific HTF by gene name
+
     context={
         "htf":htf
     }
+    # Use this context dictionary as an example of another way of releasing this variable
+    # for the HTML page to access. Could do {'htf": htf} instead of context.
     return render(request, "data/details.html", context)
 
 def drug(request):
@@ -63,30 +75,55 @@ def help(request):
 def documentation(request):
     return render(request, "data/documentation.html", {'title': 'Documentation'})
 
-
 def search(request):
     fil = Htffilter(request.GET, queryset=Htf.objects.all())
+    # This is the filter object as designed in the filters.py, allows us to generate a
+    # filter form on the webpage
+    paginator_1 = Paginator(fil.qs, 15)
+    page_number_1 = request.GET.get('page', 1)
+    page_obj_1 = paginator_1.get_page(page_number_1)
+
     if request.method == "GET":
         search = request.GET.get("q")
+        # Need to create a search using GET requests from the webpage.
+        # Here "q" stands for query, on the HTML template this is what the user inputs as a search
+
         f = Htffilter(request.GET, queryset=Htf.objects.filter(
-            Q(chromosome_name__icontains=search) | Q(dbd__icontains=search)
-            | Q(ensemble_id__icontains=search)
+            Q(chromosome_name__iexact=search) | Q(dbd__icontains=search)
+            | Q(ensemble_id__iexact=search)
             | Q(function__icontains=search) | Q(gene_end__icontains=search)
             | Q(gene_name__icontains=search) | Q(gene_start__icontains=search)
-            | Q(id__icontains=search) | Q(prot_name__icontains=search)
-            | Q(strand__icontains=search) | Q(sub_cell_location__icontains=search)
-            | Q(uniprot_id__icontains=search)
+            | Q(id__icontains=search) | Q(prot_name__iexact=search)
+            | Q(strand__icontains=search) | Q(sub_cell_location__iexact=search)
+            | Q(uniprot_id__iexact=search)
         ))
+        # This is the query function for the full search, allows user to search
+        # any of the database table fields, returns results that match the search
+        # exactly, or the search contains the search.
+
         paginator = Paginator(f.qs, 15)
+        # Pagination function for f, can't paginate both this search and
+        # the filter search.
+
         page_number = request.GET.get('page', 1)
+        # Need to know page numbers
+
         page_obj = paginator.get_page(page_number)
+        # Need a page object for the HTML template
+
         new_request = ''
+        # Empty string to put url's into
+
         for i in request.GET:
             if i != 'page':
                 val = request.GET.get(i)
                 new_request += f"&{i}={val}"
+                # Adds the search parameters to the empty string
+                # This is then added into the HTML template as pagination
+                # to allow the user to click next/ previous page without
+                # losing their search terms.
 
-    return render(request, "data/search.html", {'filter': fil, 'page_obj':page_obj,'new_request': new_request})
+    return render(request, "data/search.html", {'filter': fil, 'page_obj':page_obj,'page_obj_1':page_obj_1,'new_request': new_request})
 
 
 def data_upload(request):
