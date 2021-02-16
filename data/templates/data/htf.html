@@ -1,39 +1,41 @@
 {% extends "data/base.html" %}
 
 {% block content %}
-    <h1>HTF Data Search</h1>
-    <h2>Showing 15 of 1626 HTF's</h2>
-    <div class="container" style="padding-bottom: 20px; margin-left:14px">
-    <form action="{% url 'search_results' %}" method="get">
-        <input name="q" type="text" placeholder="Search...">
-    </form>
-    </div>
 
+    <main role="main" class="container">
+        <h1 class="mt-4">{{ title }}</h1>
+        <div class="container">
+            <form action="{% url 'search_results' %}" method="get">
+                <input name="q" type="text" placeholder="Search HTFs...">
+            </form>
+        </div>
 
-{% for htf in page_obj %}
-    <div class="card mb-4">
-        <div class="card-body" style="margin-left:15px">
-            <h5 style="font-weight:600">Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
-            <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
-            <p class="card-text">Protein name: {{htf.prot_name}}</p>
-        </div><hr>
-    </div>
-{% endfor %}
-<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
+        {% for htf in page_obj %}
+            <div class="card mb-4">
+                <div class="card-body" style="margin-left:15px">
+                    <h5 style="font-weight:600">Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
+                    <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
+                    <p class="card-text">Protein name: {{htf.prot_name}}</p>
+                </div>
+            </div>
+        {% endfor %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </main>
 {% endblock content %}

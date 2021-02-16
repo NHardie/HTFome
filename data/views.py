@@ -43,8 +43,8 @@ def htf(request):
     # This releases a page object for us to use in the html template
     # page_object contains the list of HTF's for each page.
 
-    # Add a dictionary with the page object, can now display on html page
-    return render(request, "data/htf.html", {'page_obj': page_obj}) # TODO: Fix title
+    # Add a dictionary containing htf's as a page object, can now display on html page
+    return render(request, "data/htf.html", {'page_obj': page_obj, 'title': 'HTF Search'})
 
 def detail(request, gene_name):
     htf = Htf.objects.get(gene_name=gene_name)
@@ -61,7 +61,7 @@ def drug(request):
     return render(request, "data/drug.html", {'title': 'Drug Search'})
 
 def genexp(request):
-    return render(request, "data/genexp.html", {'title': 'GEO Analyser'})
+    return render(request, "data/genexp.html", {'title': 'GEO DataSet Analyser'})
 
 def download(request):
     return render(request, "data/download.html", {'title': 'Download'})
