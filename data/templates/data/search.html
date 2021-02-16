@@ -1,62 +1,81 @@
 {% extends "data/base.html" %}
 
 {% block content %}
-    <h1>HTF Data Search</h1>
-    <div class="container" style="padding-bottom: 20px; margin-left:14px">
-    <form action="{% url 'search_results' %}" method="get">
-        {{ filter.form.as_p }}
-        <input name="q" type="submit">
-    </form>
-    </div>
-    <div class="container" style="padding-bottom: 20px; margin-left:14px">
-    <form action="{% url 'search_results' %}" method="get">
-        <input name="q" type="text" placeholder="Search All...">
-    </form>
-    </div>
 
-    <h1 style="margin-left: 14px">HTF Data Repo</h1><hr>
-
-{% if page_obj %}
-    {% for htf in page_obj %}
-        <div class="card mb-4">
-            <div class="card-body" style="margin-left:15px">
-                <h5 style="font-weight:600">Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
-                <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
-                <p class="card-text">Protein name: {{htf.prot_name}}</p>
-            </div><hr>
+    <main role="main" class="container">
+        <h1 class="mt-4">HTF Data Search</h1>
+        <div class="container">
+            <form action="{% url 'search_results' %}" method="get">
+                {{ filter.form.as_p }}
+                <input name="q" type="submit">
+            </form>
         </div>
-    {% endfor %}
+        <div class="container">
+            <form action="{% url 'search_results' %}" method="get">
+                <input name="q" type="text" placeholder="Search All...">
+            </form>
+        </div>
 
-{% else %}
-    {% if filter.qs %}
-    {% for htf in filter.qs %}
-        <article class="media content-section" style="margin-left:15px">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <strong><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></strong>
-            <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
-            <p class="card-text">Protein name: {{htf.prot_name}}</p>
-            </div><hr>
-        </article>
-    {% endfor %}
-{% endif %}
-{% endif %}
+        <h1>HTF Data Repo</h1>
+        {% if page_obj %}
+            {% for htf in page_obj %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5>Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
+                        <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
+                        <p class="card-text">Protein name: {{htf.prot_name}}</p>
+                    </div>
+                </div>
+            {% endfor %}
 
-<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1&q={{ new_request }}">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}&q={{ new_request }}">previous</a>
+        {% else %}
+
+                {% for htf in page_obj_1 %}
+                    <article class="media content-section">
+                        <div class="media-body">
+                            <div class="article-metadata">
+                                <strong><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></strong>
+                                <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
+                                <p class="card-text">Protein name: {{htf.prot_name}}</p>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+
         {% endif %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}&q={{ new_request }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj %}
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1&q={{ new_request }}">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}&q={{ new_request }}">previous</a>
+                    {% endif %}
+                {% else %}
+                    {% if page_obj_1.has_previous %}
+                        <a href="?page=1&q={{ new_request }}">&laquo; first</a>
+                        <a href="?page={{ page_obj_1.previous_page_number }}&q={{ new_request }}">previous</a>
+                    {% endif %}
+                {% endif %}
+                <span class="current">
+                    {% if page_obj %}
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    {% else %}
+                        Page {{ page_obj_1.number }} of {{ page_obj_1.paginator.num_pages }}.
+                    {% endif %}
+                </span>
+                {% if page_obj %}
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}&q={{ new_request }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a>
+                    {% endif %}
+                {% else %}
+                    {% if page_obj_1.has_next %}
+                        <a href="?page={{ page_obj_1.next_page_number }}&q={{ new_request }}">next</a>
+                        <a href="?page={{ page_obj_1.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a>
+                    {% endif %}
+                {% endif %}
+            </span>
+        </div>
+    </main>
 {% endblock content %}
