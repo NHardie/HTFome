@@ -88,16 +88,18 @@ def search(request):
         search = request.GET.get("q")
         # Need to create a search using GET requests from the webpage.
         # Here "q" stands for query, on the HTML template this is what the user inputs as a search
-
-        f = Htf.objects.filter(
-            Q(chromosome_name__iexact=search) | Q(dbd__icontains=search)
-            | Q(ensemble_id__iexact=search)
-            | Q(function__icontains=search) | Q(gene_end__icontains=search)
-            | Q(gene_name__icontains=search) | Q(gene_start__icontains=search)
-            | Q(id__icontains=search) | Q(prot_name__iexact=search)
-            | Q(strand__icontains=search) | Q(sub_cell_location__iexact=search)
-            | Q(uniprot_id__iexact=search)
-        )
+        if search:
+            f = Htf.objects.filter(
+                Q(chromosome_name__iexact=search) | Q(dbd__icontains=search)
+                | Q(ensemble_id__iexact=search)
+                | Q(function__icontains=search) | Q(gene_end__icontains=search)
+                | Q(gene_name__icontains=search) | Q(gene_start__icontains=search)
+                | Q(id__icontains=search) | Q(prot_name__iexact=search)
+                | Q(strand__icontains=search) | Q(sub_cell_location__iexact=search)
+                | Q(uniprot_id__iexact=search)
+            )
+        else:
+            f = Htf.objects.none()
         # This is the query function for the full search, allows user to search
         # any of the database table fields, returns results that match the search
         # exactly, or the result contains the search.
