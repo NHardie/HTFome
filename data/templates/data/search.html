@@ -18,6 +18,7 @@
 
         <h1>HTF Data Repo</h1>
         {% if page_obj %}
+            Search Results for: {{ request.GET.q }}
             {% for htf in page_obj %}
                 <div class="card mb-4">
                     <div class="card-body">
@@ -31,7 +32,7 @@
             {% endfor %}
 
         {% else %}
-
+            Search Results for: {{ request }}
             {% for htf in page_obj_1 %}
                 <div class="card mb-4">
                     <div class="card-body">
