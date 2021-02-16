@@ -26,6 +26,8 @@
                         <p class="card-text">Protein name: {{htf.prot_name}}</p>
                     </div>
                 </div>
+                {% empty %}
+                    <h5>No results found</a></h5>
             {% endfor %}
 
         {% else %}
@@ -38,6 +40,8 @@
                         <p class="card-text">Protein name: {{htf.prot_name}}</p>
                     </div>
                 </div>
+                {% empty %}
+                    <h5>No results found</a></h5>
             {% endfor %}
 
         {% endif %}
