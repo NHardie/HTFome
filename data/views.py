@@ -83,12 +83,13 @@ def search(request):
     page_number_1 = request.GET.get('page', 1)
     page_obj_1 = paginator_1.get_page(page_number_1)
 
+
     if request.method == "GET":
         search = request.GET.get("q")
         # Need to create a search using GET requests from the webpage.
         # Here "q" stands for query, on the HTML template this is what the user inputs as a search
 
-        f = Htffilter(request.GET, queryset=Htf.objects.filter(
+        f = Htf.objects.filter(
             Q(chromosome_name__iexact=search) | Q(dbd__icontains=search)
             | Q(ensemble_id__iexact=search)
             | Q(function__icontains=search) | Q(gene_end__icontains=search)
@@ -96,14 +97,13 @@ def search(request):
             | Q(id__icontains=search) | Q(prot_name__iexact=search)
             | Q(strand__icontains=search) | Q(sub_cell_location__iexact=search)
             | Q(uniprot_id__iexact=search)
-        ))
+        )
         # This is the query function for the full search, allows user to search
         # any of the database table fields, returns results that match the search
-        # exactly, or the search contains the search.
+        # exactly, or the result contains the search.
 
-        paginator = Paginator(f.qs, 15)
-        # Pagination function for f, can't paginate both this search and
-        # the filter search.
+        paginator = Paginator(f, 15)
+        # Pagination function for f
 
         page_number = request.GET.get('page', 1)
         # Need to know page numbers
@@ -123,7 +123,8 @@ def search(request):
                 # to allow the user to click next/ previous page without
                 # losing their search terms.
 
-    return render(request, "data/search.html", {'filter': fil, 'page_obj':page_obj,'page_obj_1':page_obj_1,'new_request': new_request})
+    return render(request, "data/search.html", {'filter': fil, 'page_obj':page_obj,'page_obj_1':page_obj_1,
+                                                'new_request': new_request})
 
 
 def data_upload(request):
