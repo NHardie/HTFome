@@ -29,17 +29,16 @@
             {% endfor %}
 
         {% else %}
-                {% for htf in page_obj_1 %}
-                    <article class="media content-section">
-                        <div class="media-body">
-                            <div class="article-metadata">
-                                <strong><a href="/htf/{{ htf.gene_name }}/">Name: {{ htf.gene_name }}</a></strong>
-                                <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
-                                <p class="card-text">Protein name: {{htf.prot_name}}</p>
-                            </div>
-                        </div>
-                    </article>
-                {% endfor %}
+
+            {% for htf in page_obj_1 %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5>Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
+                        <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
+                        <p class="card-text">Protein name: {{htf.prot_name}}</p>
+                    </div>
+                </div>
+            {% endfor %}
 
         {% endif %}
 
