@@ -6,7 +6,7 @@
         <h1 class="mt-4">HTF Data Search</h1>
         <div class="container">
             <form action="{% url 'search_results' %}" method="get">
-                {{ filter.form.as_p }}
+                {{ filter.form.as_table }}
                 <input name="q" type="submit">
             </form>
         </div>
@@ -18,7 +18,7 @@
 
         <h1>HTF Data Repo</h1>
         {% if page_obj %}
-            Search Results for: {{ request.GET.q }}
+        Search Results for: {{ request.GET.q }}
             {% for htf in page_obj %}
                 <div class="card mb-4">
                     <div class="card-body">
@@ -30,21 +30,29 @@
                 {% empty %}
                     <h5>No results found</a></h5>
             {% endfor %}
-
         {% else %}
-            Search Results for: {{ request }}
-            {% for htf in page_obj_1 %}
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5>Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
-                        <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
-                        <p class="card-text">Protein name: {{htf.prot_name}}</p>
-                    </div>
-                </div>
-                {% empty %}
-                    <h5>No results found</a></h5>
-            {% endfor %}
+            Search Results for: {% if request.GET.Gene %}
+            Gene: "{{ request.GET.Gene }}"
+            {% endif %} {% if request.GET.Chromosome %}
+            Chromosome: "{{ request.GET.Chromosome }}" {% endif %}
+            {% if request.GET.Protein %}
+            Protein: "{{ request.GET.Protein }}" {% endif %}
+            {% if request.GET.Function %}
+            Function: "{{ request.GET.Function }}" {% endif %}
+            {% if request.GET.Location %}
+            Location: "{{request.GET.Location}}" {% endif %}
 
+        {% for htf in page_obj_1 %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5>Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
+                    <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
+                    <p class="card-text">Protein name: {{htf.prot_name}}</p>
+                </div>
+            </div>
+            {% empty %}
+                <h5>No results found</a></h5>
+        {% endfor %}
         {% endif %}
 
         <div class="pagination">
