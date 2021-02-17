@@ -2,20 +2,20 @@
 
 Master stylesheet for HTFome website:
 
-1. Body and main layout
+1. Body and general page layout
 2. Navigation bar
 3. Footer
-4. Homepage d3.js sunburst
-4. HTF/Drug search
-5. HTF/Drug info pages
-6. Database layout
-7. GEO DataSet analyser
-8. GEO DataSet dashboard
+4. Homepage
+5. HTF/Drug search
+6. HTF/Drug info pages
+7. Database layout
+8. GEO DataSet analyser
+9. GEO DataSet dashboard
 
 ---------------------------------------------------*/
 
 /*---------------------------------------------------
-1. Body and main layout
+1. Body and general page layout
 ---------------------------------------------------*/
 
 body, html {
@@ -116,26 +116,51 @@ main {
 4. Homepage
 ---------------------------------------------------*/
 
-.home {
-  min-height: 100vh;
+.home, .row {
+  min-height: 100%;
 }
 
+.card {
+  flex-basis: 728px;
+    top: 0;
+    margin-bottom: 18px;
+  border: none;
+  box-shadow: 0px 17px 15px -22px rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+  min-height: 128px;
+}
+
+/* Make cards responsive */
+.card:hover,
+.card:focus {
+  top: 5px;
+  box-shadow: 0px 5px 11px -6px rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+
 /*---------------------------------------------------
-4. HTF/Drug search
+5. HTF/Drug search
 ---------------------------------------------------*/
 
 /*---------------------------------------------------
-5. HTF/Drug info pages
+6. HTF/Drug info pages
 ---------------------------------------------------*/
 
 /*---------------------------------------------------
-6. Database layout
+7. Database layout
 ---------------------------------------------------*/
 
 /*---------------------------------------------------
-7. GEO DataSet analyser
+8. GEO DataSet analyser
 ---------------------------------------------------*/
 
 /*---------------------------------------------------
-8. GEO DataSet dashboard
+9. GEO DataSet dashboard
 ---------------------------------------------------*/
