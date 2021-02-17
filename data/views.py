@@ -85,7 +85,7 @@ def search(request):
 
 
     if request.method == "GET":
-        search = request.GET.get("q")
+        search = request.GET.get("q", '')
         # Need to create a search using GET requests from the webpage.
         # Here "q" stands for query, on the HTML template this is what the user inputs as a search
         if search:
@@ -126,7 +126,7 @@ def search(request):
                 # losing their search terms.
 
     return render(request, "data/search.html", {'filter': fil, 'page_obj':page_obj,'page_obj_1':page_obj_1,
-                                                'new_request': new_request})
+                                                'new_request': new_request, 'search':search})
 
 
 def data_upload(request):
