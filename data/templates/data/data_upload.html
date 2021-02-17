@@ -1,12 +1,5 @@
-{% extends "data/base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+
     {% if messages %}
         {% for message in messages %}
             <div>
@@ -27,5 +20,4 @@
     {% for profile in profiles %}
     {{profile.name}}
     {% endfor %}
-</body>
-</html>
+

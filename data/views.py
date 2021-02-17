@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.db.models import Q
 from .models import Htf, Drug
-from django.contrib import messages
+from django.contrib import messages, admin
+from django.contrib.auth.decorators import login_required
+from django.conf.urls import url
 import csv, io
 from django.core.paginator import Paginator
 from .filters import Htffilter
@@ -127,6 +129,8 @@ def search(request):
 
     return render(request, "data/search.html", {'filter': fil, 'page_obj':page_obj,'page_obj_1':page_obj_1,
                                                 'new_request': new_request, 'search':search})
+
+
 
 
 def data_upload(request):
