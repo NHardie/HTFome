@@ -129,7 +129,7 @@ def search(request):
                                                 'new_request': new_request, 'search':search})
 
 
-def data_upload(request):
+def data_upload_HTF(request):
     data = Htf.objects.all()
     prompt = {
         "Order": "Order of the CSV should be:"
