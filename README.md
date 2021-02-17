@@ -8,7 +8,7 @@ Group project for Bioinformatics masters degree
 ### Website development
 
 
-####Root
+#### Root
 
 Within the root directory for the project there are several directories and files. 
 
@@ -29,7 +29,7 @@ requirements.txt: pip install -r requirements.txt will install all required pack
 Creation of further applications/ webpages/ HTML templates etc follows normal Django development guidelines.
 
 
-####htf_web
+#### htf_web
 
 Start in htf_web, this is the main folder containing the "website" (The Django project)
 
@@ -63,17 +63,17 @@ models.py contains the database models (tables), add new models here to generate
 tests.py should contain any development tests required.
 
 
-####data/urls.py
+#### data/urls.py
 
 One of the most important files, urls.py contains the url patterns/paths for the app to match and link users to the correct HTML template
 
 
-####data/views.py
+#### data/views.py
 
 Another crucial file, this is where the views (webpages) are created. Each view contains python functions/ classes which generate objects which the HTML template can then utilise. Various data manipulations can be performed here, to then output something for the user.
 
 
-####data/templates/data/*.html
+#### data/templates/data/*.html
 
 These HTML files are the templates which the views link to, these are what actually displays a webpage to the user. The views must render these templates, and the urls must point to them. Hence the urls, views and templates are all connected.
 
