@@ -91,7 +91,7 @@ def search(request):
         # Need to create a search using GET requests from the webpage.
         # Here "q" stands for query, on the HTML template this is what the user inputs as a search
         if search:
-            f = Htf.objects.filter(
+            search_function = Htf.objects.filter(
                 Q(chromosome_name__iexact=search) | Q(dbd__icontains=search)
                 | Q(ensemble_id__iexact=search)
                 | Q(function__icontains=search) | Q(gene_end__icontains=search)
@@ -101,13 +101,13 @@ def search(request):
                 | Q(uniprot_id__iexact=search)
             )
         else:
-            f = Htf.objects.none()
+            search_function = Htf.objects.none()
         # This is the query function for the full search, allows user to search
         # any of the database table fields, returns results that match the search
         # exactly, or the result contains the search.
 
-        paginator = Paginator(f, 15)
-        # Pagination function for f
+        paginator = Paginator(search_function, 15)
+        # Pagination function for search_function
 
         page_number = request.GET.get('page', 1)
         # Need to know page numbers
@@ -132,6 +132,8 @@ def search(request):
 
 
 
+@login_required
+# Must be logged in as admin to access this page, returns an error otherwise
 
 def data_upload(request):
     data = Htf.objects.all()
@@ -141,6 +143,7 @@ def data_upload(request):
                  "Gene start (bp), Gene end (bp), Strand, "
                  "UniProt ID, Protein names, Function [CC], Subcellular location [CC]"
     }
+    # Order of csv file format required to populate database
     if request.method=="GET":
         return render(request, "data/data_upload.html", prompt)
 
@@ -150,8 +153,9 @@ def data_upload(request):
         messages.error(request, "This is not a .csv file")
 
     data_set = csv_file.read().decode("UTF-8")
-
+    # Read file, creates a data stream
     io_string = io.StringIO(data_set)
+    # Can now use object in memory
     next(io_string)
     for column in csv.reader(io_string, delimiter='\t', quotechar="|"):
         _, created = Htf.objects.update_or_create(
@@ -167,5 +171,6 @@ def data_upload(request):
             function = column[9],
             sub_cell_location=column[10]
         )
+        # Iterates through the original csv file, copies the data to the database
     context = {}
     return render(request, "data/data_upload.html", context)

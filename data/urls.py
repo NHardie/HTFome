@@ -14,6 +14,7 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('htf/', views.htf, name="htf"),
     path('htf/<str:gene_name>/', views.detail, name="detail"),
+    # Allows the action of clicking through to a specific HTF with the url of htf/gene_name/
     path('drug/', views.drug, name="drug"),
     path('genexp/', views.genexp, name="genexp"),
     path('download/', views.download, name="download"),
