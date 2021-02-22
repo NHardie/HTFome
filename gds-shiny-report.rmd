@@ -1,0 +1,255 @@
+---
+params:
+  data: !r
+  CustomTitle: ""
+title: "GDS Report: "
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: true
+    theme: lumen
+    mathjax: null # no need for mathjax
+runtime: shiny
+---
+
+```{r include=FALSE}
+# Import libraries
+library(GEOquery)
+library(ggplot2)
+library(dplyr)
+library(dendextend)
+library(limma)
+library(gplots)
+library(EnhancedVolcano)
+library(shiny)
+```
+
+## Upload GEO DataSet (GDS) File
+```{r, echo=FALSE}
+
+# Set maximum file size limit to 100 MB ----
+options(shiny.maxRequestSize = 100*1024^2)
+
+# Define UI for data upload app ----
+ui <- fluidPage(
+
+  # Sidebar layout with input and output definitions
+  sidebarLayout(
+
+    #  Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Select a file ----
+      fileInput(
+        inputId = "filedata",
+        label = "Upload GEO DataSet. Choose TSV file",
+        accept = c("text/tsv",
+                   "text/tab-separated-values,text/plain",
+                   ".tsv"),
+        multiple = FALSE
+      ),
+
+      # Add help text ----
+      helpText("Default max. file size is 50 MB."),
+
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+      dataTableOutput(outputId = "table")
+    )
+
+  ) # close sidebarLayout
+
+) # close fluidPage
+
+# Define server logic to read selected file ----
+server <- function(input, output, session) {
+
+  data <- reactive({
+    req(input$filedata) # require input files to be available
+    read.csv(input$filedata$datapath)
+  })
+
+  # Output interactive table ----
+  output$table <- renderDataTable({data()})
+
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+```
+
+## Upload GDS File
+
+```{r, echo=FALSE}
+
+# Set maximum file size limit to 100 MB ----
+options(shiny.maxRequestSize = 100*1024^2)
+
+# Define UI for data upload app ----
+ui_upload <- fluidPage(
+
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Select a file ----
+      fileInput("file1", "Upload GDS File",
+                multiple = FALSE,
+                accept = c("text/tsv",
+                         "text/tab-separated-values,text/plain",
+                         ".tsv")),
+
+      # Add help text ----
+      helpText("Default max. file size is 50 MB."),
+
+      # Horizontal line ----
+      tags$hr(),
+
+      # Input: Checkbox if file has header ----
+      checkboxInput("header", "Header", TRUE),
+
+      # Input: Select separator ----
+      radioButtons("sep", "Separator",
+                   choices = c(Tab = "\t"),
+                   selected = "\t"),
+
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Data file ----
+      tableOutput("contents")
+
+    )
+
+  ) # close sidebarLayout
+) # close fluidPage
+
+# Define server logic to read selected file ----
+server_upload <- function(input, output, session) {
+
+  # input file
+  mydata <- reactive({
+
+    # input$file1 will be NULL initially. After the user selects
+    # and uploads a file, it will be a data frame with 'name',
+    # 'size', 'type', and 'datapath' columns. The 'datapath'
+    # column will contain the local filenames where the data can
+    # be found.
+
+    req(input$file1, input$header, file.exists(input$file1$datapath))
+    read.csv(input$file1$datapath, header = input$header)
+
+  })
+
+  # output file
+  output$contents <- renderTable({
+
+    # input$file1/mydata will be NULL initially. After the user
+    # selects and uploads a file, head of that data file by
+    # default, or all rows if selected, will be shown.
+
+    req(mydata())
+
+    mydata()
+
+    # Check upload file ---
+
+    # when reading semicolon separated files,
+    # having a comma separator causes `read.csv` to error
+    tryCatch(
+      {
+        mydata <- read.csv(input$file1$datapath,
+                 header = input$header,
+                 sep = input$sep,
+                 quote = input$quote)
+      },
+      error = function(e) {
+        # return a safeError if a parsing error occurs
+        stop(safeError(e))
+      }
+    )
+
+    return(head(mydata()))
+
+  })
+
+}
+
+# Create Shiny app ----
+shinyApp(ui_upload, server_upload)
+
+```
+
+## Summary of Data
+
+```{r, echo=FALSE}
+
+# Define UI for summary statistics app ----
+gene.type <- c("All genes", "Human transcription factors")
+
+ui_summary <- fluidPage(
+  selectInput("Gene type", "Select which genes to view:", gene.type),
+  dataTableOutput("gds"),
+
+  mainPanel(tableOutput("gds"))
+)
+
+# Define server for summary statistics app ---
+server_summary <- function(input, output, session) {
+
+  gds <- getGEO(mydata(), GSEMatrix = TRUE)
+  # gds <- getGEO(input$file1, GSEMatrix = TRUE)
+  output$gds <- renderDataTable({
+    gds
+    # options = list(pageLength = 10))
+  })
+
+}
+
+# Create Shiny app ----
+shinyApp(ui_summary, server_summary)
+
+```
+
+## Summary Statistics
+
+```{r, echo=FALSE}
+
+```
+
+## Hierarchical Clustering Analysis
+
+```{r, echo=FALSE}
+
+```
+
+## Principal Component Analysis
+
+```{r, echo=FALSE}
+
+```
+
+## Differential Gene Expression Analysis
+
+```{r, echo=FALSE}
+
+```
+
+## Table of Differentially Expressed Genes
+
+```{r, echo=FALSE}
+
+```
+
+## Estimate of HTF activity
+
+```{r, echo=FALSE}
+
+```

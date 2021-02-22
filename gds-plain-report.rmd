@@ -1,0 +1,67 @@
+---
+title: "GDS Report"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: true
+    theme: lumen
+    mathjax: null # no need for mathjax
+params:
+  date: !r Sys.Date()
+  data: file.tsv
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+# Import libraries
+library(GEOquery)
+library(ggplot2)
+library(dplyr)
+library(dendextend)
+library(limma)
+library(gplots)
+library(EnhancedVolcano)
+library(shiny)
+```
+
+## GDS Summary
+
+```{r, include=FALSE}
+
+# Load data
+gse <- getGEO(filename = "GDS5093_full.soft.gz")
+
+# Create data frame
+X <- Table(gse)
+
+# Convert GSE to ExpressionSet object
+#eset <- GDS2eSet(gds, do.log2 = TRUE)
+
+```
+
+```{r}
+# Load meta information
+X
+```
+
+## Summary Statistics
+
+## Hierarchical Clustering Analysis
+
+## Principal Component Analysis
+
+## Differential Gene Expression Analysis
+
+## Table of Differentially Expressed Genes
+
+## Estimate of HTF activity
+
+
+
+
+
+
