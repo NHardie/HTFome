@@ -4,6 +4,7 @@
 
     <main role="main" class="container">
         <h1 class="mt-4">{{ title }}</h1>
+        <p class="lead">Search for human transcription factors</p>
         <div class="container">
             <form action="{% url 'search_results' %}" method="get">
                 <input name="q" type="text" placeholder="Search HTFs...">
@@ -12,8 +13,8 @@
 
         {% for htf in page_obj %}
             <div class="card mb-4">
-                <div class="card-body" style="margin-left:15px">
-                    <h5 style="font-weight:600">Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
+                <div class="card-body">
+                    <h5>Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
                     <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
                     <p class="card-text">Protein name: {{htf.prot_name}}</p>
                 </div>
