@@ -4,7 +4,7 @@ from django.db.models import Q
 from .models import Htf, Drug
 from django.contrib import messages, admin
 from django.contrib.auth.decorators import login_required
-from django.conf.urls import url
+from django.core.files.storage import FileSystemStorage
 import csv, io
 from django.core.paginator import Paginator
 from .filters import Htffilter
@@ -65,11 +65,13 @@ def drug(request):
     return render(request, "data/drug.html", {'title': 'Drug Search'})
 
 def genexp(request):
+    context = {}
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
-        print(uploaded_file.name)
-        print(uploaded_file.size)
-    return render(request, "data/genexp.html", {'title': 'GEO DataSet Analyser'})
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context['url'] = fs.url(name)
+    return render(request, "data/genexp.html", context)
 
 def download(request):
     return render(request, "data/download.html", {'title': 'Download'})
