@@ -16,6 +16,6 @@ README.md
 - Shiny dashboard might be too difficult - alternative is R flexdashboard (which is written in normal R).
 
 ### Useful resources:
-- To learn R Shiny - nearly all the information you'll need is here: https://mastering-shiny.org/basic-app.html
+- Nearly all the information you'll need to learn R Shiny is here: https://mastering-shiny.org/basic-app.html
 - Download GEO DataSet (GDS) files here: https://www.ncbi.nlm.nih.gov/sites/GDSbrowser/
 - GEOquery documentation here: https://www.bioconductor.org/packages/release/bioc/vignettes/GEOquery/inst/doc/GEOquery.html
