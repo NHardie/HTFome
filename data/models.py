@@ -7,7 +7,10 @@ from django.db import models
 # https://docs.djangoproject.com/en/3.1/ref/models/fields/#model-field-types
 
 class Drug(models.Model):
-    name = models.CharField(max_length=100)
+    drug_name = models.CharField(max_length=100000)
+    trade_name = models.CharField(max_length=1000000)
+    drug_chembl_id = models.CharField(max_length=30)
+    drug_molecule_type = models.CharField(max_length=50)
 
 class Htf(models.Model):
     ensemble_id = models.CharField(max_length=30)
@@ -21,7 +24,7 @@ class Htf(models.Model):
     prot_name = models.CharField(max_length=1000)
     function = models.CharField(max_length=100000)
     sub_cell_location = models.CharField(max_length=100000)
-    drugs = models.ManyToManyField(Drug)
+    drugs = models.CharField(max_length=10000)
 
 
 

@@ -1,8 +1,41 @@
 {% extends "data/base.html" %}
 
 {% block content %}
+
     <main role="main" class="container">
         <h1 class="mt-4">{{ title }}</h1>
-        <p class="lead">Search for drugs that target human transcription factors</p>
+        <div class="container">
+            <form action="{% url 'search_results' %}" method="get">
+                <input name="q" type="text" placeholder="Search drugs...">
+            </form>
+        </div>
+
+        {% for drug in page_obj %}
+            <div class="card mb-4">
+                <div class="card-body" style="margin-left:15px">
+                    <h5 style="font-weight:600">Name: <a href="/drug/{{ drug.drug_name }}/">{{ drug.drug_name }}</a></h5>
+                    <p class="card-text text-muted h6">ChEMBL ID: {{ drug.drug_chembl_id }} </p>
+                    <p class="card-text">Trade name(s): {{drug.trade_name}}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </main>
 {% endblock content %}
