@@ -1,6 +1,6 @@
 import django_filters
 
-from .models import Htf
+from .models import Htf, Drug
 
 class Htffilter(django_filters.FilterSet):
     Gene = django_filters.CharFilter(field_name='gene_name', lookup_expr='icontains', label='Gene Name')
@@ -13,3 +13,13 @@ class Htffilter(django_filters.FilterSet):
         model = Htf
         fields = ['Gene', 'Chromosome',
                   'Protein', 'Function', 'Location']
+
+class Drugfilter(django_filters.FilterSet):
+    Drug = django_filters.CharFilter(field_name='drug_name', lookup_expr='icontains', label='Drug Name')
+    Trade_name = django_filters.CharFilter(field_name='trade_name', lookup_expr='icontains', label='Trade Name')
+    Molecule_type = django_filters.CharFilter(field_name='drug_molecule_type', lookup_expr='icontains', label='Drug molecule type')
+
+    class Meta:
+        model = Drug
+        fields = ['Drug', 'Trade_name',
+                  'Molecule_type']
