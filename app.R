@@ -19,7 +19,7 @@ library(EnhancedVolcano)
 # Set maximum file size limit to 100 MB ----
 options(shiny.maxRequestSize = 100*1024^2)
 
-# Define UI for dashboard ----
+# Define the UI for the dashboard ----
 ui <- dashboardPage(
 
     # Set dashboard title ----
@@ -28,7 +28,8 @@ ui <- dashboardPage(
     # create dashboard sidebar menu ----
     dashboardSidebar(
         sidebarMenu(
-            # Set tab title, and tab ID
+            # Set menu item title, and tab ID
+            # Each of these will be its own tab in the sidebar menu
             menuItem("Upload GDS File",
                      tabName = "upload_tab"),
             menuItem("Summary Statistics",
@@ -45,16 +46,18 @@ ui <- dashboardPage(
     ),
 
     # Create items in dashboard body ----
+    # We can define what UI we want in the body of each tab item here
     dashboardBody(
 
         tabItems(
-            # Each tabItem is a tab page and its contents
-            # all plots will go into each tabItem
+            # Each tabItem is a tab page, referenced by calling its tab ID
+            # (defined in the menuItem() above)
             tabItem(tabName = "upload_tab",
 
                     # Dashboard content for upload tab ----
 
                     # Define UI for data upload app
+                    # creates a fluidPage for responsive content
                     fluidPage(
 
                         # Sidebar layout with input and output definitions
@@ -79,6 +82,10 @@ ui <- dashboardPage(
                             ),
 
                             # Main panel for displaying outputs
+                            # We define what the UI should display in its main panel.
+                            # Here, UI should display a dataTableOutput, with ID
+                            # "table", which will get called in the server function
+                            # below.
                             mainPanel(
                                 dataTableOutput(outputId = "table")
                             )
@@ -136,47 +143,69 @@ ui <- dashboardPage(
 
 ) # close UI
 
+
 # Define server logic
 server <- function(input, output) {
 
     # upload_tab output ----
+
+    # reactive expressions ----
+
+    # this reactive function takes user upload from the UI and passes it
+    # to the read.delim() function, to read the data from the file.
+    # input$file1$datapath -> gives path of the file.
     data <- reactive({
-        req(input$file1) # require input files to be available
-        gds_file <- read.csv(input$file1$datapath)
-        gds_file
+        req(input$file1) # require input file to be available
+        read.delim(input$file1$datapath)
     })
+
+    # reactive outputs ----
+
     # Output interactive table of file summary
     output$table <- renderDataTable({
         data()
         })
 
-    # add observe event
-    observe ({
-
-        req(input$file1)
-        gds_file <- read.csv(input$file1$datapath)
-
-    })
 
     # stats_tab output ----
 
-    gds_stats <- reactive({
+    # reactive expressions ----
 
-        gds_file <- read.csv(input$file1$datapath)
-        req(data(input$file1))
-
-        gds <- getGEO(filename=gds_file, GSEMatrix = TRUE)
-        #gds <- getGEO(filename = input$file1$datapath, GSEMatrix = TRUE)
-        eset <- GDS2eSet(gds, do.log2 = TRUE)
-        pDat <- pData(eset)
-        pDat
-
+    # this reactive function takes the user-uploaded file from the UI, and
+    # passes it to the GEOquery package. The file name gets passed as an
+    # argument to the getGEO function, which converts the file to a gds
+    # object/data structure (with class GDS).
+    gds <- reactive({
+        req(input$file1)
+        data()
+        getGEO(data(), GSEMatrix = TRUE)
+        # getGEO(filename = input$file1$datapath, GSEMatrix = TRUE)
     })
 
-    # Output summary table of GDS file
+
+
+    # this reactive function takes the gds object and passes it as an
+    # argument to GEOquery's GDS2eSet() function, which converts the GDS
+    # file object to an ExpressionSet object.
+
+
+    # reactive outputs ----
+
+    # Output table of GDS file for the "summary" outputId (referenced in
+    # the dashboard body UI for the stats_tab)
     output$summary <- renderDataTable({
-        gds_stats()
+        gds()
     })
+
+
+    # Output ExpressionSet table
+
+
+    # Output phenotypic summary (summary(pData)) table
+
+
+    # Output full phenotype (pData) table
+
 
     # hca_tab output ----
 
@@ -192,8 +221,7 @@ server <- function(input, output) {
 
     # htf_activity_tab output ----
 
-}
+} # close server
 
 # Run the application
 shinyApp(ui = ui, server = server)
-
