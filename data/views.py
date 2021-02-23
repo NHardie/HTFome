@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db import models
 from django.db.models import Q
 from .models import Htf, Drug
 from django.contrib import messages, admin
@@ -7,6 +8,7 @@ from django.conf.urls import url
 import csv, io
 from django.core.paginator import Paginator
 from .filters import Htffilter
+
 
 # Create your views (Webpages) here.
 
@@ -63,6 +65,10 @@ def drug(request):
     return render(request, "data/drug.html", {'title': 'Drug Search'})
 
 def genexp(request):
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        print(uploaded_file.name)
+        print(uploaded_file.size)
     return render(request, "data/genexp.html", {'title': 'GEO DataSet Analyser'})
 
 def download(request):
@@ -134,7 +140,6 @@ def search(request):
 
 @login_required
 # Must be logged in as admin to access this page, returns an error otherwise
-
 def data_upload(request):
     data = Htf.objects.all()
     prompt = {
@@ -174,3 +179,5 @@ def data_upload(request):
         # Iterates through the original csv file, copies the data to the database
     context = {}
     return render(request, "data/data_upload.html", context)
+
+
