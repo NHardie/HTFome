@@ -127,11 +127,11 @@ def htf_search(request):
         # Here "q" stands for query, on the HTML template this is what the user inputs as a search
         if search:
             search_function = Htf.objects.filter(
-                Q(ensemble_id__iexact=search) | Q(dbd__icontains=search)
-                | Q(gene_name__iexact=search)
-                | Q(chromosome_name__icontains=search) | Q(gene_start__icontains=search)
-                | Q(gene_end__icontains=search) | Q(strand__icontains=search)
-                | Q(uniprot_id__icontains=search) | Q(prot_name__iexact=search)
+                Q(ensemble_id__iexact=search) | Q(dbd__iexact=search)
+                | Q(gene_name__icontains=search)
+                | Q(chromosome_name__iexact=search) | Q(gene_start__icontains=search)
+                | Q(gene_end__icontains=search) | Q(strand__iexact=search)
+                | Q(uniprot_id__iexact=search) | Q(prot_name__icontains=search)
                 | Q(function__icontains=search) | Q(sub_cell_location__iexact=search)
                 | Q(up_reg_gene__iexact=search) | Q(down_reg_gene__iexact=search)
                 | Q(unknown_interaction__iexact=search) | Q(drug_chembl_id__iexact=search)
