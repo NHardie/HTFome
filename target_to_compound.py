@@ -15,7 +15,7 @@ keys = list(compounds2targets.keys())
 
 #TARGET TO COMPOUNDS
 for i in range(0, len(keys), chunk_size):
-    activities = new_client.activity.filter(target_chembl_id__in=keys[i:i + chunk_size]).only(['target_chembl_id', 'molecule_chembl_id'])
+    activities = new_client.mechanism.filter(target_chembl_id__in=keys[i:i + chunk_size]).only(['target_chembl_id', 'molecule_chembl_id'])
     for act in activities:
         compounds2targets[act['target_chembl_id']].add(act['molecule_chembl_id'])
 
@@ -65,21 +65,21 @@ ens_list=new_dict.values()
 #WRITING
 header = ["TF gene symbol", "Drugs"]
 
-with open('final_phase4.tsv', 'wt', encoding='utf-8-sig', newline='') as f:
+with open('2final_phase4.tsv', 'wt', encoding='utf-8-sig', newline='') as f:
     writer = csv.writer(f, delimiter='\t')
     writer.writerow(header) # write the header
     for k,v in compounds2targets.items():
         writer.writerow([k,v])
 
-with open("ENSMBLids.tsv", 'w', newline='') as myfile:
+with open("2ENSMBLids.tsv", 'w', newline='') as myfile:
     wr = csv.writer(myfile, delimiter='\n')
     wr.writerow(ens_list)
 
-with open("drug_chembl_ids.tsv", 'w', newline='') as myfile:
+with open("2drug_chembl_ids.tsv", 'w', newline='') as myfile:
     wr = csv.writer(myfile, delimiter='\n')
     wr.writerow(drug_chembl_ids)
 
-with open("gene_symbols.tsv", 'w', newline='') as myfile:
+with open("2gene_symbols.tsv", 'w', newline='') as myfile:
     wr = csv.writer(myfile, delimiter='\n')
     wr.writerow(genesymbols)
 
