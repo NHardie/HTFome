@@ -16,6 +16,8 @@ server <- function(input, output) {
     data <- reactive({
         req(input$file1) # require input file to be available before showing the output
         read.delim(input$file1$datapath)
+        # print(spec(gds_file))
+        # vroom_write(gds_file, "test.tsv.gz")
     })
 
     # reactive outputs ----
@@ -35,12 +37,16 @@ server <- function(input, output) {
     # argument to the getGEO function, which converts the file to a gds
     # object/data structure (with class GDS).
     gds <- reactive({
-        req(data())
-        getGEO(data(), GSEMatrix = TRUE)
-        # getGEO(filename = input$file1$datapath, GSEMatrix = TRUE)
+        # req(input$file1)
+        # print(file1$datapath)
+        # getGEO(file1$datapath, GSEMatrix = TRUE)
+        getGEO(filename = input$file1$datapath)
     })
-
-
+    
+    # eset <- reactive({
+    #     gdss <- gds()
+    #     GDS2eSet(gdss,do.log2 = TRUE)
+    # })
 
     # this reactive function takes the gds object and passes it as an
     # argument to GEOquery's GDS2eSet() function, which converts the GDS
@@ -52,7 +58,12 @@ server <- function(input, output) {
     # Output table of GDS file for the "summary" outputId (referenced in
     # the dashboard body UI for the stats_tab)
     output$summary <- renderDataTable({
-        gds()
+        #problems(gds())
+        gdss <- gds()
+        eset <- GDS2eSet(gdss)
+        print(eset)
+        #Table(gds())
+        #spec(gds())
     })
 
 
