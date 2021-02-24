@@ -17,7 +17,7 @@
                 <div class="card-body" style="margin-left:15px">
                     <h5 style="font-weight:600">Name: <a href="/drug/{{ drug.drug_name }}/">{{ drug.drug_name }}</a></h5>
                     <p class="card-text text-muted h6">ChEMBL ID: {{ drug.drug_chembl_id }} </p>
-                    <p class="card-text">Trade name(s): {{drug.trade_name}}</p>
+                    <p class="card-text">Date of Approval: {{ drug.year_approved }}</p>
                 </div>
             </div>
         {% endfor %}

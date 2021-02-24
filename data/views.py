@@ -53,8 +53,11 @@ def htf(request):
 def htf_detail(request, gene_name):
     htf = Htf.objects.get(gene_name=gene_name)
     # Again we want the HTF table but a GET request for the specific HTF by gene name
+    drug = htf.drug_name[0]
+
+
     context={
-        "htf":htf,
+        "htf":htf, 'drug':drug
     }
     # Use this context dictionary as an example of another way of releasing this variable
     # for the HTML page to access. Could do {'htf": htf} instead of context.
@@ -124,13 +127,15 @@ def htf_search(request):
         # Here "q" stands for query, on the HTML template this is what the user inputs as a search
         if search:
             search_function = Htf.objects.filter(
-                Q(chromosome_name__iexact=search) | Q(dbd__icontains=search)
-                | Q(ensemble_id__iexact=search)
-                | Q(function__icontains=search) | Q(gene_end__icontains=search)
-                | Q(gene_name__icontains=search) | Q(gene_start__icontains=search)
-                | Q(id__icontains=search) | Q(prot_name__iexact=search)
-                | Q(strand__icontains=search) | Q(sub_cell_location__iexact=search)
-                | Q(uniprot_id__iexact=search)
+                Q(ensemble_id__iexact=search) | Q(dbd__icontains=search)
+                | Q(gene_name__iexact=search)
+                | Q(chromosome_name__icontains=search) | Q(gene_start__icontains=search)
+                | Q(gene_end__icontains=search) | Q(strand__icontains=search)
+                | Q(uniprot_id__icontains=search) | Q(prot_name__iexact=search)
+                | Q(function__icontains=search) | Q(sub_cell_location__iexact=search)
+                | Q(up_reg_gene__iexact=search) | Q(down_reg_gene__iexact=search)
+                | Q(unknown_interaction__iexact=search) | Q(drug_chembl_id__iexact=search)
+                | Q(drug_name__iexact=search)
             )
         else:
             search_function = Htf.objects.none()
@@ -179,7 +184,7 @@ def drug_search(request):
             search_function = Drug.objects.filter(
                 Q(drug_name__iexact=search) | Q(trade_name__icontains=search)
                 | Q(drug_chembl_id__iexact=search)
-                | Q(drug_molecule_type__icontains=search)
+                | Q(year_approved__icontains=search)
             )
         else:
             search_function = Drug.objects.none()
@@ -238,19 +243,25 @@ def htf_data_upload(request):
     # Can now use object in memory
     next(io_string)
     for column in csv.reader(io_string, delimiter='\t', quotechar="|"):
-        _, created = Htf.objects.update_or_create(
-            ensemble_id=column[0],
-            dbd=column[1],
-            gene_name=column[2],
-            chromosome_name=column[3],
-            gene_start=column[4],
-            gene_end = column[5],
-            strand = column[6],
-            uniprot_id = column[7],
-            prot_name = column[8],
-            function = column[9],
-            sub_cell_location=column[10]
-        )
+        if len(column) >= 15:
+            _, created = Htf.objects.update_or_create(
+                ensemble_id=column[0],
+                dbd=column[1],
+                gene_name=column[2],
+                chromosome_name=column[3],
+                gene_start=column[4],
+                gene_end = column[5],
+                strand = column[6],
+                uniprot_id = column[7],
+                prot_name = column[8],
+                function = column[9],
+                sub_cell_location=column[10],
+                up_reg_gene=column[11],
+                down_reg_gene=column[12],
+                unknown_interaction=column[13],
+                drug_chembl_id=column[14],
+                drug_name=column[15],
+            )
         # Iterates through the original csv file, copies the data to the database
     context = {}
     return render(request, "data/htf_data_upload.html", context)
@@ -262,7 +273,7 @@ def drug_data_upload(request):
     prompt = {
         "Order": "Order of the CSV should be:"
                  "drug name, drug Trade names, drug chembl id, "
-                 "drug molecule type"
+                 "drug approval date"
     }
     # Order of csv file format required to populate database
     if request.method=="GET":
@@ -285,7 +296,7 @@ def drug_data_upload(request):
                 drug_name=column[0],
                 trade_name=column[1],
                 drug_chembl_id=column[2],
-                drug_molecule_type=column[3]
+                year_approved=column[3]
             )
         # Iterates through the original csv file, copies the data to the database
     context = {}
