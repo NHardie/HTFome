@@ -15,6 +15,12 @@
                 <input name="q" type="text" placeholder="Search All...">
             </form>
         </div>
+            <button onclick="goBack()">Go Back</button>
+            <script>
+                function goBack() {
+                window.history.back();
+                }
+            </script>
 
         <h1>Drug Data Repo</h1>
         {% if page_obj %}
