@@ -5,13 +5,13 @@
     <main role="main" class="container">
         <h1 class="mt-4">HTF Data Search</h1>
         <div class="container">
-            <form action="{% url 'search_results' %}" method="get">
+            <form action="{% url 'htf_results' %}" method="get">
                 {{ filter.form.as_table }}
                 <input name="q" type="submit">
             </form>
         </div>
         <div class="container">
-            <form action="{% url 'search_results' %}" method="get">
+            <form action="{% url 'htf_results' %}" method="get">
                 <input name="q" type="text" placeholder="Search All...">
             </form>
         </div>

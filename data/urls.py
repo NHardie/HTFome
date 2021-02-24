@@ -22,8 +22,8 @@ urlpatterns = [
     path('about/', views.about, name="about"),
     path('help/', views.help, name="help"),
     path('documentation/', views.documentation, name="documentation"),
-    path('htf_search/', views.htf_search, name="search_results"),
-    path('drug_search/', views.drug_search, name="search_results"),
+    path('htf_search/', views.htf_search, name="htf_results"),
+    path('drug_search/', views.drug_search, name="drug_results"),
     path('htf_data_upload/', views.htf_data_upload, name='htf_data_upload'),
     path('drug_data_upload/', views.drug_data_upload, name='drug_data_upload')
 
