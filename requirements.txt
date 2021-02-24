@@ -12,7 +12,6 @@ MarkupSafe==1.1.1
 pycparser==2.20
 pytz==2020.5
 requests==2.25.1
-rpy2==3.4.2
 soupsieve==2.1
 sqlparse==0.4.1
 tzlocal==2.1
