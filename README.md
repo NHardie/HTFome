@@ -5,15 +5,18 @@ README.md
 
 #### How to run on your local machine:
 - Download `app.R` and run on your IDE of preference (preferably RStudio).
-- Upload your own GDS file of choice, or you can download the included `GDS5093_full.soft.gz` file available in this repo.
+- Upload your own GDS file of choice, or you can download the included `data/GDS5093_full.soft.gz` or `data/GDS6063_full.soft.gz` files available in this repo.
 
 #### Current issues + next steps:
-- GDS2eset function not working (unable to get URL). Millie suggestion: write an R script to extract GDS accession name from filepath. We will then pass this to the GDS2eset function.
+- Define UI, parameters and information to present.
 - Insert R scripts into Shiny.
-- Work on resolving issue with HTF activity package + insert into Shiny.
+- Alex: Work on resolving issue with HTF activity package + insert into Shiny.
+- Karol: Figure out how to deploy Shiny app as web-app online (including how to set up R environment with the required libraries installed).
+- If time, wrap Shiny web-app around custom HTFome HTML/CSS/Bootstrap.
 
 #### Resolved issues:
 - Can now pass uploaded GDS file to analysis code (thank you, Millie!) - solution: had to pass a gds object (before I was passing the gds() reactive function). ALSO, gds object was not displaying properly, displaying within Table() fixed issue.
+- GDS2eset function not working (unable to get URL). Millie suggestion: write an R script to extract GDS accession name from filepath, then pass to GDS2eset(). Solution: obtained eSet by manually extracting GDS accession from filename. This still doesn't resolve issue of passing actual uploaded file to GDS2eSet() - if time, I will debug.
 
 ### Useful resources:
 - Nearly all the information you'll need to learn R Shiny is here: https://mastering-shiny.org/basic-app.html
