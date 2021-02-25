@@ -15,6 +15,8 @@ server <- function(input, output) {
     # the input that uploads the data.
     data <- reactive({
         req(input$file1) # require input file to be available before showing the output
+        #print(input$file1)
+        #print(input$file1$datapath)
         read.delim(input$file1$datapath)
     })
 
@@ -54,9 +56,20 @@ server <- function(input, output) {
     
     # this reactive expression converts the GDS data structure to an
     # ExpressionSet object
+    # eset <- reactive({
+    #     gds_obj <- gds() # GDS2eSet only takes object as an argument
+    #     eset <- GDS2eSet(gds_obj,do.log2 = TRUE)
+    #     eset
+    # })
+    
+    # alternative eset code that extracts GDS accession from file name
+    # passes it through getGEO() and GDS2eSet() to return eSet object
     eset <- reactive({
-        gds_obj <- gds() # GDS2eSet only takes object as an argument
-        GDS2eSet(gds_obj,do.log2 = TRUE)
+        gds_file_name <- input$file1$name
+        gds_acc <- str_extract(gds_file_name, "GDS[:digit:]+")
+        gds <- getGEO(gds_acc)
+        eset <- GDS2eSet(gds, do.log2 = TRUE)
+        eset
     })
 
 
