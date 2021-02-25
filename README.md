@@ -8,11 +8,12 @@ README.md
 - Upload your own GDS file of choice, or you can download the included `data/GDS5093_full.soft.gz` or `data/GDS6063_full.soft.gz` files available in this repo.
 
 #### Current issues + next steps:
-- Define UI, parameters and information to present.
-- Insert R scripts into Shiny.
+- Anima: Define UI, parameters and information to present.
+- Insert R scripts into Shiny (extra hands would be appreciated for this!).
+- Need to run tests for each function, catch possible bugs.  
 - Alex: Work on resolving issue with HTF activity package + insert into Shiny.
 - Karol: Figure out how to deploy Shiny app as web-app online (including how to set up R environment with the required libraries installed).
-- If time, wrap Shiny web-app around custom HTFome HTML/CSS/Bootstrap.
+- Anima: If time, wrap Shiny web-app around custom HTFome HTML/CSS/Bootstrap.
 
 #### Resolved issues:
 - Can now pass uploaded GDS file to analysis code (thank you, Millie!) - solution: had to pass a gds object (before I was passing the gds() reactive function). ALSO, gds object was not displaying properly, displaying within Table() fixed issue.
