@@ -33,8 +33,14 @@
                 <p class="card-text">Up-regulates: {{htf.up_reg_gene}}</p>
                 <p class="card-text">Down-regulates: {{htf.down_reg_gene}}</p>
                 <p class="card-text">Unknown Interactions: {{htf.unknown_interaction}}</p>
-                <p class="card-text">Drug Chembl ID's: {{ htf.drug_chembl_id }}</p>
-                <p class="card-text">Associated Drug Compounds: {{ htf.drug_name }}</p>
+                <p class="card-text">Associated Drug Compounds: </p>
+                {% if htf.drug_chembl_id == 'N/A' %}
+                N/A
+                {% else %}
+                {% for i, j in zipped %}
+                <a href="https://www.ebi.ac.uk/chembl/compound_report_card/{{ i }}/">{{ i }}</a>: <a href="/drug_search/?Drug={{ j }}&Trade_name=&year_approved=&q=Submit+Query/">{{ j }}</a>,
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </main>
