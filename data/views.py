@@ -53,11 +53,11 @@ def htf(request):
 def htf_detail(request, gene_name):
     htf = Htf.objects.get(gene_name=gene_name)
     # Again we want the HTF table but a GET request for the specific HTF by gene name
-    drug = htf.drug_name[0]
-
-
+    drug_name = str(htf.drug_name).split(',')
+    drug_chembl_id = str(htf.drug_chembl_id).split(',')
+    zipped = zip(drug_chembl_id, drug_name)
     context={
-        "htf":htf, 'drug':drug
+        "htf":htf, 'zipped':zipped
     }
     # Use this context dictionary as an example of another way of releasing this variable
     # for the HTML page to access. Could do {'htf": htf} instead of context.
@@ -83,9 +83,10 @@ def drug(request):
 
 def drug_detail(request, drug_name):
     drug = Drug.objects.get(drug_name=drug_name)
+    htf = Htf.objects.filter(drug_name__icontains=drug_name)
     # Again we want the HTF table but a GET request for the specific HTF by gene name
     context={
-        "drug":drug
+        "drug":drug, 'htf': htf
     }
     # Use this context dictionary as an example of another way of releasing this variable
     # for the HTML page to access. Could do {'htf": htf} instead of context.
