@@ -21,8 +21,8 @@ ui <- dashboardPage(
             # Each of these will be its own tab in the sidebar menu
             menuItem("Upload GDS File",
                      tabName = "upload_tab"),
-            menuItem("Summary Statistics",
-                     tabName = "stats_tab"),
+            menuItem("Data Summary",
+                     tabName = "summary_tab"),
             menuItem("Hierarchical Clustering Analysis",
                      tabName = "hca_tab"),
             menuItem("Principal Component Analysis",
@@ -84,27 +84,32 @@ ui <- dashboardPage(
 
                     ), # close upload_tab item
 
-            tabItem(tabName = "stats_tab",
+            tabItem(tabName = "summary_tab",
 
-                    # Dashboard content for summary statistics tab ----
+                    # Dashboard content for data summary tab ----
 
                     fluidPage(
 
                         sidebarLayout(
 
-                            sidebarPanel(
-
-                            ), # close sidebarPanel
-
+                            sidebarPanel(), # close sidebarPanel
+                            
+                            # Main panel for displaying outputs ----
                             mainPanel(
-                                dataTableOutput(outputId = "summary")
+                                
+                                # Output: Tabs
+                                tabsetPanel(type = "tabs",
+                                            tabPanel("GDS Summary", dataTableOutput("gds_summary")),
+                                            tabPanel("eSet Summary", verbatimTextOutput("eset_summary")),
+                                            tabPanel("Phenotype Summary", dataTableOutput("phenotype_summary"))
+                                            ),
                                 )
 
                         ) # close sidebarLayout
 
                     ) # close fluidPage
 
-                    ), # close stats_tab item
+                    ), # close summary_tab item
 
             tabItem(tabName = "hca_tab",
 
