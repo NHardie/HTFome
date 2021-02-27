@@ -1,6 +1,5 @@
-# Title     : GEO GDS Analysis scripts for shiny dashboard
+# Title     : Scripts for HTFome's GEO DataSet Analyser (shiny dashboard)
 # Objective : Defines the UI
-# Created on: 23/02/2021
 
 
 # Create GDS file object ----
