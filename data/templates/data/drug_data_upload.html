@@ -1,5 +1,4 @@
 
-
     {% if messages %}
         {% for message in messages %}
             <div>
@@ -8,7 +7,7 @@
             </div>
         {% endfor %}
     {% else %}
-    {{order}}
+    {{ order }}
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="file1"> Upload a file</label>
@@ -17,7 +16,7 @@
         <button type="submit">Upload</button>
     </form>
     {% endif %}
-    {% for profile in profiles %}
-    {{profile.name}}
+    {% for drug in drugs %}
+    {{drug.name}}
     {% endfor %}
 
