@@ -21,8 +21,8 @@ ui <- dashboardPage(
             # Each of these will be its own tab in the sidebar menu
             menuItem("Upload GDS File",
                      tabName = "upload_tab"),
-            menuItem("Data Summary",
-                     tabName = "summary_tab"),
+            menuItem("Data Statistics",
+                     tabName = "stats_tab"),
             menuItem("Hierarchical Clustering Analysis",
                      tabName = "hca_tab"),
             menuItem("Principal Component Analysis",
@@ -35,18 +35,18 @@ ui <- dashboardPage(
     ),
 
     # Create items in dashboard body ----
-    # We can define what UI we want in the body of each tab item here
+    
+    # Define UI for body of each tab item here
     dashboardBody(
 
+        # Each tabItem is a tab page, referenced by calling its tab ID (defined in menuItem())
         tabItems(
-            # Each tabItem is a tab page, referenced by calling its tab ID
-            # (defined in the menuItem() above)
+            
             tabItem(tabName = "upload_tab",
 
                     # Dashboard content for upload tab ----
 
-                    # Define UI for data upload app
-                    # creates a fluidPage for responsive content
+                    # create a fluidPage for responsive content
                     fluidPage(
 
                         # Sidebar layout with input and output definitions
@@ -55,10 +55,13 @@ ui <- dashboardPage(
                             #  Sidebar panel for inputs
                             sidebarPanel(
 
+                                # set title
+                                h2("Upload GDS file"),
+
                                 # Input: Select a file
                                 fileInput(
                                     inputId = "file1",
-                                    label = "Upload GEO DataSet. Choose TSV file",
+                                    label = "Upload GEO DataSet (GDS format)",
                                     accept = c("text/tsv",
                                                "text/tab-separated-values,text/plain",
                                                ".tsv"),
@@ -66,27 +69,39 @@ ui <- dashboardPage(
                                 ),
 
                                 # Add help text
-                                helpText("Must be GDS format. Default max. file size is 100 MB."),
+                                helpText("Default max. file size is 100 MB."),
+
+                                p("Upload gene expression data extracted from the GEO database ",
+                                  "(data must be in GDS format)."),
+                                p("Once uploaded, a data preview will become available where ",
+                                  "you will be able to view summary information of the file."),
+                                p("The file will then be parsed by the GEOquery package to ",
+                                  "return a GEOquery data structure (of class GDS), which will ",
+                                  "then be converted into an ExpressionSet. Previews for the ",
+                                  "GDS class and ExpressionSet will also be available."),
 
                             ),
 
                             # Main panel for displaying outputs
-                            # We define what the UI should display in its main panel.
-                            # Here, UI should display a dataTableOutput, with ID
-                            # "table", which will get called in the server function
-                            # below.
                             mainPanel(
-                                dataTableOutput(outputId = "table")
+                                
+                                tabsetPanel(type = "tabs",
+                                            tabPanel("Data Summary", withSpinner(dataTableOutput("data_summary"))),
+                                            tabPanel("GDS Preview", withSpinner(dataTableOutput("gds_preview"))),
+                                            tabPanel("Phenotype Data Preview", withSpinner(dataTableOutput("pDat_preview")))
+                                            )
+
                             )
+                            
                         ) # close sidebarLayout
 
                     ) # close fluidPage
 
                     ), # close upload_tab item
 
-            tabItem(tabName = "summary_tab",
+            tabItem(tabName = "stats_tab",
 
-                    # Dashboard content for data summary tab ----
+                    # Dashboard content for stats tab ----
 
                     fluidPage(
 
@@ -109,7 +124,7 @@ ui <- dashboardPage(
 
                     ) # close fluidPage
 
-                    ), # close summary_tab item
+                    ), # close stats_tab item
 
             tabItem(tabName = "hca_tab",
 
