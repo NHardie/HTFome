@@ -48,6 +48,14 @@
             Function: "{{ request.GET.Function }}" {% endif %}
             {% if request.GET.Location %}
             Location: "{{request.GET.Location}}" {% endif %}
+            {% if request.GET.Up_Reg %}
+            Location: "{{request.GET.Up_Reg}}" {% endif %}
+            {% if request.GET.Down_Reg %}
+            Location: "{{request.GET.Down_Reg}}" {% endif %}
+            {% if request.GET.Drug_Name %}
+            Location: "{{request.GET.Drug_Name}}" {% endif %}
+
+
 
         {% for htf in page_obj_1 %}
             <div class="card mb-4">

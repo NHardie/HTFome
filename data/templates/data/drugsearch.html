@@ -31,6 +31,7 @@
                     <h5 style="font-weight:600">Name: <a href="/drug/{{ drug.drug_name }}/">{{ drug.drug_name }}</a></h5>
                     <p class="card-text text-muted h6">ChEMBL ID: {{ drug.drug_chembl_id }} </p>
                     <p class="card-text">Trade name(s): {{drug.trade_name}}</p>
+                    <p class="card-text">Year Approved: {{drug.year_approved}}</p>
                 </div>
             </div>
                 {% empty %}
@@ -41,8 +42,8 @@
             Drug: "{{ request.GET.Drug }}"
             {% endif %} {% if request.GET.Trade_name %}
             Trade name: "{{ request.GET.Trade_name }}" {% endif %}
-            {% if request.GET.Molecule_type %}
-            Molecule Type: "{{ request.GET.Molecule_type }}" {% endif %}
+            {% if request.GET.year_approved %}
+            Molecule Type: "{{ request.GET.Year_approved }}" {% endif %}
 
         {% for drug in page_obj_1 %}
             <div class="card mb-4">
