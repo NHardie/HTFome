@@ -7,28 +7,28 @@ from django.db import models
 # https://docs.djangoproject.com/en/3.1/ref/models/fields/#model-field-types
 
 class Drug(models.Model):
-    drug_name = models.CharField(max_length=100000)
-    trade_name = models.CharField(max_length=1000000)
-    drug_chembl_id = models.CharField(max_length=30)
-    year_approved = models.CharField(max_length=50)
+    drug_name = models.TextField(default='N/A')
+    trade_name = models.TextField(default='N/A')
+    drug_chembl_id = models.TextField(default='N/A')
+    year_approved = models.TextField(default='N/A')
 
 class Htf(models.Model):
-    ensemble_id = models.CharField(max_length=30)
-    dbd = models.CharField(max_length=30)
-    gene_name = models.CharField(max_length=30)
-    chromosome_name = models.CharField(max_length=30)
-    gene_start = models.CharField(max_length=30)
-    gene_end = models.CharField(max_length=30)
-    strand = models.CharField(max_length=30)
-    uniprot_id = models.CharField(max_length=30)
-    prot_name = models.CharField(max_length=1000)
-    function = models.CharField(max_length=100000)
-    sub_cell_location = models.CharField(max_length=100000)
-    up_reg_gene = models.CharField(max_length=1000)
-    down_reg_gene = models.CharField(max_length=1000)
-    unknown_interaction = models.CharField(max_length=1000)
-    drug_chembl_id = models.CharField(max_length=1000)
-    drug_name = models.CharField(max_length=1000)
+    ensemble_id = models.TextField(default='N/A')
+    dbd = models.TextField(default='N/A')
+    gene_name = models.TextField(default='N/A')
+    chromosome_name = models.TextField(default='N/A')
+    gene_start = models.TextField(default='N/A')
+    gene_end = models.TextField(default='N/A')
+    strand = models.TextField(default='N/A')
+    uniprot_id = models.TextField(default='N/A')
+    prot_name = models.TextField(default='N/A')
+    function = models.TextField(default='N/A')
+    sub_cell_location = models.TextField(default='N/A')
+    up_reg_gene = models.TextField(default='N/A')
+    down_reg_gene = models.TextField(default='N/A')
+    unknown_interaction = models.TextField(default='N/A')
+    drug_chembl_id = models.TextField(default='N/A')
+    drug_name = models.TextField(default='N/A')
 
 
 

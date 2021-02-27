@@ -272,9 +272,10 @@ def htf_data_upload(request):
 def drug_data_upload(request):
     data = Drug.objects.all()
     prompt = {
-        "Order": "Order of the CSV should be:"
-                 "drug name, drug Trade names, drug chembl id, "
-                 "drug approval date"
+        "Order": '''Order of the CSV should be: drug name,' 
+                 'drug Trade names, drug chembl id,' 
+                 'drug approval date''',
+
     }
     # Order of csv file format required to populate database
     if request.method=="GET":
@@ -301,4 +302,4 @@ def drug_data_upload(request):
             )
         # Iterates through the original csv file, copies the data to the database
     context = {}
-    return render(request, "data/drug_data_upload.html", context)
+    return render(request, "data/drug_data_upload.html")
