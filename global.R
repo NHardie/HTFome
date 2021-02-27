@@ -1,6 +1,5 @@
-# Title     : GEO GDS Analysis scripts for shiny dashboard
-# Objective : Global R scripts
-# Created on: 23/02/2021
+# Title     : Scripts for HTFome's GEO DataSet Analyser (shiny dashboard)
+# Objective : Defines global R scripts
 
 # Import libraries ----
 library(shiny)
