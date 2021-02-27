@@ -12,9 +12,12 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name="home"),
+    # path('path to be used as url/', views. view function name, view name)
+
     path('htf/', views.htf, name="htf"),
     path('htf/<str:gene_name>/', views.htf_detail, name="detail"),
     # Allows the action of clicking through to a specific HTF with the url of htf/gene_name/
+
     path('drug/', views.drug, name="drug"),
     path('drug/<str:drug_name>/', views.drug_detail, name="detail"),
     path('genexp/', views.genexp, name="genexp"),
