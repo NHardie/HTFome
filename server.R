@@ -135,29 +135,30 @@ server <- function(input, output) {
         as.matrix(top_num_genes) # class: matrix, dim: 100 56 -> expected, correct!
     })
 
-    # Plot heatmap (base R)
+    # Plot heatmap (using heatmap.2)
     heatmap <- reactive({
         # print(nrow(top_genes_mat())) # test to check user gene_num input works
         # print(class(top_genes_mat())) # test to check data is right class
         # print(dim(top_genes_mat())) # test to check data is right dim
         top_genes_mat <- as.matrix(top_genes_mat())
         heatmap.2(top_genes_mat,
+          # TODO: Colour samples by sample type.
           distfun = function(x) dist(x, method = input$distance_method),
           hclustfun = function(x) hclust(x, method = input$linkage_method),
           scale = input$scale,
           trace = "none",
-          xlab = "Samples",
-          ylab = "Genes",
+          xlab = "Samples", # TODO: display sample count.
+          ylab = "Genes", # TODO: display gene count.
           key.title = "SD from mean",
           key.xlab = NA,
           key.ylab = NA,
-          lhei = c(1,6),
-          lwid = c(1,3.5),
-          keysize = 0.35,
-          key.par = list(cex = 0.5),
-          labRow = FALSE,
-          labCol = FALSE,
-          margins = c(2,2),
+          #lhei = c(1,6),
+          #lwid = c(1,3.5),
+          #keysize = 0.35,
+          #key.par = list(cex = 0.5),
+          labRow = if (input$display_genes == "No") {FALSE} else rownames(top_genes_mat),
+          labCol = if (input$display_samples == "No") {FALSE} else colnames(top_genes_mat),
+          margins = if (input$display_genes == "No" && input$display_samples == "No") {c(2,2)} else c(5,5),
           col = greenred(75)
         )
     })
