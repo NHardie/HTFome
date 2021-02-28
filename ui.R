@@ -40,22 +40,20 @@ ui <- dashboardPage(
 
         # Each tabItem is a tab page, referenced by calling its tab ID (defined in menuItem())
         tabItems(
-            
-            tabItem(tabName = "upload_tab",
 
-                    # Dashboard content for upload tab ----
+            # Dashboard content for upload tab ----
+            tabItem(tabName = "upload_tab",
 
                     # create a fluidPage for responsive content
                     fluidPage(
+
+                        titlePanel("Upload GDS file"),
 
                         # Sidebar layout with input and output definitions
                         sidebarLayout(
 
                             #  Sidebar panel for inputs
                             sidebarPanel(
-
-                                # set title
-                                h2("Upload GDS file"),
 
                                 # Input: Select a file
                                 fileInput(
@@ -98,26 +96,30 @@ ui <- dashboardPage(
 
                     ), # close upload_tab item
 
-            tabItem(tabName = "stats_tab",
 
-                    # Dashboard content for stats tab ----
+            # Dashboard content for stats tab ----
+            tabItem(tabName = "stats_tab",
 
                     fluidPage(
 
-                        sidebarLayout(
+                        titlePanel("Data Statistics"),
+                        h4("See basic statistics for this GDS sample."),
 
-                            sidebarPanel(), # close sidebarPanel
-                            
-                            # Main panel for displaying outputs ----
-                            mainPanel(
-                                
-                                # Output: Tabs
-                                tabsetPanel(type = "tabs",
-                                            tabPanel("GDS Summary", dataTableOutput("gds_summary")),
-                                            tabPanel("eSet Summary", verbatimTextOutput("eset_summary")),
-                                            tabPanel("Phenotype Summary", dataTableOutput("phenotype_summary"))
-                                            ),
-                                )
+                        fluidRow(
+
+                            #sidebarPanel(),
+
+                            column(6,
+                                   withSpinner(plotlyOutput("pheno_plot")))
+
+                            #mainPanel(
+
+                               # tabsetPanel(type = "tabs",
+                                #            tabPanel("Phenotype Plot", plotlyOutput("pheno_plot")),
+                                #            tabPanel("Sample Boxplot", verbatimTextOutput("eset_summary")),
+                                #            tabPanel("Phenotype Summary", dataTableOutput("phenotype_summary"))
+                                #            )
+                             #   )
 
                         ) # close sidebarLayout
 
@@ -128,8 +130,33 @@ ui <- dashboardPage(
             tabItem(tabName = "hca_tab",
 
                     # Dashboard content for HCA tab ----
+                    fluidPage(
 
-                    ),
+                      titlePanel("Hierarchical Clustering Analysis"),
+
+                      sidebarLayout(
+
+                        sidebarPanel(
+                          sliderInput("gene_num", "Number of genes to display:", min = 50, max = 1000, value = 100),
+                          # TODO: extract max gene number for each GDS (and substitute in max value)
+                          selectInput("distance_method", "Distance Method:",
+                                      c("euclidean", "maximum", "manhattan", "canberra", "binary", "minkowski")),
+                          selectInput("linkage_method", "Linkage Algorithm:",
+                                      c("complete", "ward.D", "ward.D2", "single", "average", "mcquitty", "median", "centroid")),
+                          selectInput("scaling", "Apply Scaling:",
+                                      c("none", "row", "column"))
+                        ),
+
+                        mainPanel(
+                          withSpinner(plotOutput("heatmap"))
+                        )
+
+                      ) # close sidebarLayout
+
+                    ) # close fluidPage
+
+                    ), # close hca_tab item
+
             tabItem(tabName = "pca_tab,
 
                     # Dashboard content for PCA tab ----
