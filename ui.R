@@ -4,9 +4,6 @@
 
 # Create GDS file object ----
 
-# Set maximum file size limit to 100 MB ----
-options(shiny.maxRequestSize = 100*1024^2)
-
 # Define the UI for the dashboard ----
 ui <- dashboardPage(
 
@@ -143,7 +140,7 @@ ui <- dashboardPage(
                                       c("euclidean", "maximum", "manhattan", "canberra", "binary", "minkowski")),
                           selectInput("linkage_method", "Linkage Algorithm:",
                                       c("complete", "ward.D", "ward.D2", "single", "average", "mcquitty", "median", "centroid")),
-                          selectInput("scaling", "Apply Scaling:",
+                          selectInput("scale", "Apply Scaling:",
                                       c("none", "row", "column"))
                         ),
 
