@@ -111,9 +111,9 @@ server <- function(input, output) {
     gene_exp <- reactive({
         # TODO: check what data classes we have before/after adding rownames
         geneNames <- as.character(gds_df()$IDENTIFIER)
-        gene_eset <- exprs(eset())
-        rownames(gene_eset) <- geneNames
-        avereps(gene_eset, ID = rownames(gene_eset))
+        gene_eset <- exprs(eset()) # class: matrix, dim: 54715 56 -> expected, correct
+        rownames(gene_eset) <- geneNames # class: matrix, dim: 54715 56 -> expected, correct
+        avereps(gene_eset, ID = rownames(gene_eset)) # class: matrix, dim: 31654 56 -> expected, correct
     })
 
     # Calculate standard deviation of genes across all samples and sort
@@ -122,29 +122,30 @@ server <- function(input, output) {
     sort_gene_SD <- reactive({
         # Shiny doesn't seem to like data passed to apply() in matrix
         # form, so we need to convert it to a data frame first.
-        gene_exp_df <- data.frame(matrix(gene_exp()))
-        gene_SD <- transform(gene_exp_df, SD = apply(gene_exp_df, 1, sd, na.rm = TRUE))
-        gene_SD[with(gene_SD, order(-SD)),]
+        #gene_exp_df <- data.frame(matrix(gene_exp())) # class: df, dim: 31654 56 -> expected, incorrect: df, 1772624 1
+        gene_exp_df <- as.data.frame(gene_exp()) # class: df, dim: 31654 56 -> expected, correct
+        gene_SD <- transform(gene_exp_df, SD = apply(gene_exp_df, 1, sd, na.rm = TRUE)) # class: df, dim: 31654 57 -> expected, correct
+        gene_SD[with(gene_SD, order(-SD)),] # class: df, dim: 31654 57 -> expected, correct
     })
 
     # Extract user-defined genes with highest SD and convert to numeric matrix
     top_genes_mat <- reactive({
-        sorted_num_genes <- head(sort_gene_SD(), input$gene_num)
-        sorted_num_genes <- sorted_num_genes[1:(length(sorted_num_genes)-1)] # remove SD column
-        as.matrix(sorted_num_genes)
-        # Warning: Error in heatmap.2: `x' must have at least 2 rows and 2 columns
-        # TODO: see what top_genes_mat() is returning
+        top_num_genes <- head(sort_gene_SD(), input$gene_num) # class: df, dim: 100 57 -> expected, correct
+        top_num_genes <- top_num_genes[1:(length(top_num_genes)-1)] # remove SD column # class: df, dim: 100 56 -> expected, correct
+        as.matrix(top_num_genes) # class: matrix, dim: 100 56 -> expected, correct!
     })
 
     # Plot heatmap (base R)
     heatmap <- reactive({
         # print(nrow(top_genes())) # test to check user gene_num input works
         # print(class(top_genes())) # test to check data is right class
-        print(dim(top_genes_mat())) # 100 x 1
-        print(class(top_genes_mat())) # matrix
-        print(class(sort_gene_SD())) # df
-        print(class(gds_df())) #df
-        print(class(gene_exp())) #matrix
+        print(dim(top_genes_mat()))
+        print(class(top_genes_mat()))
+        #print(dim(top_genes_mat())) # 100 x 1
+        #print(class(top_genes_mat())) # matrix
+        #print(class(sort_gene_SD())) # df
+        #print(class(gds_df())) #df
+        #print(class(gene_exp())) #matrix
         heatmap.2(
           top_genes_mat(),
           distfun = input$distance_method,
