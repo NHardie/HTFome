@@ -137,23 +137,17 @@ server <- function(input, output) {
 
     # Plot heatmap (base R)
     heatmap <- reactive({
-        # print(nrow(top_genes())) # test to check user gene_num input works
-        # print(class(top_genes())) # test to check data is right class
-        print(dim(top_genes_mat()))
-        print(class(top_genes_mat()))
-        #print(dim(top_genes_mat())) # 100 x 1
-        #print(class(top_genes_mat())) # matrix
-        #print(class(sort_gene_SD())) # df
-        #print(class(gds_df())) #df
-        #print(class(gene_exp())) #matrix
-        heatmap.2(
-          top_genes_mat(),
-          distfun = input$distance_method,
-          hclustfun = input$linkage_method,
-          scale = input$scaling,
+        # print(nrow(top_genes_mat())) # test to check user gene_num input works
+        # print(class(top_genes_mat())) # test to check data is right class
+        # print(dim(top_genes_mat())) # test to check data is right dim
+        top_genes_mat <- as.matrix(top_genes_mat())
+        heatmap.2(top_genes_mat,
+          distfun = function(x) dist(x, method = input$distance_method),
+          hclustfun = function(x) hclust(x, method = input$linkage_method),
+          scale = input$scale,
           trace = "none",
-          xlab = "Samples (n=" + ncol(top_genes_mat()) + ")",
-          ylab = "Genes (n=" + nrow(top_genes_mat()) + ")",
+          xlab = "Samples",
+          ylab = "Genes",
           key.title = "SD from mean",
           key.xlab = NA,
           key.ylab = NA,
