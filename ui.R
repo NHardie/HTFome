@@ -141,7 +141,11 @@ ui <- dashboardPage(
                           selectInput("linkage_method", "Linkage Algorithm:",
                                       c("complete", "ward.D", "ward.D2", "single", "average", "mcquitty", "median", "centroid")),
                           selectInput("scale", "Apply Scaling:",
-                                      c("none", "row", "column"))
+                                      c("none", "row", "column")),
+                          radioButtons("display_genes", "Display Gene Names:",
+                                       c("No", "Yes"), inline = TRUE),
+                          radioButtons("display_samples", "Display Sample Names:",
+                                       c("No", "Yes"), inline = TRUE)
                         ),
 
                         mainPanel(
