@@ -28,3 +28,6 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+
+# Allows us to upload geo data to the directory under MEDIA_ROOT and access via MEDIA_URL
+# Found in settings.py
