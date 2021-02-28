@@ -158,21 +158,50 @@ ui <- dashboardPage(
 
                     ), # close hca_tab item
 
-            tabItem(tabName = "pca_tab,
+            tabItem(tabName = "pca_tab",
 
                     # Dashboard content for PCA tab ----
 
-                    "),
-            tabItem(tabName = "dge_tab,
+                    fluidPage(
+
+                      titlePanel("Principal Component Analysis"),
+
+                      sidebarPanel(),
+
+                      mainPanel(
+                        tabsetPanel(
+                          type = "tabs",
+                          tabPanel("PCA Plot", withSpinner(plotlyOutput("pca_plot"))),
+                          tabPanel("PCA Table", withSpinner(dataTableOutput("pca_table"))),
+                          tabPanel("Percentage Variance", withSpinner(plotOutput("perc_var")))
+                        )
+                      )
+
+                    )
+
+                    ),
+            tabItem(tabName = "dge_tab",
 
                     # Dashboard content for DGE tab ----
 
-                    "),
-            tabItem(tabName = "htf_activity_tab,
+                    fluidPage(
+
+                      titlePanel("Differential Gene Expression Analysis")
+
+                    )
+
+                    ),
+            tabItem(tabName = "htf_activity_tab",
 
                     # Dashboard content for HTF activity tab ----
 
-                    ")
+                    fluidPage(
+
+                      titlePanel("Human Transcription Factor Activity"),
+
+                    )
+
+                    )
         ) # close tabItems
 
     ) # close dashboardBody
