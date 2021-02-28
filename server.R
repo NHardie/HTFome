@@ -141,24 +141,31 @@ server <- function(input, output) {
         # print(class(top_genes_mat())) # test to check data is right class
         # print(dim(top_genes_mat())) # test to check data is right dim
         top_genes_mat <- as.matrix(top_genes_mat())
+        samples <- paste("Samples (n=",ncol(top_genes_mat),")", sep = "")
+        genes <- paste("Genes (n=",nrow(top_genes_mat),")", sep = "")
+        #title <- paste(Meta(gds())$title, sep = "")
         heatmap.2(top_genes_mat,
           # TODO: Colour samples by sample type.
           distfun = function(x) dist(x, method = input$distance_method),
           hclustfun = function(x) hclust(x, method = input$linkage_method),
           scale = input$scale,
           trace = "none",
-          xlab = "Samples", # TODO: display sample count.
-          ylab = "Genes", # TODO: display gene count.
+          #main = title,
+          xlab = samples,
+          ylab = genes,
           key.title = "SD from mean",
           key.xlab = NA,
           key.ylab = NA,
-          #lhei = c(1,6),
-          #lwid = c(1,3.5),
-          #keysize = 0.35,
-          #key.par = list(cex = 0.5),
+          lhei = c(1,6),
+          lwid = c(1,3.5),
+          keysize = 0.35,
+          key.par = list(cex = 0.5),
           labRow = if (input$display_genes == "No") {FALSE} else rownames(top_genes_mat),
           labCol = if (input$display_samples == "No") {FALSE} else colnames(top_genes_mat),
-          margins = if (input$display_genes == "No" && input$display_samples == "No") {c(2,2)} else c(5,5),
+          margins = if (input$display_genes == "No" && input$display_samples == "No") {c(2,2)}
+                        else if (input$display_genes == "Yes" && input$display_samples == "No") {c(2,7)}
+                        else if (input$display_genes == "No" && input$display_samples == "Yes") {c(9,2)}
+                        else c(9,7), # shifts x-/y-axis labels depending whether user chooses to show sample/gene labels
           col = greenred(75)
         )
     })
