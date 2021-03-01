@@ -107,16 +107,8 @@ ui <- dashboardPage(
                             #sidebarPanel(),
 
                             column(6,
-                                   withSpinner(plotlyOutput("pheno_plot")))
-
-                            #mainPanel(
-
-                               # tabsetPanel(type = "tabs",
-                                #            tabPanel("Phenotype Plot", plotlyOutput("pheno_plot")),
-                                #            tabPanel("Sample Boxplot", verbatimTextOutput("eset_summary")),
-                                #            tabPanel("Phenotype Summary", dataTableOutput("phenotype_summary"))
-                                #            )
-                             #   )
+                                   withSpinner(plotlyOutput("pheno_plot"))
+                            )
 
                         ) # close sidebarLayout
 
@@ -124,9 +116,10 @@ ui <- dashboardPage(
 
                     ), # close stats_tab item
 
+
+            # Dashboard content for HCA tab ----
             tabItem(tabName = "hca_tab",
 
-                    # Dashboard content for HCA tab ----
                     fluidPage(
 
                       titlePanel("Hierarchical Clustering Analysis"),
@@ -160,9 +153,9 @@ ui <- dashboardPage(
 
                     ), # close hca_tab item
 
-            tabItem(tabName = "pca_tab",
 
-                    # Dashboard content for PCA tab ----
+            # Dashboard content for PCA tab ----
+            tabItem(tabName = "pca_tab",
 
                     fluidPage(
 
@@ -172,10 +165,11 @@ ui <- dashboardPage(
                         numericInput("pc_num", "Number of Principal Components to retain:",
                                      value = 10, min = 10), # set min value to 10 as screeplot() only takes min 10 npcs
                         uiOutput("pDat_cols_pca")
+                        # TODO: try get the scaling and centering options working
                         # radioButtons("pca_scale", "Apply scaling:",
                         #             c("TRUE", "FALSE"), inline = TRUE),
                         # radioButtons("pca_center", "Center:",
-                        #             c("TRUE", "FALSE"), inline = TRUE) # TODO: try get these options working
+                        #             c("TRUE", "FALSE"), inline = TRUE)
                       ),
 
                       mainPanel(
@@ -191,31 +185,47 @@ ui <- dashboardPage(
                         )
                       )
 
-                    )
+                    ) # close fluidPage
 
-                    ),
+                    ), # close pca_tab item
+
+
+            # Dashboard content for DGE tab ----
             tabItem(tabName = "dge_tab",
-
-                    # Dashboard content for DGE tab ----
 
                     fluidPage(
 
                       titlePanel("Differential Gene Expression Analysis")
 
-                    )
+                    ) # close fluidPage
 
-                    ),
+                    ), # close dge_tab item
+
+
+            # Dashboard content for HTF activity tab ----
             tabItem(tabName = "htf_activity_tab",
-
-                    # Dashboard content for HTF activity tab ----
 
                     fluidPage(
 
                       titlePanel("Human Transcription Factor Activity"),
 
-                    )
+                      sidebarLayout(
 
-                    )
+                        sidebarPanel(
+                          uiOutput("get_treatment_name"),
+                          uiOutput("get_control_name")
+                        ),
+
+                        mainPanel(
+                          withSpinner(plotOutput("viper_plot"))
+                        )
+
+                      ) # close sidebarPanel
+
+                    ) # close fluidPage
+
+            ) # close htf_activity tab
+
         ) # close tabItems
 
     ) # close dashboardBody
