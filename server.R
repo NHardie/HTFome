@@ -259,19 +259,19 @@ server <- function(input, output) {
 
         num_rows <- length(unique(rows)) # Test: print num factors - PASSED!
         unique_rows <- unique(rows) # Test: print unique rows -
-
-        print(pDat_col_name) # should print name, test passed!
-        print(class(pDat_col_name)) # class character
-        print(pDat_choice) # should print entire column - yes but includes sample names
-        print(class(pDat_choice)) # class df
-        print(num_sample_types) # should print num factor levels (2) - failed: prints "0"
-        print(class(num_sample_types)) # class integer
-        print(rows) # prints all rownames + includes line of levels (correctly identified)
-        print(class(rows)) # class factor
+        unique_rows
+        #print(pDat_col_name) # should print name, test passed!
+        #print(class(pDat_col_name)) # class character
+        #print(pDat_choice) # should print entire column - yes but includes sample names
+        #print(class(pDat_choice)) # class df
+        #print(num_sample_types) # should print num factor levels (2) - failed: prints "0"
+        #print(class(num_sample_types)) # class integer
+        #print(rows) # prints all rownames + includes line of levels (correctly identified)
+        #print(class(rows)) # class factor
         print(num_rows) # 2
-        print(class(num_rows)) # integer
+        #print(class(num_rows)) # integer
         print(unique_rows) # [1] influenza A      no virus control      Levels: influenza A no virus control
-        print(class(unique_rows)) # factor
+        #print(class(unique_rows)) # factor
 
         #my_cols <-
 
@@ -340,23 +340,24 @@ server <- function(input, output) {
 
     # htf_activity_tab reactive outputs ----
 
+    # Define sample choices for HTF activity analysis
+    sample_choice <- reactive({
+        pDat_sample_col <- pDat()[,2]
+        unique(pDat_sample_col)
+    })
+
     # Let user select treatment variable
     output$get_treatment_name <- renderUI({
-        pDat_samples <- pDat()[,2]
-        pDat_col <- rownames(pDat_samples)
-        selectInput("treatment_names",
+        selectInput("treatment_name",
                     "Select treatment variable:",
-                    choices = pDat_col)
+                    choices = sample_choice())
     })
 
     # Let user select control variable
     output$get_control_name <- renderUI({
-        pDat_samples <- pDat()[,3, drop = FALSE]
-        print(rownames(pDat_samples))
-        pDat_col <- rownames(pDat_samples)
-        selectInput("control_names",
+        selectInput("control_name",
                     "Select control variable:",
-                    choices = pDat_col)
+                    choices = sample_choice())
     })
 
     # Perform viper analysis
