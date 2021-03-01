@@ -13,6 +13,7 @@ library(EnhancedVolcano)
 library(tidyverse)
 library(shinycssloaders)
 library(plotly)
+library(RColorBrewer)
 
 # Set maximum file size limit to 100 MB ----
 options(shiny.maxRequestSize = 100*1024^2)
