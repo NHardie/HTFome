@@ -217,7 +217,11 @@ ui <- dashboardPage(
                         ),
 
                         mainPanel(
-                          withSpinner(plotOutput("viper_plot"))
+                          tabsetPanel(
+                            type = "tabs",
+                            tabPanel("VIPER Plot", withSpinner(plotOutput("viper_plot"))),
+                            tabPanel("VIPER Summary", withSpinner(dataTableOutput("viper_summary")))
+                          )
                         )
 
                       ) # close sidebarPanel
