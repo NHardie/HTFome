@@ -337,6 +337,11 @@ server <- function(input, output) {
         viper_regulons
     })
 
+    # Perform viper analysis
+    viper_analysis <- reactive({
+
+    })
+
 
     # htf_activity_tab reactive outputs ----
 
@@ -360,12 +365,15 @@ server <- function(input, output) {
                     choices = sample_choice())
     })
 
-    # Perform viper analysis
-
-
     # Plot viper output
-    viper_plot <- renderPlot(
-      validate_upload()
-    )
+    output$viper_plot <- renderPlot({
+        validate_upload()
+        viper_analysis()
+    })
+
+    # Display VIPER summary table
+    output$viper_summary <- renderDataTable({
+        validate_upload()
+    })
 
 } # close server
