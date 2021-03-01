@@ -230,12 +230,6 @@ server <- function(input, output) {
         )
     })
 
-    # Set colours by sample type
-    my_colours <- reactive({
-        num_sample_types
-        my_cols
-    })
-
     # Plot PCA scores
     pca_scores <- reactive({
         scores <- pca()$x # class matrix expected, correct!
@@ -247,6 +241,31 @@ server <- function(input, output) {
              main = "PCA scores (per sample)",
              col =
         )
+    })
+
+    # Set colours by sample type
+    my_cols <- reactive({
+        #choices <- length(unique(iris$Species))
+        pDat_df <- pDat()
+        #pDat_choice <- pDat_df$names(pDat()[input$pca_cols]) # test fail: Error in <reactive:my_cols>: attempt to apply non-function
+        #pDat_choice <- pDat()$pDat()[input$pca_cols] # test fail: Error in <reactive:my_cols>: attempt to apply non-function
+        #pDat_choice <- pDat_df$names(pDat_df[input$pca_cols]) # test fail: Error in <reactive:my_cols>: attempt to apply non-function
+
+        pDat_col_name <- names(pDat()[input$pca_cols]) # test passed: this prints!
+        pDat_choice <- pDat()[input$pca_cols] # test passed: prints entire column selected by user
+        num_sample_types <- length(unique(pDat_choice$pDat_col_name))
+
+        print(pDat_col_name) # should print name, test passed!
+        print(class(pDat_col_name))
+        print(pDat_choice) # should print entire column
+        print(class(pDat_choice))
+        print(num_sample_types) # should print num factor levels
+        print(class(num_sample_types))
+        #my_cols <-
+
+        #my_cols <- c("#0096FF", "#F8766D", "#E76CF3", "#00BA38")
+        #names(my_cols) <- c("Convalescent", "Dengue Hemorrhagic Fever", "Dengue Fever", "healthy control")
+
     })
 
 
@@ -262,6 +281,7 @@ server <- function(input, output) {
     output$pca_data <- renderPrint({
         validate_upload()
         pca_summary()
+        my_cols()
     })
 
     output$screeplot <- renderPlot({
