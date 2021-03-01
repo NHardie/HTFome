@@ -255,12 +255,24 @@ server <- function(input, output) {
         pDat_choice <- pDat()[input$pca_cols] # test passed: prints entire column selected by user
         num_sample_types <- length(unique(pDat_choice$pDat_col_name))
 
+        rows <- pDat()[,input$pca_cols] # Test: print all rownames - passed
+
+        num_rows <- length(unique(rows)) # Test: print num factors - PASSED!
+        unique_rows <- unique(rows) # Test: print unique rows -
+
         print(pDat_col_name) # should print name, test passed!
-        print(class(pDat_col_name))
-        print(pDat_choice) # should print entire column
-        print(class(pDat_choice))
-        print(num_sample_types) # should print num factor levels
-        print(class(num_sample_types))
+        print(class(pDat_col_name)) # class character
+        print(pDat_choice) # should print entire column - yes but includes sample names
+        print(class(pDat_choice)) # class df
+        print(num_sample_types) # should print num factor levels (2) - failed: prints "0"
+        print(class(num_sample_types)) # class integer
+        print(rows) # prints all rownames + includes line of levels (correctly identified)
+        print(class(rows)) # class factor
+        print(num_rows) # 2
+        print(class(num_rows)) # integer
+        print(unique_rows) # [1] influenza A      no virus control      Levels: influenza A no virus control
+        print(class(unique_rows)) # factor
+
         #my_cols <-
 
         #my_cols <- c("#0096FF", "#F8766D", "#E76CF3", "#00BA38")
@@ -311,7 +323,48 @@ server <- function(input, output) {
 
     # htf_activity_tab reactive expressions ----
 
+    # gene_exp = expr(eset)
+
+    # Get treatment factors
+    #factor_category = df[,2]
+    # treatment <-
+    # control <-
+
+    #convert DoRothEA network to regulon
+    get_regulon <- reactive({
+        data(dorothea_hs, package = "dorothea")
+        viper_regulons = df2regulon(dorothea_hs)
+        viper_regulons
+    })
+
+
     # htf_activity_tab reactive outputs ----
 
+    # Let user select treatment variable
+    output$get_treatment_name <- renderUI({
+        pDat_samples <- pDat()[,2]
+        pDat_col <- rownames(pDat_samples)
+        selectInput("treatment_names",
+                    "Select treatment variable:",
+                    choices = pDat_col)
+    })
+
+    # Let user select control variable
+    output$get_control_name <- renderUI({
+        pDat_samples <- pDat()[,3, drop = FALSE]
+        print(rownames(pDat_samples))
+        pDat_col <- rownames(pDat_samples)
+        selectInput("control_names",
+                    "Select control variable:",
+                    choices = pDat_col)
+    })
+
+    # Perform viper analysis
+
+
+    # Plot viper output
+    viper_plot <- renderPlot(
+      validate_upload()
+    )
 
 } # close server
