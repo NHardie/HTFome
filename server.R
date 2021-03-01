@@ -93,7 +93,7 @@ server <- function(input, output) {
     output$pheno_plot <- renderPlotly({
         validate_upload()
         #plot(pDat()[,3])
-        pDatPlot <- ggplot(pDat(), aes(x=pDat()[,3])) +
+        pDatPlot <- ggplot(pDat(), aes(x=pDat()[,2])) +
           geom_bar(color="black", position=position_dodge()) +
           theme_minimal()
         ggplotly(pDatPlot)
@@ -105,11 +105,10 @@ server <- function(input, output) {
     # hca_tab reactive expressions ----
 
     # Combine gene names from gds and expression data from eSet, then
-    # remove any duplicated genes by taking an average of probes
-    # corresponding to same gene.
+    # remove any duplicated genes by taking the average expression of
+    # probes corresponding to same gene.
     # Output is a matrix containing averaged gene expression data.
     gene_exp <- reactive({
-        # TODO: check what data classes we have before/after adding rownames
         geneNames <- as.character(gds_df()$IDENTIFIER)
         gene_eset <- exprs(eset()) # class: matrix, dim: 54715 56 -> expected, correct
         rownames(gene_eset) <- geneNames # class: matrix, dim: 54715 56 -> expected, correct
@@ -180,8 +179,91 @@ server <- function(input, output) {
 
     # pca_tab reactive expressions ----
 
+    # Perform PCA: get averaged gene expression data, transform it and
+    # remove any columns containing zeros and NAs first
+    pca <- reactive({
+        gene_exp_mat <- gene_exp() # class matrix expected, correct
+        tX <- t(gene_exp_mat)
+        Xpca <- tX[, colSums(tX != 0, na.rm = TRUE) > 0]
+        Xpca <- prcomp(Xpca, center = TRUE, scale. = TRUE) # class prcomp expected, correct!
+        Xpca
+    })
+
+    # Get summary of PCA results
+    pca_summary <- reactive({
+        summary(pca())
+    })
+
+    # Screeplot
+    scree_plot <- reactive({
+        screeplot_title <- paste("Screeplot of the first ",input$pc_num," PCs", sep = "")
+        summ <- pca_summary()
+        exp_var <- summ$importance[2,] * 100
+        plot(exp_var[1:input$pc_num],
+             type = "b",
+             xlab = "PCs",
+             ylab = "Variance",
+             main = screeplot_title
+        )
+        abline(h = 1, col = "red", lty = 5)
+        legend("topright", legend = c("Eigenvalue = 1"),
+               col = c("red"), lty = 5, cex = 0.9)
+    })
+
+    # Plot cumulative variance
+    cum_var <- reactive({
+        summ <- pca_summary()
+        cum_var <- summ$importance[3,] * 100
+        plot(cum_var[1:input$pc_num],
+             type = "b",
+             xlab = "PCs",
+             ylab = "Cumulative explained variance",
+             main = "Cumulative variance plot"
+        )
+    })
+
+    # Set colours by sample type
+    my_colours <- reactive({
+        num_sample_types
+        my_cols
+    })
+
+    # Plot PCA scores
+    pca_scores <- reactive({
+        scores <- pca()$x # class matrix expected, correct!
+        plot(scores[,1],
+             scores[,2],
+             xlab = "PC1",
+             ylab = "PC2",
+             pch = 19,
+             main = "PCA scores (per sample)",
+             col =
+        )
+    })
+
+
     # pca_tab reactive outputs ----
 
+    output$pca_data <- renderPrint({
+        validate_upload()
+        pca_summary()
+    })
+
+    output$screeplot <- renderPlot({
+        validate_upload()
+        scree_plot()
+    })
+
+    output$cum_var_plot <- renderPlot({
+        validate_upload()
+        cum_var()
+    })
+
+
+    output$pca_plot <- renderPlot({
+        validate_upload()
+        pca_scores()
+    })
 
     # ---- dge_tab item ----
 
