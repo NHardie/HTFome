@@ -170,6 +170,14 @@ server <- function(input, output) {
     })
 
     # hca_tab reactive outputs ----
+
+    # Display column names user can colour samples by
+    output$pDat_cols_hca <- renderUI({
+        pDat_col <- names(pDat()[2:3])
+        selectInput("hca_cols", "Colour samples by:",
+                    choices = pDat_col)
+    })
+
     output$heatmap <- renderPlot({
         validate_upload()
         heatmap()
@@ -206,8 +214,8 @@ server <- function(input, output) {
              main = screeplot_title
         )
         abline(h = 1, col = "red", lty = 5)
-        legend("topright", legend = c("Eigenvalue = 1"),
-               col = c("red"), lty = 5, cex = 0.9)
+        legend("topright", legend = "Eigenvalue = 1",
+               col = "red", lty = 5, cex = 0.9)
     })
 
     # Plot cumulative variance
@@ -243,6 +251,13 @@ server <- function(input, output) {
 
 
     # pca_tab reactive outputs ----
+
+    # Display column names user can colour samples by
+    output$pDat_cols_pca <- renderUI({
+        pDat_col <- names(pDat()[2:3]) # select categorical variables only
+        selectInput("pca_cols", "Colour samples by:",
+                    choices = pDat_col)
+    })
 
     output$pca_data <- renderPrint({
         validate_upload()
