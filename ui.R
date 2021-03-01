@@ -134,7 +134,8 @@ ui <- dashboardPage(
                       sidebarLayout(
 
                         sidebarPanel(
-                          sliderInput("gene_num", "Number of genes to display:", min = 50, max = 1000, value = 100),
+                          sliderInput("gene_num", "Number of genes to display:",
+                                      min = 50, max = 5000, value = 100),
                           # TODO: extract max gene number for each GDS (and substitute in max value)
                           selectInput("distance_method", "Distance Method:",
                                       c("euclidean", "maximum", "manhattan", "canberra", "binary", "minkowski")),
@@ -166,14 +167,25 @@ ui <- dashboardPage(
 
                       titlePanel("Principal Component Analysis"),
 
-                      sidebarPanel(),
+                      sidebarPanel(
+                        numericInput("pc_num", "Number of Principal Components to retain:",
+                                     value = 10, min = 10), # set min value to 10 as screeplot() only takes min 10 npcs
+                        radioButtons("pca_scale", "Apply scaling:",
+                                    c("TRUE", "FALSE"), inline = TRUE),
+                        radioButtons("pca_center", "Center:",
+                                    c("TRUE", "FALSE"), inline = TRUE)
+                      ),
 
                       mainPanel(
                         tabsetPanel(
                           type = "tabs",
-                          tabPanel("PCA Plot", withSpinner(plotlyOutput("pca_plot"))),
-                          tabPanel("PCA Table", withSpinner(dataTableOutput("pca_table"))),
-                          tabPanel("Percentage Variance", withSpinner(plotOutput("perc_var")))
+                          # TODO: options not currently in use - may need to remove OR debug
+                          tabPanel("PCA Data", withSpinner(verbatimTextOutput("pca_data"))),
+                          tabPanel("Screeplot",
+                                   withSpinner(plotOutput("screeplot")),
+                                   br(),
+                                   withSpinner(plotOutput("cum_var_plot"))),
+                          tabPanel("PCA Plot", withSpinner(plotOutput("pca_plot")))
                         )
                       )
 
