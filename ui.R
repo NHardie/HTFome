@@ -146,7 +146,8 @@ ui <- dashboardPage(
                           radioButtons("display_genes", "Display Gene Names:",
                                        c("No", "Yes"), inline = TRUE),
                           radioButtons("display_samples", "Display Sample Names:",
-                                       c("No", "Yes"), inline = TRUE)
+                                       c("No", "Yes"), inline = TRUE),
+                          uiOutput("pDat_cols_hca")
                         ),
 
                         mainPanel(
@@ -170,10 +171,11 @@ ui <- dashboardPage(
                       sidebarPanel(
                         numericInput("pc_num", "Number of Principal Components to retain:",
                                      value = 10, min = 10), # set min value to 10 as screeplot() only takes min 10 npcs
-                        radioButtons("pca_scale", "Apply scaling:",
-                                    c("TRUE", "FALSE"), inline = TRUE),
-                        radioButtons("pca_center", "Center:",
-                                    c("TRUE", "FALSE"), inline = TRUE)
+                        uiOutput("pDat_cols_pca")
+                        # radioButtons("pca_scale", "Apply scaling:",
+                        #             c("TRUE", "FALSE"), inline = TRUE),
+                        # radioButtons("pca_center", "Center:",
+                        #             c("TRUE", "FALSE"), inline = TRUE) # TODO: try get these options working
                       ),
 
                       mainPanel(
