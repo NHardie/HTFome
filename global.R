@@ -1,7 +1,8 @@
 # Title     : Scripts for HTFome's GEO DataSet Analyser (shiny dashboard)
 # Objective : Defines global R scripts
 
-# Import libraries for Shiny ----
+# Import libraries ----
+# Import libraries for Shiny
 library(shiny)
 library(shinydashboard)
 library(shinycssloaders)
@@ -18,7 +19,7 @@ library(EnhancedVolcano)
 library(plotly)
 library(RColorBrewer)
 
-# Import libraries for HTF activity ----
+# Import libraries for HTF activity
 library(viper)
 library(dorothea)
 
@@ -26,10 +27,9 @@ library(dorothea)
 options(shiny.maxRequestSize = 100*1024^2)
 
 # Viper function ----
-
 viper_analysis <- function(gds, eset, sampleType, treatment, control) {
 
-  # Converting probe names to gene symbols
+  # Convert probe names to gene symbols
   X <- Table(gds)
   X <- avereps(X, ID=X$IDENTIFIER) # summarise probe values to a single expression value per gene
   eset <- eset[match(X[, "ID_REF"], rownames(eset)),] # update eset dimensions
@@ -41,7 +41,7 @@ viper_analysis <- function(gds, eset, sampleType, treatment, control) {
   exprs(eset) <- exp # write expression matrix back to eSet
 
   ### NEEDS TO GET USER INPUT ####
-  # Get treatment factors
+  # Get treatment and control from factor
   factor_category <- sampleType
   treatment_name <- treatment
   control_name <- control
