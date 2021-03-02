@@ -1,6 +1,12 @@
 README.md
-# bioinfo-group-project
-Group project for Bioinformatics masters degree
+# **HTFome**
+Group project for QMUL bioinformatics masters degree
+
+A.M. Andersen, K. Antoniuk, N. Hardie and A. Sutradhar
+
+_HTFome (https://htfome.com/) is a web application (webapp) designed to give users access to data regarding Human Transcription Factors (HTF’s), drugs which target HTF’s, and allow users to upload gene expression data for analysis in-browser._
+
+HTFome was developed using the Django framework, and R Shiny, hosted on an Amazon Web Services (AWS) Elastic Beanstalk (EB) server. The data used in the app was gathered through Application Programming Interface (API) calls to several large, established data repositories, and is stored locally via a SQLite3 database. An app user can access this data via the browser and view one of several web pages, displaying the data as a list, or click-through to see more specific detail about an individual HTF or drug of choice. 
 
 
 ## Future reference 
@@ -23,7 +29,7 @@ manage.py: Allows user to run django commands in the command line, such as runse
 Future applications should be generated as normal in Django using the command: startapp app_name, this command must be run from the directory containing the manage.py file
 
 requirements.txt: pip install -r requirements.txt will install all required packages/ dependancies to further develop the webapp, add to this file by installing required packages then using pip freeze > requirements.txt to ensure all developers are using same packages.
-(This should be performed in a virtual environment)
+**(This should be performed in a virtual environment)**
 
 
 Creation of further applications/ webpages/ HTML templates etc follows normal Django development guidelines.
