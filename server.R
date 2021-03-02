@@ -175,7 +175,6 @@ server <- function(input, output) {
 
     # Display column names user can colour samples by
     output$pDat_cols_hca <- renderUI({
-        req(input$hca_cols)
         pDat_col <- names(pDat()[2:3])
         selectInput("hca_cols", "Colour samples by:",
                     choices = pDat_col)
@@ -298,7 +297,6 @@ server <- function(input, output) {
 
     # Display column names user can colour samples by
     output$pDat_cols_pca <- renderUI({
-        req(input$pca_cols)
         pDat_col <- names(pDat()[2:3]) # select categorical variables only
         selectInput("pca_cols", "Colour samples by:",
                     choices = pDat_col)
@@ -367,7 +365,6 @@ server <- function(input, output) {
 
     # Let user select treatment variable
     output$get_treatment_name <- renderUI({
-        req(input$treatment_name)
         selectInput("treatment_name",
                     "Select treatment variable:",
                     choices = sample_choice())
@@ -375,7 +372,6 @@ server <- function(input, output) {
 
     # Let user select control variable
     output$get_control_name <- renderUI({
-        req(input$control_name)
         selectInput("control_name",
                     "Select control variable:",
                     choices = sample_choice())
