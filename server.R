@@ -2,7 +2,7 @@
 # Objective : Defines the server function
 
 # Define server logic
-server <- function(input, output, session) {
+server <- function(input, output) {
 
     # ---- upload_tab item ----
 
@@ -175,6 +175,7 @@ server <- function(input, output, session) {
 
     # Display column names user can colour samples by
     output$pDat_cols_hca <- renderUI({
+        req(input$hca_cols)
         pDat_col <- names(pDat()[2:3])
         selectInput("hca_cols", "Colour samples by:",
                     choices = pDat_col)
@@ -297,6 +298,7 @@ server <- function(input, output, session) {
 
     # Display column names user can colour samples by
     output$pDat_cols_pca <- renderUI({
+        req(input$pca_cols)
         pDat_col <- names(pDat()[2:3]) # select categorical variables only
         selectInput("pca_cols", "Colour samples by:",
                     choices = pDat_col)
@@ -335,6 +337,15 @@ server <- function(input, output, session) {
 
     # htf_activity_tab reactive expressions ----
 
+    # File upload validation
+    validate_htf_button <- reactive({
+        validate(
+          need(input$htf_activity_button,
+               "Nothing to display here, please assign treatment and control variables and click the button to begin analysis.")
+        )
+    })
+
+    # Run VIPER analysis
     viper_output <- reactive({
 
         # Get treatment factors
@@ -342,19 +353,9 @@ server <- function(input, output, session) {
         treatment_name <- input$treatment_name
         control_name <- input$control_name
 
-        viper <<- viper_analysis(gds(), eset(), sample_type, treatment_name, control_name)
-        viper
+        # Run analysis
+        viper_analysis(gds(), eset(), sample_type, treatment_name, control_name)
     })
-
-    viper_tests <- reactive({
-        # Enter print/class/dim statements here
-
-    })
-
-    # Only perform VIPER analysis when user clicks button
-    #observeEvent({
-    #    updateActionButton(inputId = "htf_activity_button", label = label)
-    #})
 
     # htf_activity_tab reactive outputs ----
 
@@ -366,6 +367,7 @@ server <- function(input, output, session) {
 
     # Let user select treatment variable
     output$get_treatment_name <- renderUI({
+        req(input$treatment_name)
         selectInput("treatment_name",
                     "Select treatment variable:",
                     choices = sample_choice())
@@ -373,6 +375,7 @@ server <- function(input, output, session) {
 
     # Let user select control variable
     output$get_control_name <- renderUI({
+        req(input$control_name)
         selectInput("control_name",
                     "Select control variable:",
                     choices = sample_choice())
@@ -381,18 +384,21 @@ server <- function(input, output, session) {
     # Plot viper output
     output$viper_plot <- renderPlot({
         validate_upload()
+        validate_htf_button()
         input$htf_activity_button
-        viper_output()
+        plot(viper_output(), cex = 0.8)
     })
 
     # Display VIPER summary table
     output$viper_summary <- renderDataTable({
         validate_upload()
+        validate_htf_button()
+        summary(viper_output())
     })
 
-    # VIPER tests
-    output$viper_test <- renderPrint({
-        # reference a function and print/class/dim statements here
-    })
+    # VIPER tests - uncomment for developer testing
+    # output$viper_test <- renderPrint({
+    #     # test functions/reactives with print/class/dim statements here
+    # })
 
 } # close server
