@@ -6,7 +6,7 @@
         <div class="row">
 
             <!-- Title and description -->
-            <div class="col-12 col-lg-7">
+            <div class="col-12 col-lg-7"> <!-- TODO: Add my-auto mt-1 here? -->
                 <h1 class="mt-5">HTFome</h1>
                 <p><em> HTF: Human Transcription Factor, one of many proteins controlling the rate of transcription in Humans</p></em>
 
@@ -17,32 +17,48 @@
             </div>
 
             <!-- Cards -->
-            <div class="col-12 col-lg-5">
-                <div class="column">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">HTF Search</h5>
-                            <p class="card-text">Search for human transcription factors.</p>
-                            <a href="{% url 'htf' %}" class="card-link">Get started</a>
+            <div class="col-12 col-lg-5 my-auto">
+                <div class="col">
+                    <a href="{% url 'htf' %}" class="custom-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mt-5">HTF Search
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                                    </svg>
+                                </h5>
+                                <p class="card-text">Search for human transcription factors.</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Drug Search</h5>
-                            <p class="card-text">Search for drugs that target human transcription factors.</p>
-                            <a href="{% url 'drug' %}" class="card-link">Get started</a>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="{% url 'drug' %}" class="custom-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mt-5">Drug Search
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                                    </svg>
+                                </h5>
+                                <p class="card-text">Search for drugs that target human transcription factors.</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">GEO DataSet Analyser</h5>
-                            <p class="card-text">Upload gene expression data from GEO to obtain summary statistics and an estimate of transcription factor activity.</p>
-                            <a href="{% url 'genexp' %}" class="card-link">Get started</a>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="{% url 'genexp' %}" class="custom-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mt-4">GEO DataSet Analyser
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                                    </svg>
+                                </h5>
+                                <p class="card-text">Upload gene expression data from GEO to obtain summary statistics and an estimate of transcription factor activity.</p>
+                            </div>
                         </div>
-                    </div>
-
+                    </a>
                 </div>
             </div>
         </div>
