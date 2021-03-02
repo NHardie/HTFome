@@ -1,7 +1,6 @@
 #This script was used to clean the data extracted from Signor and organize the relational data between HTFs and their targeted gens
 
 import pandas as pd
-cd ~/bioinfo-group-project/ #change working directory to project folder
 
 HTF = pd.read_excel('HTF_data.xlsx', header=0) #read excel sheet with HTF list
 Genes = pd.read_excel('all_data_08_02_21.xlsx', header=0) #read excel sheet with genes and their targeted genes
