@@ -2,12 +2,6 @@
 # Objective : Use as an example for GDS analysis
 # Created on: 23/11/2020
 
-# Aim: To gain insights into molecular mechanisms underlying host response to DENV infection, through:
-# (1) visualising relationships between gene expression profiles of four patient populations; and
-# (2) Identifying the genes that show most significant difference in expression between those populations.
-
-# Install packages
-
 # Import libraries
 library(GEOquery)
 library(ggplot2)
@@ -113,14 +107,10 @@ sort.sdX <- X.SD[with(X.SD, order(-SD)),]
 # Extract top genes with highest SD
 genes.X <- head(sort.sdX, 100)
 hclust.X <- head(sort.sdX, 7528) # number genes used in original paper
-top5000.X <- head(sort.sdX, 5000)
-top1000.X <- head(sort.sdX, 1000)
 
 # Remove SD column
 genes.X <- genes.X[1:(length(genes.X)-1)]
 hclust.X <- hclust.X[1:(length(hclust.X)-1)]
-top5000.X <- top5000.X[1:(length(top5000.X)-1)]
-top1000.X <- top1000.X[1:(length(top1000.X)-1)]
 
 
 # Visualise as heatmap ----
@@ -128,11 +118,13 @@ top1000.X <- top1000.X[1:(length(top1000.X)-1)]
 # Convert named num to numeric matrix
 genes.X <- as.matrix(genes.X)
 hclust.X <- as.matrix(hclust.X)
-top5000.X <- as.matrix(top5000.X)
-top1000.X <- as.matrix(top1000.X)
 
 # Plot heatmap (base R)
 heatmap(x = genes.X, col = pDat$disease.state)
+
+# Create colour palette to colour samples by disease state
+my_cols <- c("#0096FF", "#F8766D", "#E76CF3", "#00BA38")
+names(my_cols) <- c("Convalescent", "Dengue Hemorrhagic Fever", "Dengue Fever", "healthy control")
 
 # Plot heatmap (gplots) for top 100 genes
 heatmap.2(x = genes.X, trace = "none", ColSideColors = my_cols[pDat$disease.state],
@@ -148,35 +140,13 @@ legend("topleft",
        border = NA, bty = "y",
        cex=0.5)
 
-# Plot heatmap for all genes
-heatmap.2(x = X, trace = "none", ColSideColors = my_cols[pDat$disease.state],
-          xlab = "Patient Samples (n=56)", ylab = "Genes (n=31,654)",
-          key.title = "SD from mean", key.xlab = NA, key.ylab = NA,
-          lhei=c(1,4), lwid=c(1,3.5), keysize=0.35, key.par = list(cex=0.5),
-          labRow = FALSE, labCol = FALSE, margins = c(2, 2), col = greenred(75))
-
-
 # Plot heatmap for 7528 genes (as done in paper)
+# Create new colour palette (as used in paper)
 new_cols <- c("#9ECEFC", "#F6F237", "#272727", "#BD2D2C")
 names(new_cols) <- c("Convalescent", "healthy control", "Dengue Fever", "Dengue Hemorrhagic Fever")
 
 heatmap.2(x = hclust.X, trace = "none", ColSideColors = new_cols[pDat$disease.state],
           xlab = "Patient Samples (n=56)", ylab = "Genes (n=7,528)",
-          key.title = "SD from mean", key.xlab = NA, key.ylab = NA,
-          lhei=c(1,4), lwid=c(1,3.5), keysize=0.35, key.par = list(cex=0.5),
-          labRow = FALSE, labCol = FALSE, margins = c(2, 2), col = greenred(75))
-
-
-# Heatmap for top 5000 genes
-heatmap.2(x = top5000.X, trace = "none", ColSideColors = my_cols[pDat$disease.state],
-          xlab = "Patient Samples (n=56)", ylab = "Genes (n=5,000)",
-          key.title = "SD from mean", key.xlab = NA, key.ylab = NA,
-          lhei=c(1,4), lwid=c(1,3.5), keysize=0.35, key.par = list(cex=0.5),
-          labRow = FALSE, labCol = FALSE, margins = c(2, 2), col = greenred(75))
-
-# Heatmap for top 1000 genes
-heatmap.2(x = top1000.X, trace = "none", ColSideColors = my_cols[pDat$disease.state],
-          xlab = "Patient Samples (n=56)", ylab = "Genes (n=1,000)",
           key.title = "SD from mean", key.xlab = NA, key.ylab = NA,
           lhei=c(1,4), lwid=c(1,3.5), keysize=0.35, key.par = list(cex=0.5),
           labRow = FALSE, labCol = FALSE, margins = c(2, 2), col = greenred(75))
@@ -191,11 +161,11 @@ Xpca <- prcomp(t(X), scale = TRUE)
 summary(Xpca)
 
 # Get percentage variance for each PC
-summ = summary(Xpca)
-exp_var = summ$importance[2,] * 100
+summ <- summary(Xpca)
+exp_var <- summ$importance[2,] * 100
 
 # Get cumulative variance for each PC
-cum_var = summ$importance[3,] * 100
+cum_var <- summ$importance[3,] * 100
 head(cum_var)
 
 # Plot bar charts showing relative importance of each PC
@@ -206,11 +176,7 @@ barplot(cum_var)
 # Plot PCA ----
 
 # Extract PC scores
-Xscores = Xpca$x
-
-# Colour samples by disease state
-my_cols <- c("#0096FF", "#F8766D", "#E76CF3", "#00BA38")
-names(my_cols) <- c("Convalescent", "Dengue Hemorrhagic Fever", "Dengue Fever", "healthy control")
+Xscores <- Xpca$x
 
 # Produce 2D PC plot
 plot(Xscores[,1], Xscores[,2], xlab = "PC1 (16.5%)", ylab = "PC2 (8.2%)", pch = 19,
@@ -261,11 +227,11 @@ p + z$layers
 Xpca2 <- prcomp(X, scale = FALSE)
 
 # Get percentage variance for each PC
-summ2 = summary(Xpca2)
-exp_var2 = summ2$importance[2,] * 100
+summ2 <- summary(Xpca2)
+exp_var2 <- summ2$importance[2,] * 100
 
 # Get cumulative variance for each PC
-cum_var2 = summ2$importance[3,] * 100
+cum_var2 <- summ2$importance[3,] * 100
 head(cum_var2)
 
 # Plot bar charts showing relative importance of each PC
@@ -273,7 +239,7 @@ barplot(exp_var2) # differences a lot more extreme between PC1 and rest of PCs.
 barplot(cum_var2) # less variation between PCs.
 
 # Plot PCA
-Xscores2 = Xpca2$x
+Xscores2 <- Xpca2$x
 plot(Xscores2[,1], Xscores2[,2], xlab="PC1 (94.3%)", ylab= "PC2 (1.2%)", pch=19)
 
 
