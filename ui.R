@@ -215,6 +215,7 @@ ui <- dashboardPage(
                           uiOutput("get_treatment_name"),
                           uiOutput("get_control_name"),
                           actionButton("htf_activity_button", "Estimate HTF activity"),
+                          helpText("Click this button to begin analysis."),
 
                           p("Assuming all goes well, a VIPER plot should appear on the right tab. Please be patient as this does take a while to run!"),
                           p("The VIPER plot shows the projected expression levels of targets for the top ten differentially active transcription factors, where up-regulated (red) and down-regulated (blue) targets are displayed as vertical lines, resembling a bar-code."),
@@ -226,8 +227,8 @@ ui <- dashboardPage(
                           tabsetPanel(
                             type = "tabs",
                             tabPanel("VIPER Plot", withSpinner(plotOutput("viper_plot"))),
-                            tabPanel("VIPER Summary", withSpinner(dataTableOutput("viper_summary"))),
-                            tabPanel("VIPER Tests", withSpinner(verbatimTextOutput("viper_test")))
+                            tabPanel("VIPER Summary", withSpinner(dataTableOutput("viper_summary")))
+                            # tabPanel("VIPER Tests", withSpinner(verbatimTextOutput("viper_test"))) # Uncomment for developer testing, a test tab will appear when app is run
                           )
                         )
 
