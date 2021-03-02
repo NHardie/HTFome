@@ -213,14 +213,16 @@ ui <- dashboardPage(
 
                         sidebarPanel(
                           uiOutput("get_treatment_name"),
-                          uiOutput("get_control_name")
+                          uiOutput("get_control_name"),
+                          actionButton("htf_activity_button", "Estimate HTF activity")
                         ),
 
                         mainPanel(
                           tabsetPanel(
                             type = "tabs",
                             tabPanel("VIPER Plot", withSpinner(plotOutput("viper_plot"))),
-                            tabPanel("VIPER Summary", withSpinner(dataTableOutput("viper_summary")))
+                            tabPanel("VIPER Summary", withSpinner(dataTableOutput("viper_summary"))),
+                            tabPanel("VIPER Tests", withSpinner(verbatimTextOutput("viper_test")))
                           )
                         )
 
