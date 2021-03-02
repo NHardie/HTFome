@@ -5,22 +5,22 @@
 library(shiny)
 library(shinydashboard)
 library(shinycssloaders)
-# Import libraries for GEOquery ----
+
+# Import libraries for GEOquery
 library(BiocManager)
 library(ggplot2)
 library(GEOquery)
-library(RColorBrewer)
-# Import libraries for volcano plot ----
+library(tidyverse)
+library(dplyr)
 library(limma)
 library(gplots)
 library(EnhancedVolcano)
+library(plotly)
+library(RColorBrewer)
+
 # Import libraries for HTF activity ----
 library(viper)
 library(dorothea)
-# Import libraries for utility/visuals ----
-library(tidyverse)
-library(dplyr)
-library(plotly)
 
 # Set maximum file size limit to 100 MB ----
 options(shiny.maxRequestSize = 100*1024^2)
@@ -29,10 +29,6 @@ options(shiny.maxRequestSize = 100*1024^2)
 
 viper_analysis <- function(gds, eset, sampleType, treatment, control) {
 
-  # Note: "<<-" assigns variable to a super (i.e. global) scope.
-  # This allows function to be accessed inside server reactives.
-
-  # MODIFICATION BY MAGDALENA
   # Converting probe names to gene symbols
   X <- Table(gds)
   X <- avereps(X, ID=X$IDENTIFIER) # summarise probe values to a single expression value per gene
@@ -64,7 +60,6 @@ viper_analysis <- function(gds, eset, sampleType, treatment, control) {
 
   # msVIPER analysis
   mra <- msviper(signature, viper_regulons, nullmodel, verbose = FALSE)
-
-  plot(mra, cex = 0.8) #plot the analysis
+  mra
 
 }
