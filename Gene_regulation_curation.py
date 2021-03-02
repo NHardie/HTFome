@@ -1,3 +1,5 @@
+#This script was used to clean the data extracted from Signor and organize the relational data between HTFs and their targeted gens
+
 import pandas as pd
 cd ~/bioinfo-group-project/ #change working directory to project folder
 
