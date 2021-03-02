@@ -30,9 +30,30 @@
                 <p class="card-text">Strand: {{htf.strand}}</p>
                 <p class="card-text">Function: {{htf.function}}</p>
                 <p class="card-text">Subcellular Location: {{htf.sub_cell_location}}</p>
-                <p class="card-text">Up-regulates: {{htf.up_reg_gene}}</p>
-                <p class="card-text">Down-regulates: {{htf.down_reg_gene}}</p>
-                <p class="card-text">Unknown Interactions: {{htf.unknown_interaction}}</p>
+                <p class="card-text">Up-regulates: </p>
+                {% if htf.up_reg_gene == 'N/A' %}
+                N/A
+                {% else %}
+                {% for i in up_reg %}
+                <a href="http://www.ensembl.org/Multi/Search/Results?q={{ i }}">{{i}}</a>
+                {% endfor %}
+                {% endif %}
+                <p class="card-text">Down-regulates: </p>
+                {% if htf.down_reg_gene == 'N/A' %}
+                N/A
+                {% else %}
+                {% for i in down_reg %}
+                <a href="http://www.ensembl.org/Multi/Search/Results?q={{ i }}">{{i}}</a>
+                {% endfor %}
+                {% endif %}
+                <p class="card-text">Unknown Interactions: </p>
+                {% if htf.unknown_interaction == 'N/A' %}
+                N/A
+                {% else %}
+                {% for i in unknown_interaction %}
+                <a href="http://www.ensembl.org/Multi/Search/Results?q={{ i }}">{{i}}</a>
+                {% endfor %}
+                {% endif %}
                 <p class="card-text">Associated Drug Compounds: </p>
                 {% if htf.drug_chembl_id == 'N/A' %}
                 N/A
