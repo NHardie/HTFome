@@ -2,7 +2,7 @@
 # Objective : Defines the server function
 
 # Define server logic
-server <- function(input, output) {
+server <- function(input, output, session) {
 
     # ---- upload_tab item ----
 
@@ -24,7 +24,9 @@ server <- function(input, output) {
         gds_file_name <- input$file1$name
 
         # If user uploads full SOFT GDS file format
-        # GEOquery cannot currently parse full SOFT GDS files into eSet.
+        # GEOquery cannot currently parse full SOFT GDS files into eSet,
+        # as the _full.soft.gz files seem to have an extra GPL line which
+        # GDS2eset() is unable to parse.
         # Workaround solution: extract GDS accession from filename and
         # pass to getGEO() to retrieve online instead.
         if (str_detect(gds_file_name, "_full")) {
@@ -260,6 +262,11 @@ server <- function(input, output) {
         num_rows <- length(unique(rows)) # Test: print num factors - PASSED!
         unique_rows <- unique(rows) # Test: print unique rows -
         unique_rows
+
+        x <- colnames(pDat()[2]) # Test: print infection - passed!
+        treatment_name <- input$treatment_name # passed!
+        control_name <- input$control_name # passed!
+
         #print(pDat_col_name) # should print name, test passed!
         #print(class(pDat_col_name)) # class character
         #print(pDat_choice) # should print entire column - yes but includes sample names
@@ -272,6 +279,11 @@ server <- function(input, output) {
         #print(class(num_rows)) # integer
         print(unique_rows) # [1] influenza A      no virus control      Levels: influenza A no virus control
         #print(class(unique_rows)) # factor
+        #print(x) # infection - passed!
+        #print(treatment_name) # passed!
+        #print(class(treatment_name)) # passed!
+        #print(control_name) # passed!
+        #print(class(control_name)) # passed!
 
         #my_cols <-
 
@@ -323,25 +335,26 @@ server <- function(input, output) {
 
     # htf_activity_tab reactive expressions ----
 
-    # gene_exp = expr(eset)
+    viper_output <- reactive({
 
-    # Get treatment factors
-    #factor_category = df[,2]
-    # treatment <-
-    # control <-
+        # Get treatment factors
+        sample_type <- colnames(pDat()[2])
+        treatment_name <- input$treatment_name
+        control_name <- input$control_name
 
-    #convert DoRothEA network to regulon
-    get_regulon <- reactive({
-        data(dorothea_hs, package = "dorothea")
-        viper_regulons = df2regulon(dorothea_hs)
-        viper_regulons
+        viper <<- viper_analysis(gds(), eset(), sample_type, treatment_name, control_name)
+        viper
     })
 
-    # Perform viper analysis
-    viper_analysis <- reactive({
+    viper_tests <- reactive({
+        # Enter print/class/dim statements here
 
     })
 
+    # Only perform VIPER analysis when user clicks button
+    #observeEvent({
+    #    updateActionButton(inputId = "htf_activity_button", label = label)
+    #})
 
     # htf_activity_tab reactive outputs ----
 
@@ -368,12 +381,18 @@ server <- function(input, output) {
     # Plot viper output
     output$viper_plot <- renderPlot({
         validate_upload()
-        viper_analysis()
+        input$htf_activity_button
+        viper_output()
     })
 
     # Display VIPER summary table
     output$viper_summary <- renderDataTable({
         validate_upload()
+    })
+
+    # VIPER tests
+    output$viper_test <- renderPrint({
+        # reference a function and print/class/dim statements here
     })
 
 } # close server
