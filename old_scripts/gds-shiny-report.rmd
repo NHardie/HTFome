@@ -1,3 +1,7 @@
+# Title     : Old script for HTFome's GEO DataSet Analyser (shiny dashboard) - DO NOT USE.
+# Objective : Do not use this script, this script is here for display/proof-of-concept purposes.
+#             Shows an alternative way of presenting analysis to the user.
+
 ---
 params:
   data: !r
