@@ -1,24 +1,26 @@
 # Title     : Scripts for HTFome's GEO DataSet Analyser (shiny dashboard)
 # Objective : Defines global R scripts
 
-# Import libraries ----
-library(BiocManager)
+# Import libraries for Shiny ----
 library(shiny)
 library(shinydashboard)
+library(shinycssloaders)
+# Import libraries for GEOquery ----
+library(BiocManager)
 library(ggplot2)
 library(GEOquery)
-library(tidyverse)
-library(dplyr)
+library(RColorBrewer)
+# Import libraries for volcano plot ----
 library(limma)
 library(gplots)
 library(EnhancedVolcano)
-library(shinycssloaders)
-library(plotly)
-library(RColorBrewer)
-
 # Import libraries for HTF activity ----
 library(viper)
 library(dorothea)
+# Import libraries for utility/visuals ----
+library(tidyverse)
+library(dplyr)
+library(plotly)
 
 # Set maximum file size limit to 100 MB ----
 options(shiny.maxRequestSize = 100*1024^2)
