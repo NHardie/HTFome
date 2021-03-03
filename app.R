@@ -2,26 +2,78 @@
 # Objective : GEO GDS Analysis
 # Created on: 22/02/2021
 
+############################################################################################
+# GLOBAL / global.R
+############################################################################################
 
 # Import libraries ----
+# Import libraries for Shiny
 library(shiny)
 library(shinydashboard)
+library(shinycssloaders)
+
+# Import libraries for GEOquery
+library(BiocManager)
 library(ggplot2)
 library(GEOquery)
+library(tidyverse)
 library(dplyr)
 library(limma)
 library(gplots)
 library(EnhancedVolcano)
-library(tidyverse)
-library(shinycssloaders)
 library(plotly)
 library(RColorBrewer)
 
-
-# Create GDS file object ----
+# Import libraries for HTF activity
+library(viper)
+library(dorothea)
 
 # Set maximum file size limit to 100 MB ----
 options(shiny.maxRequestSize = 100*1024^2)
+
+# Viper function ----
+viper_analysis <- function(gds, eset, sampleType, treatment, control) {
+
+  # Convert probe names to gene symbols
+  X <- Table(gds)
+  X <- avereps(X, ID=X$IDENTIFIER) # summarise probe values to a single expression value per gene
+  eset <- eset[match(X[, "ID_REF"], rownames(eset)),] # update eset dimensions
+  rownames(X) <- X[, "ID_REF"]
+  featureNames(eset) <- X[, "IDENTIFIER"] # rename featureNames from probeids to gene symbols
+  rownames(X) <- X[, "IDENTIFIER"]
+  exp <- X[, -c(1:2)]
+  class(exp) <- "numeric"
+  exprs(eset) <- exp # write expression matrix back to eSet
+
+  ### NEEDS TO GET USER INPUT ####
+  # Get treatment and control from factor
+  factor_category <- sampleType
+  treatment_name <- treatment
+  control_name <- control
+
+  # Convert DoRothEA network to regulon
+  data(dorothea_hs, package = "dorothea")
+  viper_regulons <- df2regulon(dorothea_hs)
+
+  # Perform t-test
+  signature <- rowTtest(eset, factor_category, treatment_name, control_name)
+  signature <- (qnorm(signature$p.value/2, lower.tail = FALSE) *
+                + sign(signature$statistic))[, 1]
+
+  # Create nullmodel based on 1000 iterations
+  nullmodel <- ttestNull(eset, factor_category, treatment_name, control_name, per = 1000, repos = TRUE, verbose = FALSE)
+
+  # msVIPER analysis
+  mra <- msviper(signature, viper_regulons, nullmodel, verbose = FALSE)
+  mra
+
+}
+
+############################################################################################
+# DEFINE UI / ui.R
+############################################################################################
+
+# Create GDS file object ----
 
 # Define the UI for the dashboard ----
 ui <- dashboardPage(
@@ -126,16 +178,8 @@ ui <- dashboardPage(
                             #sidebarPanel(),
 
                             column(6,
-                                   withSpinner(plotlyOutput("pheno_plot")))
-
-                            #mainPanel(
-
-                               # tabsetPanel(type = "tabs",
-                                #            tabPanel("Phenotype Plot", plotlyOutput("pheno_plot")),
-                                #            tabPanel("Sample Boxplot", verbatimTextOutput("eset_summary")),
-                                #            tabPanel("Phenotype Summary", dataTableOutput("phenotype_summary"))
-                                #            )
-                             #   )
+                                   withSpinner(plotlyOutput("pheno_plot"))
+                            )
 
                         ) # close sidebarLayout
 
@@ -143,9 +187,10 @@ ui <- dashboardPage(
 
                     ), # close stats_tab item
 
+
+            # Dashboard content for HCA tab ----
             tabItem(tabName = "hca_tab",
 
-                    # Dashboard content for HCA tab ----
                     fluidPage(
 
                       titlePanel("Hierarchical Clustering Analysis"),
@@ -165,7 +210,8 @@ ui <- dashboardPage(
                           radioButtons("display_genes", "Display Gene Names:",
                                        c("No", "Yes"), inline = TRUE),
                           radioButtons("display_samples", "Display Sample Names:",
-                                       c("No", "Yes"), inline = TRUE)
+                                       c("No", "Yes"), inline = TRUE),
+                          uiOutput("pDat_cols_hca")
                         ),
 
                         mainPanel(
@@ -178,9 +224,9 @@ ui <- dashboardPage(
 
                     ), # close hca_tab item
 
-            tabItem(tabName = "pca_tab",
 
-                    # Dashboard content for PCA tab ----
+            # Dashboard content for PCA tab ----
+            tabItem(tabName = "pca_tab",
 
                     fluidPage(
 
@@ -189,10 +235,12 @@ ui <- dashboardPage(
                       sidebarPanel(
                         numericInput("pc_num", "Number of Principal Components to retain:",
                                      value = 10, min = 10), # set min value to 10 as screeplot() only takes min 10 npcs
-                        radioButtons("pca_scale", "Apply scaling:",
-                                    c("TRUE", "FALSE"), inline = TRUE),
-                        radioButtons("pca_center", "Center:",
-                                    c("TRUE", "FALSE"), inline = TRUE)
+                        uiOutput("pDat_cols_pca")
+                        # TODO: try get the scaling and centering options working
+                        # radioButtons("pca_scale", "Apply scaling:",
+                        #             c("TRUE", "FALSE"), inline = TRUE),
+                        # radioButtons("pca_center", "Center:",
+                        #             c("TRUE", "FALSE"), inline = TRUE)
                       ),
 
                       mainPanel(
@@ -208,37 +256,69 @@ ui <- dashboardPage(
                         )
                       )
 
-                    )
+                    ) # close fluidPage
 
-                    ),
+                    ), # close pca_tab item
+
+
+            # Dashboard content for DGE tab ----
             tabItem(tabName = "dge_tab",
-
-                    # Dashboard content for DGE tab ----
 
                     fluidPage(
 
                       titlePanel("Differential Gene Expression Analysis")
 
-                    )
+                    ) # close fluidPage
 
-                    ),
+                    ), # close dge_tab item
+
+
+            # Dashboard content for HTF activity tab ----
             tabItem(tabName = "htf_activity_tab",
-
-                    # Dashboard content for HTF activity tab ----
 
                     fluidPage(
 
                       titlePanel("Human Transcription Factor Activity"),
 
-                    )
+                      sidebarLayout(
 
-                    )
+                        sidebarPanel(
+                          uiOutput("get_treatment_name"),
+                          uiOutput("get_control_name"),
+                          actionButton("htf_activity_button", "Estimate HTF activity"),
+                          helpText("Click this button to begin analysis."),
+
+                          p("Assuming all goes well, a VIPER plot should appear on the right tab. Please be patient as this does take a few minutes to run!"),
+                          p("As a guide, a GDS file with ~10 samples takes around 5 minutes, whereas a GDS file with 50 samples takes around 10 minutes."),
+                          p("The VIPER plot shows the projected expression levels of targets for the top ten differentially active transcription factors, where up-regulated (red) and down-regulated (blue) targets are displayed as vertical lines, resembling a bar-code."),
+                          p("The two-column heatmap on the right side shows the differential activity ('Act', in the first column) and differential expression ('Exp', in the second column) of the top ten regulators."),
+                          p("The numbers on the right side represent the transcription factor’s ranking according to their relative expression level in the ’test’ vs ‘control’ conditions.")
+                        ),
+
+                        mainPanel(
+                          tabsetPanel(
+                            type = "tabs",
+                            tabPanel("VIPER Plot", withSpinner(plotOutput("viper_plot"))),
+                            tabPanel("VIPER Summary", withSpinner(dataTableOutput("viper_summary")))
+                            # tabPanel("VIPER Tests", withSpinner(verbatimTextOutput("viper_test"))) # Uncomment for developer testing, a test tab will appear when app is run
+                          )
+                        )
+
+                      ) # close sidebarPanel
+
+                    ) # close fluidPage
+
+            ) # close htf_activity tab
+
         ) # close tabItems
 
     ) # close dashboardBody
 
 ) # close UI
 
+############################################################################################
+# DEFINE SERVER FUNCTIONS / server.R
+############################################################################################
 
 # Define server logic
 server <- function(input, output) {
@@ -263,7 +343,9 @@ server <- function(input, output) {
         gds_file_name <- input$file1$name
 
         # If user uploads full SOFT GDS file format
-        # GEOquery cannot currently parse full SOFT GDS files into eSet.
+        # GEOquery cannot currently parse full SOFT GDS files into eSet,
+        # as the _full.soft.gz files seem to have an extra GPL line which
+        # GDS2eset() is unable to parse.
         # Workaround solution: extract GDS accession from filename and
         # pass to getGEO() to retrieve online instead.
         if (str_detect(gds_file_name, "_full")) {
@@ -375,13 +457,10 @@ server <- function(input, output) {
 
     # Plot heatmap (using heatmap.2)
     heatmap <- reactive({
-        # print(nrow(top_genes_mat())) # test to check user gene_num input works
-        # print(class(top_genes_mat())) # test to check data is right class
-        # print(dim(top_genes_mat())) # test to check data is right dim
         top_genes_mat <- as.matrix(top_genes_mat())
         samples <- paste("Samples (n=",ncol(top_genes_mat),")", sep = "")
         genes <- paste("Genes (n=",nrow(top_genes_mat),")", sep = "")
-        #title <- paste(Meta(gds())$title, sep = "")
+        #title <- paste(Meta(gds())$title, sep = "") # TODO: Add heatmap title?
         heatmap.2(top_genes_mat,
           # TODO: Colour samples by sample type.
           distfun = function(x) dist(x, method = input$distance_method),
@@ -409,6 +488,14 @@ server <- function(input, output) {
     })
 
     # hca_tab reactive outputs ----
+
+    # Display column names user can colour samples by
+    output$pDat_cols_hca <- renderUI({
+        pDat_col <- names(pDat()[2:3])
+        selectInput("hca_cols", "Colour samples by:",
+                    choices = pDat_col)
+    })
+
     output$heatmap <- renderPlot({
         validate_upload()
         heatmap()
@@ -445,8 +532,8 @@ server <- function(input, output) {
              main = screeplot_title
         )
         abline(h = 1, col = "red", lty = 5)
-        legend("topright", legend = c("Eigenvalue = 1"),
-               col = c("red"), lty = 5, cex = 0.9)
+        legend("topright", legend = "Eigenvalue = 1",
+               col = "red", lty = 5, cex = 0.9)
     })
 
     # Plot cumulative variance
@@ -461,9 +548,6 @@ server <- function(input, output) {
         )
     })
 
-    # Set colours by sample type
-
-
     # Plot PCA scores
     pca_scores <- reactive({
         scores <- pca()$x # class matrix expected, correct!
@@ -477,8 +561,20 @@ server <- function(input, output) {
         )
     })
 
+    # Set colours by sample type
+    my_cols <- reactive({
+        # TODO: Add colour code here.
+    })
+
 
     # pca_tab reactive outputs ----
+
+    # Display column names user can colour samples by
+    output$pDat_cols_pca <- renderUI({
+        pDat_col <- names(pDat()[2:3]) # select categorical variables only
+        selectInput("pca_cols", "Colour samples by:",
+                    choices = pDat_col)
+    })
 
     output$pca_data <- renderPrint({
         validate_upload()
@@ -512,11 +608,73 @@ server <- function(input, output) {
 
     # htf_activity_tab reactive expressions ----
 
+    # File upload validation
+    validate_htf_button <- reactive({
+        validate(
+          need(input$htf_activity_button,
+               "Nothing to display here, please assign treatment and control variables and click the button to begin analysis.")
+        )
+    })
+
+    # Run VIPER analysis
+    viper_output <- reactive({
+
+        # Get treatment factors
+        sample_type <- colnames(pDat()[2])
+        treatment_name <- input$treatment_name
+        control_name <- input$control_name
+
+        # Run analysis
+        viper_analysis(gds(), eset(), sample_type, treatment_name, control_name)
+    })
+
     # htf_activity_tab reactive outputs ----
 
+    # Define sample choices for HTF activity analysis
+    sample_choice <- reactive({
+        pDat_sample_col <- pDat()[,2]
+        unique(pDat_sample_col)
+    })
+
+    # Let user select treatment variable
+    output$get_treatment_name <- renderUI({
+        selectInput("treatment_name",
+                    "Select treatment variable:",
+                    choices = sample_choice())
+    })
+
+    # Let user select control variable
+    output$get_control_name <- renderUI({
+        selectInput("control_name",
+                    "Select control variable:",
+                    choices = sample_choice())
+    })
+
+    # Plot viper output
+    output$viper_plot <- renderPlot({
+        validate_upload()
+        validate_htf_button()
+        input$htf_activity_button
+        plot(viper_output(), cex = 0.7)
+    })
+
+    # Display VIPER summary table
+    output$viper_summary <- renderDataTable({
+        validate_upload()
+        validate_htf_button()
+        summary(viper_output())
+    })
+
+    # VIPER tests - uncomment for developer testing
+    # output$viper_test <- renderPrint({
+    #     # test functions/reactives with print/class/dim statements here
+    # })
 
 } # close server
 
+############################################################################################
+# RUN THE APPLICATION
+############################################################################################
 
 # Run the application
 shinyApp(ui = ui, server = server)
