@@ -60,20 +60,49 @@ server <- function(input, output) {
 
     # extract file summary information from gds, eset and pDat objects
     # TODO: Add scripts to extract file summary information here
+    data_summ <- reactive({
+
+        get_title <- Meta(gds())$title
+
+        desc <- Meta(gds())$description
+        matrix_desc <- matrix(desc) # need to convert to matrix
+        get_desc <- matrix_desc[1] # extract only the actual description
+
+        get_num_features <- Meta(gds())$feature_count
+        get_num_samples <- Meta(gds())$sample_count
+        get_organism <- Meta(gds())$sample_organism
+        get_sample_type <- Meta(gds())$sample_type
+        get_platform <- Meta(gds())$platform
+        get_channel_count <- Meta(gds())$channel_count
+        # get_factor_levels <- as.character(unique(unlist(pDat()[,2]))) # TODO: debug why adding any further info causes info in frontend to repeat
+
+        title <- paste("Experiment title: ",get_title, sep = "")
+        description <- paste("Description: ",get_desc, sep = "")
+        features <- paste("Number of features (genes) in dataset: ", get_num_features, sep = "")
+        num_samples <- paste("Number of samples: ", get_num_samples, sep = "")
+        organism <- paste("Organism: ", get_organism, sep = "")
+        sample_type <- paste("Sample type: ", get_sample_type, sep = "")
+        platform_info <- paste("Platform: ",get_platform, sep = "")
+        channel_count <- paste("Channel count: ",get_channel_count, sep = "")
+
+        HTML(paste(title, description, features, num_samples, organism, sample_type, platform_info, channel_count, sep = '<br/><br/>'))
+
+    })
+
 
 
     # upload_tab reactive outputs ----
 
     # display file summary information for "data_summary" tab
-    output$data_summary <- renderDataTable({
+    output$data_summary <- renderUI({
         validate_upload()
-        # TODO: Add scripts to display file summary information here
+        data_summ()
     })
 
     # display preview of gds data in "gds_preview" tab
     output$gds_preview <- renderDataTable({
         validate_upload()
-        gds_df()[,1:5] # displaying first 5 columns fixes over-sized rows
+        gds_df()[1:25,1:5] # displaying first 5 columns fixes over-sized rows
     })
 
     # display phenotype data in "pDat_preview" tab
