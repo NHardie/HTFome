@@ -199,7 +199,12 @@ ui <- dashboardPage(
 
                     fluidPage(
 
-                      titlePanel("Differential Gene Expression Analysis")
+                      titlePanel("Differential Gene Expression Analysis"),
+                      h2("Coming soon!"),
+
+                      # sidebarPanel(
+                      #   uiOutput("get_factor_level"),
+                      # )
 
                     ) # close fluidPage
 

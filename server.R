@@ -141,9 +141,9 @@ server <- function(input, output) {
     # Output is a matrix containing averaged gene expression data.
     gene_exp <- reactive({
         geneNames <- as.character(gds_df()$IDENTIFIER)
-        gene_eset <- exprs(eset()) # class: matrix, dim: 54715 56 -> expected, correct
-        rownames(gene_eset) <- geneNames # class: matrix, dim: 54715 56 -> expected, correct
-        avereps(gene_eset, ID = rownames(gene_eset)) # class: matrix, dim: 31654 56 -> expected, correct
+        gene_eset <- exprs(eset())
+        rownames(gene_eset) <- geneNames
+        avereps(gene_eset, ID = rownames(gene_eset))
     })
 
     # Calculate standard deviation of genes across all samples and sort
@@ -152,35 +152,29 @@ server <- function(input, output) {
     sort_gene_SD <- reactive({
         # Shiny doesn't seem to like data passed to apply() in matrix
         # form, so we need to convert it to a data frame first.
-        #gene_exp_df <- data.frame(matrix(gene_exp())) # class: df, dim: 31654 56 -> expected, incorrect: df, 1772624 1
-        gene_exp_df <- as.data.frame(gene_exp()) # class: df, dim: 31654 56 -> expected, correct
-        gene_SD <- transform(gene_exp_df, SD = apply(gene_exp_df, 1, sd, na.rm = TRUE)) # class: df, dim: 31654 57 -> expected, correct
-        gene_SD[with(gene_SD, order(-SD)),] # class: df, dim: 31654 57 -> expected, correct
+        gene_exp_df <- as.data.frame(gene_exp())
+        gene_SD <- transform(gene_exp_df, SD = apply(gene_exp_df, 1, sd, na.rm = TRUE))
+        gene_SD[with(gene_SD, order(-SD)),]
     })
 
     # Extract user-defined genes with highest SD and convert to numeric matrix
     top_genes_mat <- reactive({
-        top_num_genes <- head(sort_gene_SD(), input$gene_num) # class: df, dim: 100 57 -> expected, correct
-        top_num_genes <- top_num_genes[1:(length(top_num_genes)-1)] # remove SD column # class: df, dim: 100 56 -> expected, correct
-        as.matrix(top_num_genes) # class: matrix, dim: 100 56 -> expected, correct!
+        top_num_genes <- head(sort_gene_SD(), input$gene_num)
+        top_num_genes <- top_num_genes[1:(length(top_num_genes)-1)]
+        as.matrix(top_num_genes)
     })
 
     # Plot heatmap (using heatmap.2)
     heatmap <- reactive({
-        # print(nrow(top_genes_mat())) # test to check user gene_num input works
-        # print(class(top_genes_mat())) # test to check data is right class
-        # print(dim(top_genes_mat())) # test to check data is right dim
         top_genes_mat <- as.matrix(top_genes_mat())
         samples <- paste("Samples (n=",ncol(top_genes_mat),")", sep = "")
         genes <- paste("Genes (n=",nrow(top_genes_mat),")", sep = "")
-        #title <- paste(Meta(gds())$title, sep = "")
         heatmap.2(top_genes_mat,
           # TODO: Colour samples by sample type.
           distfun = function(x) dist(x, method = input$distance_method),
           hclustfun = function(x) hclust(x, method = input$linkage_method),
           scale = input$scale,
           trace = "none",
-          #main = title,
           xlab = samples,
           ylab = genes,
           key.title = "SD from mean",
@@ -221,10 +215,10 @@ server <- function(input, output) {
     # Perform PCA: get averaged gene expression data, transform it and
     # remove any columns containing zeros and NAs first
     pca <- reactive({
-        gene_exp_mat <- gene_exp() # class matrix expected, correct
+        gene_exp_mat <- gene_exp()
         tX <- t(gene_exp_mat)
         Xpca <- tX[, colSums(tX != 0, na.rm = TRUE) > 0]
-        Xpca <- prcomp(Xpca, center = TRUE, scale. = TRUE) # class prcomp expected, correct!
+        Xpca <- prcomp(Xpca, center = TRUE, scale. = TRUE)
         Xpca
     })
 
@@ -276,18 +270,11 @@ server <- function(input, output) {
 
     # Set colours by sample type
     my_cols <- reactive({
-        #choices <- length(unique(iris$Species))
-        pDat_df <- pDat()
-        #pDat_choice <- pDat_df$names(pDat()[input$pca_cols]) # test fail: Error in <reactive:my_cols>: attempt to apply non-function
-        #pDat_choice <- pDat()$pDat()[input$pca_cols] # test fail: Error in <reactive:my_cols>: attempt to apply non-function
-        #pDat_choice <- pDat_df$names(pDat_df[input$pca_cols]) # test fail: Error in <reactive:my_cols>: attempt to apply non-function
-
         pDat_col_name <- names(pDat()[input$pca_cols]) # test passed: this prints!
         pDat_choice <- pDat()[input$pca_cols] # test passed: prints entire column selected by user
         num_sample_types <- length(unique(pDat_choice$pDat_col_name))
 
         rows <- pDat()[,input$pca_cols] # Test: print all rownames - passed
-
         num_rows <- length(unique(rows)) # Test: print num factors - PASSED!
         unique_rows <- unique(rows) # Test: print unique rows -
         unique_rows
@@ -354,6 +341,7 @@ server <- function(input, output) {
     })
 
     # ---- dge_tab item ----
+    # TODO: Add code for differential gene expression analysis here.
 
     # dge_tab reactive expressions ----
 
