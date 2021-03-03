@@ -2,7 +2,7 @@
 
 desc <- Meta(gse)$description #get description of the data
 matrix_desc <- matrix(desc) #convert into matriix
-cur_desc <- list_desc[1] #extract only the actual description
+cur_desc <- matrix_desc[1] #extract only the actual description
 
 number_of_features <- Meta(gse)$feature_count #get the number of probes gathered in the experiment
 
