@@ -217,7 +217,8 @@ ui <- dashboardPage(
                           actionButton("htf_activity_button", "Estimate HTF activity"),
                           helpText("Click this button to begin analysis."),
 
-                          p("Assuming all goes well, a VIPER plot should appear on the right tab. Please be patient as this does take a while to run!"),
+                          p("Assuming all goes well, a VIPER plot should appear on the right tab. Please be patient as this does take a few minutes to run!"),
+                          p("As a guide, a GDS file with ~10 samples takes around 5 minutes, whereas a GDS file with 50 samples takes around 10 minutes."),
                           p("The VIPER plot shows the projected expression levels of targets for the top ten differentially active transcription factors, where up-regulated (red) and down-regulated (blue) targets are displayed as vertical lines, resembling a bar-code."),
                           p("The two-column heatmap on the right side shows the differential activity ('Act', in the first column) and differential expression ('Exp', in the second column) of the top ten regulators."),
                           p("The numbers on the right side represent the transcription factor’s ranking according to their relative expression level in the ’test’ vs ‘control’ conditions.")
