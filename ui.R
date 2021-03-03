@@ -84,7 +84,7 @@ ui <- dashboardPage(
                             mainPanel(
                                 
                                 tabsetPanel(type = "tabs",
-                                            tabPanel("Data Summary", withSpinner(dataTableOutput("data_summary"))),
+                                            tabPanel("Data Summary", withSpinner(htmlOutput("data_summary"))),
                                             tabPanel("GDS Preview", withSpinner(dataTableOutput("gds_preview"))),
                                             tabPanel("Phenotype Data Preview", withSpinner(dataTableOutput("pDat_preview")))
                                             )
