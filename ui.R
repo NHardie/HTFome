@@ -27,7 +27,11 @@ ui <- dashboardPage(
                      tabName = "dge_tab"),
             menuItem("Estimate of HTF Activity",
                      tabName = "htf_activity_tab")
-        )
+        ),
+        br(),
+        actionButton("htfome_button", "Return to HTFome", icon("home"),
+                     style = "color: #222D32",
+                     onclick = "location.href='https://htfome.com/'")
     ),
 
     # Create items in dashboard body ----
