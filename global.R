@@ -48,7 +48,7 @@ viper_analysis <- function(gds, eset, sampleType, treatment, control) {
 
   # Convert DoRothEA network to regulon
   data(dorothea_hs, package = "dorothea")
-  viper_regulons = df2regulon(dorothea_hs)
+  viper_regulons <- df2regulon(dorothea_hs)
 
   # Perform t-test
   signature <- rowTtest(eset, factor_category, treatment_name, control_name)
