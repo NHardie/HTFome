@@ -1,10 +1,12 @@
 import csv
 from chembl_webresource_client.new_client import new_client
 
+
+#DICTIONARY MAPPING TFS TO DRUGS
 compounds2targets = dict()
 
 
-#PARSE CSV WITH TARGET IDS
+#PARSE CSV WITH TFs CHEMBL IDS
 with open('chemblids.csv', 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     for row in reader:
@@ -13,15 +15,16 @@ with open('chemblids.csv', 'r') as csvfile:
 chunk_size = 50
 keys = list(compounds2targets.keys())
 
-#TARGET TO COMPOUNDS
+#MAP TARGET TFs TO COMPOUNDS (DRUGS)
 for i in range(0, len(keys), chunk_size):
     activities = new_client.mechanism.filter(target_chembl_id__in=keys[i:i + chunk_size]).only(['target_chembl_id', 'molecule_chembl_id'])
     for act in activities:
         compounds2targets[act['target_chembl_id']].add(act['molecule_chembl_id'])
 
 
+
+#FILTER ONLY PHASE 4 DRUGS
 drug_chembl_ids=[]
-#PHASE 4 FILTER
 for key, val in compounds2targets.items():
     lval = list(val)
     genes = []
@@ -40,7 +43,7 @@ print(drug_chembl_ids)
 new_dict=compounds2targets.copy()
 genesymbols=[]
 
-#ADD GENE SYMBOLS
+#ADD GENE SYMBOLS FOR TFS
 for key in keys:
     symbol = []
     targets = new_client.target.filter(target_chembl_id=key).only(
@@ -63,6 +66,7 @@ print(new_dict)
 ens_list=new_dict.values()
 
 #WRITING
+
 header = ["TF gene symbol", "Drugs"]
 
 with open('2final_phase4.tsv', 'wt', encoding='utf-8-sig', newline='') as f:

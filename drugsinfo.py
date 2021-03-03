@@ -1,27 +1,21 @@
 import csv
 from chembl_webresource_client.new_client import new_client
 
+
+#EXTARCT EXTRA INFO FOR DRUGS
 drugs_ids = []
 
+#PARSE A CSV WITH ALL DRUGS IDS
 with open('INPUT_drugsid.csv', 'r') as csvfile:
     reader = csv.reader(csvfile)
     for row in reader:
         drugs_ids.append(row)
 
-
 flat_list = [item for sublist in drugs_ids for item in sublist]
-
 print(flat_list)
-
-
-
-
-
-
 
 #GET TRADE NAMES
 trade_names=[]
-
 for i in range(0, len(flat_list)):
     drugsyn = []
     molecules = new_client.molecule.filter(molecule_chembl_id__in=flat_list[i:i + 1]).only(
@@ -31,7 +25,6 @@ for i in range(0, len(flat_list)):
             if synonym['syn_type'] == "TRADE_NAME":
                 drugsyn.append(synonym['molecule_synonym'])
     trade_names.append(drugsyn)
-
 print(trade_names)
 
 #get PREF_NAME
@@ -51,7 +44,7 @@ for i in range(0, len(flat_list)):
 print(len(pref_names))
 print(len(mol_types))
 
-
+#PRINT OUTPUT
 
 with open("trade_namesOUT.tsv", 'w', newline='') as myfile:
     wr = csv.writer(myfile, delimiter='\n')
