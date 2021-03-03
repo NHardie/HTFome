@@ -305,7 +305,7 @@ server <- function(input, output) {
     output$pca_data <- renderPrint({
         validate_upload()
         pca_summary()
-        my_cols()
+        #my_cols()
     })
 
     output$screeplot <- renderPlot({
@@ -382,7 +382,7 @@ server <- function(input, output) {
         validate_upload()
         validate_htf_button()
         input$htf_activity_button
-        plot(viper_output(), cex = 0.8)
+        plot(viper_output(), cex = 0.7)
     })
 
     # Display VIPER summary table
