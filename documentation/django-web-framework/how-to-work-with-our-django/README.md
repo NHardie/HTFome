@@ -1,4 +1,4 @@
-#2.2.2. How to work with our django
+# 2.2.2. How to work with our django
 
 Developers should activate a virtual environment within the directory where they wish to instantiate their project, then download the Django package, or if continuing development, should activate their virtual environment and install the required packages found in the requirements.txt. 
 
