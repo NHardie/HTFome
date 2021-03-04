@@ -1,9 +1,37 @@
 {% extends "data/base.html" %}
 
 {% block content %}
-    <main role="main" class="container">
+    <main role="main" class="geo container">
         <h1 class="mt-4">GEO Data Analysis</h1>
         <p class="lead">Upload gene expression data from the Gene Expression Omnibus (GEO) data repository to obtain summary statistics and an estimate of transcription factor activity</p>
+
+    <div class="geo-info">
+        <p class="lead">What can I do with HTFome's GEO DataSet Analyser?</p>
+        <ul>
+            <p>HTFome's GEO DataSet Analyser allows you to:</p>
+            <ul><li>Upload a GEO DataSet of your choice (in GDS format), containing gene expression data.</li></ul>
+            <ul><li>Obtain basic statistical information and publication-level graphical outputs, such as heatmaps,
+                principal compenent analysis plots.</li></ul>
+            <ul><li>Visualise the inferred activity of your HTFs (obtained using DoRothEA and VIPER package
+                algorithms).</li></ul>
+            <ul><li>Our analysis pipeline is fully interactive, allowing you to flexibly explore your gene expression data to the fullest.</li></ul>
+            <ul><li>Further features will be coming soon, such as volcano plots summarising differential gene expression analysis.</li></ul>
+        </ul>
+        <p class="lead">How can I access HTFome's GEO DataSet Analyser?</p>
+        <ul>
+            <ul><li>HTFome's GEO DataSet Analyser can be accessed through our
+                <a href="https://github.com/NHardie/HTFome/tree/gds-r-dev">GitHub repository</a>.</li></ul>
+            <ul><li>All that is required is for you to download the app.R script (or you can copy/paste the code to your console) and run it from
+                an IDE of your choice (preferably RStudio). Further details are provided on our GitHub.</li></ul>
+            <ul><li>The HTFome Dashboard (a Shiny dashboard app) should then appear where you can run your analysis.</li></ul>
+            <ul><li>We are currently working on deploying the HTFome Dashboard online, to allow for analysis in-browser.</li></ul>
+        </ul>
+
+        <p class="lead">Contact us if you experience any issues</p>
+        <p>If you experience any issues, or have any feedback, comments or even further features you would like
+            implemented, please do get in touch with us by opening an issue on our <a href="https://github.com/NHardie/HTFome/issues">GitHub</a>.</p>
+
+    </div>
 
         <!-- example of in-house upload button here
         <form method="post" enctype="multipart/form-data">
