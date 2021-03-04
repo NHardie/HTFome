@@ -17,17 +17,19 @@
             </script>
 
 
-        <div class="card mb-4">
-            <div class="card-body" style="margin-left:15px; font-size:19px">
-                <h5 style="font-weight:600">{{ drug.drug_name }}</h5><hr>
-                <p class="card-text text-muted h6"> ChEMBL ID: <a href="https://www.ebi.ac.uk/chembl/compound_report_card/{{ drug.drug_chembl_id }}/"> {{ drug.drug_chembl_id }} </a></p>
-                <p class="card-text">Trade name(s): {{ drug.trade_name }}</p>
-                <p class="card-text">Year Approved: {{ drug.year_approved }}</p>
-                <p class="card-text">Transcription Factor Target(s): </p>
+        <div class="info card mb-4">
+            <div class="info card-body">
+                <h2>{{ drug.drug_name }}</h2>
+                <hr>
+                <p class="card-text"><strong>ChEMBL ID:</strong> <a href="https://www.ebi.ac.uk/chembl/compound_report_card/{{ drug.drug_chembl_id }}/"> {{ drug.drug_chembl_id }} </a></p>
+                <p class="card-text"><strong>Trade name(s):</strong> {{ drug.trade_name }}</p>
+                <p class="card-text"><strong>Year Approved:</strong> {{ drug.year_approved }}</p>
+                <p class="card-text"><strong>Transcription Factor Target(s):</strong></p>
                 {% for htf in htf %}
                 <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a>
                 {% endfor %}
-                <object data="https://www.ebi.ac.uk/chembl/embed/#compound_report_card/{{ drug.drug_chembl_id }}/name_and_classification" width="100%" height="100%"></object>
+                <!-- TODO: resize object -->
+                <object id="chembl-object" data="https://www.ebi.ac.uk/chembl/embed/#compound_report_card/{{ drug.drug_chembl_id }}/name_and_classification"></object>
             </div>
         </div>
     </main>
