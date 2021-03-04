@@ -1,6 +1,6 @@
 # HTFome Documentation
 
-This is the official documentation for HTFome, written by A.M. Andersen, K. Antoniuk, N. Hardie and A. Sutradhar.
+This is the official documentation for HTFome (https://htfome.com/), written by A.M. Andersen, K. Antoniuk, N. Hardie and A. Sutradhar.
 
 ## Contents
 
