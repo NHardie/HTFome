@@ -54,6 +54,8 @@
                   {% else %}
                     {% for i in unknown_interaction %}
                       <a href="http://www.ensembl.org/Multi/Search/Results?q={{ i }}">{{i}}</a>
+                    {% endfor %}
+                  {% endif %}
                 <p class="card-text"><strong>Associated Drug Compounds: </strong></p>
                   {% if htf.drug_chembl_id == 'N/A' %}
                     <p>N/A</p>
