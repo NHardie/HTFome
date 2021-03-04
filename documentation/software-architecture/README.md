@@ -1,4 +1,4 @@
-#2. Software Architecture 
+# 2. Software Architecture 
 
 HTFome was developed using the Django framework, and R Shiny, hosted on an Amazon Web Services (AWS) Elastic Beanstalk (EB) server. 
 The data used in the app was gathered through Application Programming Interface (API) calls to several large, established data repositories, 
