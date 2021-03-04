@@ -1,4 +1,4 @@
-#2.1. Overall design philosophy
+# 2.1. Overall design philosophy
 
 The HTFome app was designed to provide biologists with a simple method of accessing data related to HTF’s and the drugs that target them. The aim was to make it easy for a biologist to enter some parameters, such as a gene symbol, and quickly be provided with useful information about the relationships that gene has to other HTF genes, and to drug compounds. 
 
