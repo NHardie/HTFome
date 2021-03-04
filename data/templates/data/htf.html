@@ -11,11 +11,9 @@
             </form>
         </div>
 
-
-
         {% for htf in page_obj %}
-            <div class="card mb-4">
-                <div class="card-body">
+            <div class="search-result card mb-4">
+                <div class="search-result card-body">
                     <h5>Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
                     <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
                     <p class="card-text">Protein name: {{htf.prot_name}}</p>
