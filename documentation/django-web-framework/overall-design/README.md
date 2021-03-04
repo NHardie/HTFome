@@ -1,4 +1,4 @@
-2.2.1. Overall design
+# 2.2.1. Overall design
 
 The general software structure is represented below, the initial idea was to have a home page that users would “land” on, a search page specifically for HTF’s, a search page specifically for drugs, and access to an analysis page for GDS data. 
 
