@@ -8,7 +8,7 @@ _HTFome (https://htfome.com/) is a web application (webapp) designed to give use
 
 HTFome was developed using the Django framework, and R Shiny, hosted on an Amazon Web Services (AWS) Elastic Beanstalk (EB) server. The data used in the app was gathered through Application Programming Interface (API) calls to several large, established data repositories, and is stored locally via a SQLite3 database. An app user can access this data via the browser and view one of several web pages, displaying the data as a list, or click-through to see more specific detail about an individual HTF or drug of choice. 
 
-Documentation can be found within the source code above, documentation.txt
+Documentation can be found within the source code above, documentation.pdf, as well as in the documentation directory.
 
 ## Future reference 
 
