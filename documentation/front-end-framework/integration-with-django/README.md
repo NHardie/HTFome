@@ -53,3 +53,6 @@ Here the `{% extends "data/base.html" %}` and `{% block content %}` allow the de
 avoiding rewriting all the HTML for the base template for each other page template. 
   
 One point to note is that the code blocks, once opened, must be closed, i.e. `{% block %}` requires `{% endblock %}`, `{% if %}` requires `{% endif %}`.
+
+Another feature of Django is the `{ % include % }` code block, that allows you to reuse code from another .html file. For example, a separate HTML file has been created for the navbar and footer, which gets included in base.html. This means, when base.html is extended to other pages, the navbar and footer also get included. This means, if site links need to be changed - they can be changed directly in the navbar and footer html files once (rather than in each individual html page).
+
