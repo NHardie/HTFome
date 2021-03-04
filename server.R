@@ -59,7 +59,6 @@ server <- function(input, output) {
     })
 
     # extract file summary information from gds, eset and pDat objects
-    # TODO: Add scripts to extract file summary information here
     data_summ <- reactive({
 
         get_title <- Meta(gds())$title
