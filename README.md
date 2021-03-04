@@ -6,8 +6,7 @@ README.md
 #### How to run on your local machine:
 - Download `app.R` (or copy/paste to your console) and run on your IDE of preference (it works better in RStudio).
 - Upload your own GDS file of choice (available on the 
-  [GDSBrowser](https://www.ncbi.nlm.nih.gov/sites/GDSbrowser/)), or you can download 
-  the included datasets in this repo (available in `/data`).
+  [GDSBrowser](https://www.ncbi.nlm.nih.gov/sites/GDSbrowser/)).
 - Note: to begin analysis, you may need to install BiocManager (which many of the
   packages depend upon).
     - To install BiocManager, refer to BiocManager's installation code (latest version 
