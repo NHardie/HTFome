@@ -1,4 +1,4 @@
-#2.2. Django web-framework:
+# 2.2. Django web-framework:
 
 The project itself is developed predominantly in Django, a python-based framework for creating web app’s. Initially we opted to use the Flask framework, partially as we were more familiar with webapp development with this framework, and also because Flask is recognised as a micro-framework, perfect for developers who are new to web apps, although there is some compromise between built-in features and overall design flexibility.
 
