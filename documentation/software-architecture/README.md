@@ -8,5 +8,4 @@ displaying the data as a list, or click-through to see more specific detail abou
 
 ![HTF-web-project-Updated Software Architecture](https://user-images.githubusercontent.com/60273209/109990466-52a64600-7d01-11eb-84f6-7a6354a68996.png)
 
-Next: [2.1. Overall design philosophy](overall-design-philosopy/README.md)
 
