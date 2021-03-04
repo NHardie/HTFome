@@ -1,4 +1,4 @@
-#1. About HTFome
+# 1. About HTFome
 
 HTFome (https://htfome.com/) is a web application (webapp) designed to give users access to data regarding Human Transcription Factors (HTF’s), drugs which target HTF’s, and allow users to upload gene expression data for analysis in-browser.
 
