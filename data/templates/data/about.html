@@ -4,14 +4,67 @@
 
     <main role="main" class="container">
         <h1 class="mt-4">{{ title }}</h1>
-        <p><em> HTF: Human Transcription Factor, one of many proteins controlling the rate of transcription in Humans</em></p>
-        <p><em>-ome: (biology) The complete whole of a class of substances for a species or an individual</em></p>
-        <p>HTFome is a web application (webapp) designed to give users access to data regarding Human Transcription Factors (HTF’s),</p>
-        <p> drugs which target HTF’s, and allow users to upload gene expression data for analysis in-browser.</p>
-        <p> The webapp was developed as part of the Queen Mary University of London (QMUL) bioinformatics masters degree program.</p>
-        <p> Application specifications can be found on the QMUL website. (https://qmplus.qmul.ac.uk/course/view.php?id=16766).</p>
-        <p> Developers of this app were A.M. Andersen, K. Antoniuk, N. Hardie and A. Sutradhar.</p>
-        <p> The source code for the app can be found on Github: (https://github.com/NHardie/HTFome)</p>
+        <p class="lead">HTF: Human Transcription Factor, one of many proteins controlling the rate of transcription
+            in humans.</p>
+        <p class="lead">-ome: The complete whole of a class of substances for a species or an individual.</p>
+        <br>
+        <div class="about container">
+            <p class="lead">What is HTFome?</p>
+            <p>HTFome is a web application designed to give users access to data on Human Transcription Factors (HTFs),
+                drugs which target HTFs, and allows users to upload GEO DataSets for further analysis.</p>
+            <p>This webapp was developed as part of the Queen Mary University of London (QMUL) Bioinformatics
+                masters degree program.</p>
+            <p>Developers of this app were A.M. Andersen, K. Antoniuk, N. Hardie and A. Sutradhar.
+            The source code can be found on <a href ="https://github.com/NHardie/HTFome">GitHub.</a></p>
+
+            <div class="references">
+                <p class="lead">Datasets used</p>
+                <p>Our existing HTF datasets include data from:</p>
+
+                <div class="reference-list">
+                    <ul><strong>SIGNOR 2.0: </strong>Licata L, Lo Surdo P, Iannuccelli M, Palma A, Micarelli E,
+                        Perfetto L, Peluso D, Calderone A, Castagnoli L, Cesareni G. SIGNOR 2.0, the SIGnaling Network
+                        Open Resource 2.0: 2019 update. <em>Nucleic Acids Res</em>. 2020 Jan 8;48(D1):D504-D510. DOI:
+                        <a href="https://doi.org/10.1093/nar/gkz949">10.1093/nar/gkz949.</a> PMID: 31665520;
+                        PMCID: PMC7145695.</ul>
+                    <ul><strong>UniProt: </strong>The UniProt Consortium, UniProt: the universal protein knowledgebase
+                        in 2021, <em>Nucleic Acids Research</em>, Volume 49, Issue D1, 8 January 2021, Pages D480–D489, DOI:
+                        <a href="https://doi.org/10.1093/nar/gkaa1100">10.1093/nar/gkaa1100</a>.</ul>
+                    <ul><strong>Ensembl: </strong>Andrew D Yates et. al, Ensembl 2020, <em>Nucleic Acids Research</em>,
+                        Volume 48, Issue D1, 08 January 2020, Pages D682–D688, DOI:
+                        <a href="https://doi.org/10.1093/nar/gkz966">10.1093/nar/gkz966</a></ul>
+                    <ul><strong>Literature: </strong>Samuel A. Lambert, Arttu Jolma, Laura F. Campitelli, Pratyush K.
+                        Das, Yimeng Yin, Mihai Albu, Xiaoting Chen, Jussi Taipale, Timothy R. Hughes, Matthew T.
+                        Weirauch, The Human Transcription Factors, <em>Cell</em>, Volume 172, Issue 4, 2018, Pages 650-665, ISSN 0092-8674, DOI:
+                        <a href="https://doi.org/10.1016/j.cell.2018.01.029">10.1016/j.cell.2018.01.029</a>.</ul>
+                </div>
+
+                <p>Our existing drug datasets include data from:</p>
+
+                <div class="reference-list">
+                    <ul><strong>ChEMBL: </strong>ChEMBL web services: streamlining access to drug discovery data and
+                        utilities. Davies M, Nowotka M, Papadatos G, Dedman N, Gaulton A, Atkinson F, Bellis L,
+                        Overington JP. — <em>Nucleic Acids Res</em>. 2015; 43(W1):W612-20. DOI:
+                        <a href="https://doi.org/10.1093/nar/gkv352">10.1093/nar/gkv352</a>.</ul>
+                </div>
+
+                <p class="lead">Packages used for GEO DataSet analysis include:</p>
+
+                <div class="reference-list">
+                    <ul><strong>DoRothEA: </strong>Garcia-Alonso L, Holland CH, Ibrahim MM, Turei D, Saez-Rodriguez J. “Benchmark and integration
+                        of resources for the estimation of human transcription factor activities.” <em>Genome Research</em>.
+                        2019. <a href="https://doi.org/10.1101/gr.240663.118">10.1101/gr.240663.118</a>.</ul>
+                    <ul><strong>VIPER: </strong>Alvarez, M.J., Shen, Y., Giorgi, F.M., Lachmann, A., Ding, B.B., Ye,
+                        B.H., and Califano, A. (2016) Functional characterization of somatic mutations in cancer using
+                        network-based inference of protein activity. <em>Nature Genetics</em>. 48(8):848--47. DOI:
+                        <a href="https://doi.org/10.1038/ng.3593">10.1038/ng.3593</a>.</ul>
+                </div>
+
+                <p class="lead">Contact us</p>
+                <p>If you have any comments, suggestions or issues, please let us know on our <a href="https://github.com/NHardie/HTFome/issues">GitHub</a>.</p>
+
+            </div>
+        </div>
     </main>
 
 {% endblock content %}
