@@ -8,6 +8,27 @@ README.md
 - Upload your own GDS file of choice (available on the 
   [GDSBrowser](https://www.ncbi.nlm.nih.gov/sites/GDSbrowser/)), or you can download 
   the included datasets in this repo (available in `/data`).
+- Note: to begin analysis, you may need to install BiocManager (which many of the
+  packages depend upon).
+    - To install BiocManager, refer to BiocManager's installation code (latest version 
+      available [here](https://www.bioconductor.org/install/)):
+    ```r
+  if (!requireNamespace("BiocManager", quietly = TRUE))
+        install.packages("BiocManager")
+  BiocManager::install()
+    ```
+  - Then you can begin to install packages dependent on BiocManager like so: e.g. GEOquery:
+    ```r
+    BiocManager::install("GEOquery")
+    ```
+    e.g. LIMMA:
+    ```r
+    BiocManager::install("limma")
+    ```
+    e.g. EnhancedVolcano:
+    ```r
+    BiocManager::install("EnhancedVolcano")
+    ```
 
 #### Current issues:
 - Deploy Shiny app as web-app online (update/solution: system dependencies have to be 
