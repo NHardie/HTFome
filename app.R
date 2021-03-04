@@ -69,6 +69,9 @@ viper_analysis <- function(gds, eset, sampleType, treatment, control) {
 
 }
 
+# Volcano plot to show significant differentially expressed genes ----
+# TODO: Add volcano plot code here.
+
 ############################################################################################
 # DEFINE UI / ui.R
 ############################################################################################
@@ -98,7 +101,11 @@ ui <- dashboardPage(
                      tabName = "dge_tab"),
             menuItem("Estimate of HTF Activity",
                      tabName = "htf_activity_tab")
-        )
+        ),
+        br(),
+        actionButton("htfome_button", "Return to HTFome", icon("home"),
+                     style = "color: #222D32",
+                     onclick = "location.href='https://htfome.com/'")
     ),
 
     # Create items in dashboard body ----
@@ -151,7 +158,7 @@ ui <- dashboardPage(
                             mainPanel(
 
                                 tabsetPanel(type = "tabs",
-                                            tabPanel("Data Summary", withSpinner(dataTableOutput("data_summary"))),
+                                            tabPanel("Data Summary", withSpinner(htmlOutput("data_summary"))),
                                             tabPanel("GDS Preview", withSpinner(dataTableOutput("gds_preview"))),
                                             tabPanel("Phenotype Data Preview", withSpinner(dataTableOutput("pDat_preview")))
                                             )
@@ -266,7 +273,12 @@ ui <- dashboardPage(
 
                     fluidPage(
 
-                      titlePanel("Differential Gene Expression Analysis")
+                      titlePanel("Differential Gene Expression Analysis"),
+                      h2("Coming soon!"),
+
+                      # sidebarPanel(
+                      #   uiOutput("get_factor_level"),
+                      # )
 
                     ) # close fluidPage
 
@@ -288,11 +300,11 @@ ui <- dashboardPage(
                           actionButton("htf_activity_button", "Estimate HTF activity"),
                           helpText("Click this button to begin analysis."),
 
-                          p("Assuming all goes well, a VIPER plot should appear on the right tab. Please be patient as this does take a few minutes to run!"),
-                          p("As a guide, a GDS file with ~10 samples takes around 5 minutes, whereas a GDS file with 50 samples takes around 10 minutes."),
-                          p("The VIPER plot shows the projected expression levels of targets for the top ten differentially active transcription factors, where up-regulated (red) and down-regulated (blue) targets are displayed as vertical lines, resembling a bar-code."),
-                          p("The two-column heatmap on the right side shows the differential activity ('Act', in the first column) and differential expression ('Exp', in the second column) of the top ten regulators."),
-                          p("The numbers on the right side represent the transcription factor’s ranking according to their relative expression level in the ’test’ vs ‘control’ conditions.")
+                          p("Please be patient as this analysis take a few minutes to run! As a guide, a GDS file with ~10 samples takes around 5 minutes to compute, whereas a GDS file with 50 samples takes around 10 minutes."),
+                          p("Human transcription factor (TF) activity will be analysed using the R packages: DoRothEA (a gene set resource containing signed TF-target interactions) and VIPER (which provides computational inference of protein activity)."),
+                          p("Once the analysis is complete, a VIPER plot will appear, along with a summary table. The VIPER plot shows the projected expression levels of targets for the top ten differentially active TFs, where up-regulated (red) and down-regulated (blue) targets are displayed as vertical lines, resembling a barcode."),
+                          p("The two-column heatmap on the right of the image shows the differential activity ('Act', in the first column) and differential expression ('Exp', in the second column) of the top ten regulators."),
+                          p("The numbers on the right side represent the TF ranking according to their relative expression level in the ’test’ vs. ‘control’ conditions.")
                         ),
 
                         mainPanel(
@@ -379,20 +391,49 @@ server <- function(input, output) {
 
     # extract file summary information from gds, eset and pDat objects
     # TODO: Add scripts to extract file summary information here
+    data_summ <- reactive({
+
+        get_title <- Meta(gds())$title
+
+        desc <- Meta(gds())$description
+        matrix_desc <- matrix(desc) # need to convert to matrix
+        get_desc <- matrix_desc[1] # extract only the actual description
+
+        get_num_features <- Meta(gds())$feature_count
+        get_num_samples <- Meta(gds())$sample_count
+        get_organism <- Meta(gds())$sample_organism
+        get_sample_type <- Meta(gds())$sample_type
+        get_platform <- Meta(gds())$platform
+        get_channel_count <- Meta(gds())$channel_count
+        # get_factor_levels <- as.character(unique(unlist(pDat()[,2]))) # TODO: debug why adding any further info causes info in frontend to repeat
+
+        title <- paste("Experiment title: ",get_title, sep = "")
+        description <- paste("Description: ",get_desc, sep = "")
+        features <- paste("Number of features (genes) in dataset: ", get_num_features, sep = "")
+        num_samples <- paste("Number of samples: ", get_num_samples, sep = "")
+        organism <- paste("Organism: ", get_organism, sep = "")
+        sample_type <- paste("Sample type: ", get_sample_type, sep = "")
+        platform_info <- paste("Platform: ",get_platform, sep = "")
+        channel_count <- paste("Channel count: ",get_channel_count, sep = "")
+
+        HTML(paste(title, description, features, num_samples, organism, sample_type, platform_info, channel_count, sep = '<br/><br/>'))
+
+    })
+
 
 
     # upload_tab reactive outputs ----
 
     # display file summary information for "data_summary" tab
-    output$data_summary <- renderDataTable({
+    output$data_summary <- renderUI({
         validate_upload()
-        # TODO: Add scripts to display file summary information here
+        data_summ()
     })
 
     # display preview of gds data in "gds_preview" tab
     output$gds_preview <- renderDataTable({
         validate_upload()
-        gds_df()[,1:5] # displaying first 5 columns fixes over-sized rows
+        gds_df()[1:25,1:5] # displaying first 5 columns fixes over-sized rows
     })
 
     # display phenotype data in "pDat_preview" tab
@@ -431,9 +472,9 @@ server <- function(input, output) {
     # Output is a matrix containing averaged gene expression data.
     gene_exp <- reactive({
         geneNames <- as.character(gds_df()$IDENTIFIER)
-        gene_eset <- exprs(eset()) # class: matrix, dim: 54715 56 -> expected, correct
-        rownames(gene_eset) <- geneNames # class: matrix, dim: 54715 56 -> expected, correct
-        avereps(gene_eset, ID = rownames(gene_eset)) # class: matrix, dim: 31654 56 -> expected, correct
+        gene_eset <- exprs(eset())
+        rownames(gene_eset) <- geneNames
+        avereps(gene_eset, ID = rownames(gene_eset))
     })
 
     # Calculate standard deviation of genes across all samples and sort
@@ -442,17 +483,16 @@ server <- function(input, output) {
     sort_gene_SD <- reactive({
         # Shiny doesn't seem to like data passed to apply() in matrix
         # form, so we need to convert it to a data frame first.
-        #gene_exp_df <- data.frame(matrix(gene_exp())) # class: df, dim: 31654 56 -> expected, incorrect: df, 1772624 1
-        gene_exp_df <- as.data.frame(gene_exp()) # class: df, dim: 31654 56 -> expected, correct
-        gene_SD <- transform(gene_exp_df, SD = apply(gene_exp_df, 1, sd, na.rm = TRUE)) # class: df, dim: 31654 57 -> expected, correct
-        gene_SD[with(gene_SD, order(-SD)),] # class: df, dim: 31654 57 -> expected, correct
+        gene_exp_df <- as.data.frame(gene_exp())
+        gene_SD <- transform(gene_exp_df, SD = apply(gene_exp_df, 1, sd, na.rm = TRUE))
+        gene_SD[with(gene_SD, order(-SD)),]
     })
 
     # Extract user-defined genes with highest SD and convert to numeric matrix
     top_genes_mat <- reactive({
-        top_num_genes <- head(sort_gene_SD(), input$gene_num) # class: df, dim: 100 57 -> expected, correct
-        top_num_genes <- top_num_genes[1:(length(top_num_genes)-1)] # remove SD column # class: df, dim: 100 56 -> expected, correct
-        as.matrix(top_num_genes) # class: matrix, dim: 100 56 -> expected, correct!
+        top_num_genes <- head(sort_gene_SD(), input$gene_num)
+        top_num_genes <- top_num_genes[1:(length(top_num_genes)-1)]
+        as.matrix(top_num_genes)
     })
 
     # Plot heatmap (using heatmap.2)
@@ -460,14 +500,12 @@ server <- function(input, output) {
         top_genes_mat <- as.matrix(top_genes_mat())
         samples <- paste("Samples (n=",ncol(top_genes_mat),")", sep = "")
         genes <- paste("Genes (n=",nrow(top_genes_mat),")", sep = "")
-        #title <- paste(Meta(gds())$title, sep = "") # TODO: Add heatmap title?
         heatmap.2(top_genes_mat,
           # TODO: Colour samples by sample type.
           distfun = function(x) dist(x, method = input$distance_method),
           hclustfun = function(x) hclust(x, method = input$linkage_method),
           scale = input$scale,
           trace = "none",
-          #main = title,
           xlab = samples,
           ylab = genes,
           key.title = "SD from mean",
@@ -508,10 +546,10 @@ server <- function(input, output) {
     # Perform PCA: get averaged gene expression data, transform it and
     # remove any columns containing zeros and NAs first
     pca <- reactive({
-        gene_exp_mat <- gene_exp() # class matrix expected, correct
+        gene_exp_mat <- gene_exp()
         tX <- t(gene_exp_mat)
         Xpca <- tX[, colSums(tX != 0, na.rm = TRUE) > 0]
-        Xpca <- prcomp(Xpca, center = TRUE, scale. = TRUE) # class prcomp expected, correct!
+        Xpca <- prcomp(Xpca, center = TRUE, scale. = TRUE)
         Xpca
     })
 
@@ -550,7 +588,7 @@ server <- function(input, output) {
 
     # Plot PCA scores
     pca_scores <- reactive({
-        scores <- pca()$x # class matrix expected, correct!
+        scores <- pca()$x
         plot(scores[,1],
              scores[,2],
              xlab = "PC1",
@@ -561,9 +599,24 @@ server <- function(input, output) {
         )
     })
 
-    # Set colours by sample type
+    # Set colours by sample type # TODO: still in progress
     my_cols <- reactive({
-        # TODO: Add colour code here.
+        pDat_col_name <- names(pDat()[input$pca_cols])
+        pDat_choice <- pDat()[input$pca_cols]
+        num_sample_types <- length(unique(pDat_choice$pDat_col_name))
+
+        rows <- pDat()[,input$pca_cols]
+        num_rows <- length(unique(rows))
+        unique_rows <- unique(rows)
+        unique_rows
+
+        x <- colnames(pDat()[2])
+        treatment_name <- input$treatment_name
+        control_name <- input$control_name
+
+        #my_cols <- c("#0096FF", "#F8766D", "#E76CF3", "#00BA38")
+        #names(my_cols) <- c("Convalescent", "Dengue Hemorrhagic Fever", "Dengue Fever", "healthy control")
+
     })
 
 
@@ -579,6 +632,7 @@ server <- function(input, output) {
     output$pca_data <- renderPrint({
         validate_upload()
         pca_summary()
+        #my_cols()
     })
 
     output$screeplot <- renderPlot({
@@ -598,6 +652,7 @@ server <- function(input, output) {
     })
 
     # ---- dge_tab item ----
+    # TODO: Add code for differential gene expression analysis here.
 
     # dge_tab reactive expressions ----
 
