@@ -1,0 +1,196 @@
+"DRUG PREF NAME"	"DRUG TRADE NAMES"	"DRUG CHEMBL ID"	"YEAR OF APPROVAL"
+"ABIRATERONE"	"Zytiga"	"CHEMBL254328"	"N/A"
+"ACITRETIN"	"Acitretin', 'Neotigason', 'Soriatane"	"CHEMBL1131"	1996
+"ADAPALENE"	"Adapalene', 'Differin"	"CHEMBL1265"	1996
+"ALCLOMETASONE DIPROPIONATE"	"Aclovate', 'Alclometasone dipropionate', 'Modrasone"	"CHEMBL1200989"	1982
+"ALFACALCIDOL"	"Alfa d', 'Etalpha', 'One-alpha"	"CHEMBL1601669"	"N/A"
+"ALITRETINOIN"	"Panretin', 'Toctino"	"CHEMBL705"	1999
+"ALLYLESTRENOL"	"Gestanin"	"CHEMBL2105618"	"N/A"
+"ALLYLESTRENOL"	"Gestanin"	"CHEMBL2105618"	"N/A"
+"AMCINONIDE"	"Amcinonide', 'Cyclocort"	"CHEMBL1200732"	1979
+"APALUTAMIDE"	"Erleada"	"CHEMBL3183409"	2018
+"BALSALAZIDE DISODIUM"	"Balsalazide disodium', 'Colazal', 'Colazide', 'Giazo"	"CHEMBL1200760"	2000
+"BAZEDOXIFENE ACETATE"	"N/A"	"CHEMBL2106615"	2009
+"BECLOMETHASONE DIPROPIONATE"	"Aerobec 100', 'Aerobec 50', 'Aerobec fte 250', 'Asmabec clickhaler', 'Asmabec spacehaler', 'Beclazone 100', 'Beclazone 100 e-breathe', 'Beclazone 200', 'Beclazone 250', 'Beclazone 250 e-breathe', 'Beclazone 50', 'Beclazone 50 e-breathe', 'Becloaqua 50', 'Becloforte', 'Becloforte e-breathe', 'Becloforte integra', 'Becloforte-vm', 'Beclomet diprop', 'Beclomet hayfever', 'Beclomist', 'Beclotaide', 'Beclovent', 'Becodisks', 'Beconase', 'Beconase aq', 'Becotide', 'Becotide 100', 'Becotide 100 e-breathe', 'Becotide 200', 'Becotide 50', 'Becotide 50 e-breathe', 'Clenil modulite', 'Clipper', 'Filair 100', 'Filair 50', 'Filair fte', 'Fostair', 'Fostair nexthaler', 'Nasobec aq', 'Nasobec hayfever', 'Propaderm', 'Propaderm-a', 'Propaderm-c', 'Propaderm fte', 'Pulvinal beclomet', 'Qnasl', 'Qvar 100', 'Qvar 100 e-breathe', 'Qvar 40', 'Qvar 50', 'Qvar 50 e-breathe', 'Qvar 80', 'Qvar redihaler', 'Rino clenil', 'Vancenase', 'Vancenase aq', 'Vancenase pockethaler', 'Vanceril', 'Vanceril double strength', 'Ventide', 'Vivabec', 'Zonivent aquanasal"	"CHEMBL1200500"	1976
+"BETAMETHASONE ACETATE"	"N/A"	"CHEMBL1200538"	1965
+"BETAMETHASONE BENZOATE"	"Uticort"	"CHEMBL1200376"	1982
+"BETAMETHASONE DIPROPIONATE"	"Alphatrex', 'Betamethasone dipropionate', 'Diprolene', 'Diprolene af', 'Diprosone', 'Sernivo"	"CHEMBL1200384"	1975
+"BETAMETHASONE SODIUM PHOSPHATE"	"Betamethasone sodium phosphate', 'Betam-ophtal', 'Betnesol', 'Betnesol-n', 'Celestone', 'Vistamethasone', 'Vistamethasone n"	"CHEMBL1200762"	1965
+"BETAMETHASONE VALERATE"	"Audavate', 'Audavate rd', 'Betacap', 'Betaderm', 'Betamethasone valerate', 'Betameth val in coal tar', 'Betatrex', 'Beta-val', 'Betesil', 'Betnovate-c', 'Betnovate-n', 'Betnovate rd', 'Bettamousse', 'Bextasol', 'Dermabet', 'Fucibet', 'Luxiq', 'Valisone', 'Valnac', 'Xemacort"	"CHEMBL1497"	1967
+"BETAMETHASONE"	"Alphatrex', 'Betasolan', 'Betatrex', 'Betnelan', 'Celestone', 'Dermabet', 'Uticort"	"CHEMBL632"	1961
+"BEXAROTENE"	"Bexarotene', 'Targretin', 'Targretine"	"CHEMBL1023"	1999
+"BEZAFIBRATE"	"Bezagen xl', 'Bezalip', 'Bezalip-mono', 'Fibrazate xl', 'Liparol xl', 'Zimbacol xl"	"CHEMBL264374"	"N/A"
+"BICALUTAMIDE"	"Bicalutamide', 'Calutide', 'Casodex', 'Cosudex', 'Kalumid"	"CHEMBL409"	1995
+"BUDESONIDE"	"Aircort', 'Budeflam aquanase', 'Budelin novolizer', 'Budenofalk', 'Budesonide', 'Cortiment', 'Duoresp spiromax', 'Entocort', 'Entocort cr', 'Entocort ec', 'Ortikos', 'Preferid', 'Pulmaxan', 'Pulmicort', 'Pulmicort flexhaler', 'Pulmicort l.s.', 'Pulmicort respules', 'Rhinocort', 'Rhinocort allergy', 'Rhinocort aqua', 'Rhinocort aqua 64', 'Symbicort', 'Uceris"	"CHEMBL1370"	1994
+"CALCIFEDIOL"	"Calderol', 'Rayaldee"	"CHEMBL3544909"	1980
+"CALCIPOTRIENE"	"Calcipotriene', 'Dovobet', 'Dovonex', 'Enstilar', 'Sorilux', 'Xamiol"	"CHEMBL1200666"	1993
+"CALCITRIOL"	"Calcijex', 'Calcitriol', 'Dihydroxycholecalciferol', 'Dihydroxyvitamin D 3', 'Rocaltrol', 'Silkis', 'Topitriol', 'Vectical"	"CHEMBL846"	1978
+"CANRENOATE POTASSIUM"	"Soldactone', 'Spiroctan-m"	"CHEMBL1371200"	"N/A"
+"CANRENONE"	"N/A"	"CHEMBL1463345"	"N/A"
+"CHENODIOL"	"Chendol 125', 'Chendol 250', 'Chenix', 'Chenocedon', 'Chenodiol', 'Chenofalk', 'Combidol', 'Lithofalk', 'Xenbilox"	"CHEMBL240597"	1983
+"CHLORMADINONE ACETATE"	"N/A"	"CHEMBL110691"	"N/A"
+"CHLOROTRIANISENE"	"Chlorotrianisene', 'Tace"	"CHEMBL1200761"	1982
+"CHOLECALCIFEROL"	"Accrete d3', 'Aciferol d3', 'Adcal-d3', 'Aviticol', 'Biolife vitamin d3', 'Bio-vitamin d3', 'Cacit d3', 'Calceos', 'Calcichew d3', 'Calcichew d3 fte', 'Calcichew d3 once daily', 'Calci-d', 'Caldrink d3', 'Calfovit d3', 'Colecalciferol', 'Colecal d3', 'Colekal-d3', 'Colevit d3', 'Cubicole d3', 'D3-50', 'D3 lemon melts', 'Dekristol', 'Desunin', 'Dihydrocholesterol', 'Dlux 400', 'D-max', 'D-tracetten', 'D-vit3', 'E-d3', 'Evacal d3', 'Fultium-d3', 'Fultium daily d3', 'Hux d3', 'Invita d3', 'Iso d3', 'Kora liquid', 'Natecal d3', ""Nature's remedy vitamin d3"", 'Neo-d', 'Nphd3', 'Osteocaps d3', 'Plenachol', 'Pro d3', 'Pro d3 folic', 'Pro d3 forte', 'Royalvit d3', 'Stexerol-d3', 'Stivit-d3', 'Sunvit-d3 1,000', 'Sunvit-d3 10,000', 'Sunvit-d3 2,000', 'Sunvit-d3 20,000', 'Sunvit-d3 3,000', 'Sunvit-d3 400', 'Sunvit-d3 5,000', 'Sunvit-d3 50,000', 'Sunvit-d3 800', 'Synervit-d3', 'Theical d-3', 'Thorens', 'Vigantol', 'Vigantoletten', 'Vigantoletten 500', 'Vita-d3', 'Vitamin D 3', 'Vit d3 streuli', 'Zymad"	"CHEMBL1042"	1999
+"CHOLINE FENOFIBRATE"	"Trilipix"	"CHEMBL1201745"	2008
+"CICLESONIDE"	"Alvesco', 'Alvesco 160', 'Alvesco 80', 'Omnaris', 'Zetonna"	"CHEMBL2040682"	2006
+"CIPROFIBRATE"	"Modalim"	"CHEMBL557555"	"N/A"
+"CLASCOTERONE"	"Breezula', 'Winlevi"	"CHEMBL3590187"	2020
+"CLOBETASOL PROPIONATE"	"Clarelux', 'Clobaderm', 'Clobetasol propionate', 'Clobetasol propionate (emollient)', 'Clobex', 'Cormax', 'Dermovate', 'Dermovate nn', 'Embeline', 'Embeline e', 'Etrivex', 'Impeklo', 'Impoyz', 'Olux', 'Olux e', 'Temovate', 'Temovate e"	"CHEMBL1159650"	1985
+"CLOCORTOLONE PIVALATE"	"Cloderm"	"CHEMBL1200975"	1977
+"CLOFIBRATE"	"Atromid', 'Atromid-s', 'Clofibrate"	"CHEMBL565"	1967
+"CLOMIPHENE CITRATE"	"Clomid', 'Clomiphene citrate', 'Clophene', 'Milophene', 'Serophene"	"CHEMBL3185958"	1967
+"CORTISONE ACETATE"	"Cortate', 'Cortelan', 'Cortisone acetate', 'Cortistab', 'Cortisyl', 'Cortone"	"CHEMBL1650"	1950
+"CORTIVAZOL"	"Altim"	"CHEMBL2105842"	"N/A"
+"CYCLOFENIL"	"Neoclym', 'Rehibin"	"CHEMBL141305"	"N/A"
+"CYPROTERONE ACETATE"	"Androcur', 'Androcur 10', 'Cyprostat', 'Diane"	"CHEMBL139835"	"N/A"
+"CYPROTERONE ACETATE"	"Androcur', 'Androcur 10', 'Cyprostat', 'Diane"	"CHEMBL139835"	"N/A"
+"CYPROTERONE ACETATE"	"Androcur', 'Androcur 10', 'Cyprostat', 'Diane"	"CHEMBL139835"	"N/A"
+"DANAZOL"	"Danazol', 'Danocrine"	"CHEMBL1479"	1976
+"DANAZOL"	"Danazol', 'Danocrine"	"CHEMBL1479"	1976
+"DANTHRON"	"Dorbane', 'Istizin"	"CHEMBL53418"	"N/A"
+"DAROLUTAMIDE"	"Nubeqa"	"CHEMBL4297185"	2019
+"DEFLAZACORT"	"Calcort', 'Emflaza', 'Zamene"	"CHEMBL1201891"	2017
+"DESOGESTREL"	"Aizea', 'Cerazette', 'Cerelle', 'Desomono', 'Feanolla', 'Nacrez', 'Zelleta"	"CHEMBL1533"	1992
+"DESONIDE"	"Desonate', 'Desonide', 'Desowen', 'Tridesilon', 'Verdeso"	"CHEMBL1201109"	1972
+"DESOXIMETASONE"	"Desoximetasone', 'Stiedex', 'Stiedex lp', 'Stiedex lpn', 'Topicort', 'Topicort lp"	"CHEMBL1766"	1977
+"DESOXYCORTICOSTERONE ACETATE"	"Doca', 'Percorten"	"CHEMBL1200542"	1939
+"DESOXYCORTICOSTERONE PIVALATE"	"Percorten"	"CHEMBL1200592"	1982
+"DEXAMETHASONE ACETATE"	"Decadron', 'Decadron-la', 'Dexamethasone acetate"	"CHEMBL1530428"	1973
+"DEXAMETHASONE SODIUM PHOSPHATE"	"Decadron', 'Dexacen-4', 'Dexacort', 'Dexair', 'Dexamethasone', 'Dexamethasone sodium phosphate', 'Dexamethasone sodium phosphate preservative free', 'Hexadrol', 'Maxidex"	"CHEMBL2021430"	1959
+"DEXAMETHASONE"	"Aeroseb-dex', 'Dalalone', 'Decaderm', 'Decadron', 'Decadron-75', 'Decaspray', 'Dexacortisyl', 'Dexafree', 'Dexamethasone', 'Dexamethasone intensol', 'Dexone', 'Dexone 0.5', 'Dexone 0.75', 'Dexone 1.5', 'Dexone 4', 'Dexsol', 'Dextenza', 'Dexycu kit', 'Dropodex', 'Gppe ear spy', 'Hemady', 'Hexadrol', 'Kortico Injection', 'Martapan', 'Maxidex', 'Maxitrol', 'Oradexon', 'Otomize', 'Ozurdex', 'Sofradex', 'Spersadex comp', 'Tobradex"	"CHEMBL384467"	1958
+"DEXTROTHYROXINE SODIUM"	"Choloxin"	"CHEMBL3545058"	1967
+"DEXTROTHYROXINE"	"Thyroxine"	"CHEMBL559"	1967
+"DIENESTROL"	"Dienestrol', 'Estraguard', 'Hormofemin"	"CHEMBL1018"	1947
+"DIETHYLSTILBESTROL DIPHOSPHATE"	"Fosfestrol', 'Stilphostrol"	"CHEMBL1200598"	1982
+"DIETHYLSTILBESTROL"	"Apstil', 'Diethylstilbestrol', 'Distilbene', 'Stilbestrol', 'Stilbetin', 'Stilboesterol', 'Tampovagan"	"CHEMBL411"	1973
+"DIFLORASONE DIACETATE"	"Diflorasone diacetate', 'Florone', 'Florone e', 'Psorcon', 'Psorcon e"	"CHEMBL1200545"	1977
+"DIFLUPREDNATE"	"Durezol"	"CHEMBL1201749"	2008
+"DIHYDROTACHYSTEROL"	"A.t. 10', 'Dihydral', 'Dygratyl', 'Hytakerol', 'Tachyrol"	"CHEMBL2356023"	"N/A"
+"DOXERCALCIFEROL"	"Doxercalciferol', 'Hectorol"	"CHEMBL1200810"	1999
+"DROMOSTANOLONE PROPIONATE"	"Drolban', 'Masteril"	"CHEMBL1201048"	1982
+"DROSPIRENONE"	"Angeliq', 'Slynd"	"CHEMBL1509"	2001
+"DROSPIRENONE"	"Angeliq', 'Slynd"	"CHEMBL1509"	2001
+"DYDROGESTERONE"	"Duphaston', 'Duphaston-hrt', 'Gynorest"	"CHEMBL1200853"	1982
+"ENZALUTAMIDE"	"Xtandi"	"CHEMBL1082407"	2012
+"EPLERENONE"	"Eplerenone', 'Inspra"	"CHEMBL1095097"	2002
+"ERGOCALCIFEROL"	"Calciferol', 'Calciferol in arach oil', 'Caltrate', 'Deltalin', 'D-forte', 'Drisdol', 'Eciferol d2', 'Ergocalciferol', 'Ergo-d2', 'Ergoral d2', 'Lanes', 'Oleovitamin D', 'Osto-d2', 'Sterogyl', 'Sterogyl-15', 'Sterogyl 15h', 'Uvesterol d', 'Vitamin d', 'Vitamin D 2"	"CHEMBL1536"	1941
+"ESTRADIOL ACETATE"	"Femring', 'Femtrace"	"CHEMBL1200430"	2003
+"ESTRADIOL CYPIONATE"	"Depo', 'Depo-estradiol', 'Estradiol cypionate"	"CHEMBL1200973"	1979
+"ESTRADIOL VALERATE"	"Climaval', 'Delestrogen', 'Estradiol valerate', 'Femtab', 'Progynon depot', 'Progynon-depot-10', 'Progynova"	"CHEMBL1511"	2010
+"ESTRADIOL"	"Adgyn estro', 'Alora', 'Aquagen', 'Bedol', 'Climara', 'Climara Pro', 'Dermestril 100', 'Dermestril 25', 'Dermestril 50', 'Dermestril septem 25', 'Dermestril septem 50', 'Dermestril septem 75', 'Divigel', 'E-Cypionate', 'Elestrim', 'Elestrin', 'Elleste solo', 'Elleste solo mx 40', 'Elleste solo mx 80', 'Esclim', 'Estrace', 'Estraderm', 'Estraderm mx 100', 'Estraderm mx 25', 'Estraderm mx 50', 'Estraderm mx 75', 'Estraderm tts 100', 'Estraderm tts 25', 'Estraderm tts 50', 'Estradiol', 'Estrasorb', 'Estring', 'Estrogel', 'Evamist', 'Evorel 100', 'Evorel 25', 'Evorel 50', 'Evorel 75', 'Fematrix 40', 'Fematrix 80', 'Fempatch', 'Femseven 100', 'Femseven 50', 'Femseven 75', 'Gvnodiol', 'Gynodiol', 'Gynogen', 'Imvexxy', 'Innofem', 'Menorest 37.5', 'Menorest 50', 'Menorest 75', 'Menoring 50', 'Menostar', 'Minivelle', 'Oestradiol', 'Progynova ts', 'Sandrena', 'Vagifem', 'Vagifem 18', 'Vagifem 8', 'Vivelle', 'Vivelle-dot', 'Zumenon"	"CHEMBL135"	1975
+"ESTRAMUSTINE PHOSPHATE SODIUM"	"Emcyt"	"CHEMBL1200721"	1981
+"ESTRIOL"	"Gynest', 'Ortho-gynest', 'Ovestin', 'Theelol"	"CHEMBL193482"	"N/A"
+"ESTROGENS, CONJUGATED SYNTHETIC A"	"Cenestin', 'Synthetic conjugated estrogens a"	"CHEMBL1201466"	1999
+"ESTROGENS, CONJUGATED"	"Cenestin', 'Oestrogen', 'Premarin', 'Premarin Cream"	"CHEMBL1201649"	1942
+"ESTROGENS, ESTERIFIED"	"Amnestrogen', 'Esterified estrogens', 'Estratab', 'Evex', 'Femogen', 'Menest"	"CHEMBL1201468"	1977
+"ESTRONE"	"Estrogenic substance', 'Estrone', 'Natural estrogenic substance-estrone', 'Oestrone', 'Theelin"	"CHEMBL1405"	1979
+"ESTROPIPATE"	"Estropipate', 'Harmogen', 'Ogen', 'Ogen 1.25', 'Ogen 2.5', 'Ogen 5', 'Ogen .625', 'Ortho-est"	"CHEMBL1200980"	1977
+"ETHINYL ESTRADIOL"	"Estinyl', 'Etinestryl', 'Feminone', 'Follicoral', 'Lynoral"	"CHEMBL691"	2001
+"ETHYLESTRENOL"	"Maxibolin"	"CHEMBL1200623"	1964
+"ETHYNODIOL DIACETATE"	"Femulen"	"CHEMBL1200624"	1966
+"ETONOGESTREL"	"Implanon', 'Nexplanon"	"CHEMBL1531"	2001
+"ETRETINATE"	"Tegison', 'Tigason"	"CHEMBL464"	1986
+"FELODIPINE"	"Cabren', 'Cardioplen xl', 'Felodipine', 'Felogen xl', 'Felotens xl', 'Folpik xl', 'Keloc sr', 'Neofel xl', 'Parmid xl', 'Pinefeld xl', 'Plendil', 'Preslow', 'Vascalpha"	"CHEMBL1480"	1991
+"FENOFIBRATE"	"Antara', 'Antara (micronized)', 'Fenofibrate', 'Fenofibrate (micronized)', 'Fenogal', 'Fenoglide', 'Lipantil', 'Lipantil micro 200', 'Lipantil micro 267', 'Lipantil micro 67', 'Lipidil', 'Lipofen', 'Supralip 160', 'Tricor', 'Tricor (micronized)', 'Triglide"	"CHEMBL672"	1993
+"FENOFIBRIC ACID"	"Fenocor-67', 'Fenogal', 'Fibricor', 'Lipanthyl', 'Lipofen', 'Lofibra', 'Supralip', 'Trilipix"	"CHEMBL981"	2008
+"FLUDROCORTISONE ACETATE"	"Astonin', 'Florinef', 'Fludrocortisone acetate', 'Fludrocortone', 'Panotile"	"CHEMBL1201010"	1955
+"FLUMETHASONE PIVALATE"	"Locorten', 'Locorten-vioform"	"CHEMBL1200877"	1982
+"FLUNISOLIDE"	"Aerobid', 'Aerospan', 'Aerospan hfa', 'Flunisolide', 'Nasalide', 'Nasarel', 'Syntaris', 'Syntaris hayfever"	"CHEMBL1512"	1981
+"FLUOCINOLONE ACETONIDE"	"Capex', 'Derma-smoothe/fs', 'Dermotic', 'Fluocet', 'Fluocinolone acetonide', 'Fluonid', 'Fluotrex', 'Fs shampoo', 'Iluvien', 'Retisert', 'Synalar', 'Synalar-c', 'Synalar fte', 'Synalar-hp', 'Synalar-n', 'Synandone', 'Yutiq"	"CHEMBL989"	1963
+"FLUOCINONIDE"	"Fluocinonide', 'Fluocinonide emulsified base', 'Lidex', 'Lidex-e', 'Metosyn', 'Metosyn fapg', 'Vanos"	"CHEMBL1501"	1971
+"FLUOROMETHOLONE ACETATE"	"Flarex"	"CHEMBL1201064"	1986
+"FLUOROMETHOLONE"	"Fluaton', 'Fluor-op', 'Fml forte', 'Fml fte', 'Fml-neo', 'Oxylone"	"CHEMBL1200600"	1972
+"FLUOXYMESTERONE"	"Android-f', 'Androxy', 'Fluoxymesterone', 'Halotestin', 'Ora-testryl"	"CHEMBL1445"	1956
+"FLUPREDNISOLONE"	"Alphadrol"	"CHEMBL1200774"	1982
+"FLURANDRENOLIDE"	"Cordran', 'Cordran sp', 'Flurandrenolide', 'Haelan', 'Haelan-c', 'Haelan-x"	"CHEMBL1201012"	1965
+"FLUTAMIDE"	"Chimax', 'Drogenil', 'Eulexin', 'Flutamide"	"CHEMBL806"	1989
+"FLUTICASONE FUROATE"	"Arnuity ellipta', 'Avamys', 'Flonase sensimist allergy relief', 'Relvar ellipta', 'Trelegy ellipta', 'Veramyst"	"CHEMBL1676"	2007
+"FLUTICASONE PROPIONATE"	"Aerivio spiromax', 'Airflusal forspiro', 'Armonair digihaler', 'Armonair respiclick', 'Cutivate', 'Flixonase', 'Flixotide', 'Flonase', 'Flonase allergy relief', 'Flovent', 'Flovent diskus 100', 'Flovent diskus 250', 'Flovent diskus 50', 'Flovent hfa', 'Fluticasone propionate', 'Flutiform', 'Nasofan', 'Pirinase', 'Sereflo', 'Seretide 100', 'Seretide 125', 'Seretide 250', 'Seretide 50', 'Seretide 500', 'Sirdupla', 'Xhance"	"CHEMBL1473"	1990
+"FULVESTRANT"	"Faslodex"	"CHEMBL1358"	2002
+"GEMFIBROZIL"	"Emfib', 'Gemfibrozil', 'Lopid"	"CHEMBL457"	1981
+"HALCINONIDE"	"Halog', 'Halog-e"	"CHEMBL1200845"	1974
+"HALOBETASOL PROPIONATE"	"Bryhali', 'Halobetasol propionate', 'Lexette', 'Ultravate"	"CHEMBL1200908"	1990
+"HYDROCORTAMATE HYDROCHLORIDE"	"Magnacort"	"CHEMBL1200635"	1956
+"HYDROCORTISONE ACETATE"	"Barquinol hc', 'Chloromycetin hydrocort', 'Colifoam', 'Cortef acetate', 'Cortifoam', 'Cortril', 'Cortucid', 'Dricort', 'Epifoam', 'Framycort', 'Fucidin h', 'Genticin hc', 'Gentisone hc', 'Gppe ear susp', 'Gppe eye crm', 'Gppe foam aero', 'Hc45 hydrocort', 'Hemsol-hc', 'Hepacort plus', 'Hydrocal', 'Hydrocortisone acetate', 'Hydrocortone', 'Lanacort', 'Micort-hc', 'Neo-cortef', 'Orabase hca"	"CHEMBL1091"	1951
+"HYDROCORTISONE BUTYRATE"	"Hydrocortisone butyrate', 'Locoid', 'Locoid c', 'Locoid crelo', 'Locoid lipocream"	"CHEMBL1683"	1982
+"HYDROCORTISONE CYPIONATE"	"Cortef"	"CHEMBL1549"	1955
+"HYDROCORTISONE PROBUTATE"	"Pandel"	"CHEMBL1200953"	1997
+"HYDROCORTISONE SODIUM PHOSPHATE"	"Efcortesol', 'Hydrocortone"	"CHEMBL1200968"	1960
+"HYDROCORTISONE SODIUM SUCCINATE"	"A-hydrocort', 'Hcss', 'Hydrocortisone sodium succinate', 'Solu-cortef"	"CHEMBL1200495"	1955
+"HYDROCORTISONE VALERATE"	"Hydrocortisone valerate', 'Westcort"	"CHEMBL1200562"	1978
+"HYDROCORTISONE"	"Acetasol hc', 'Acticort', 'Aeroseb-hc', 'Ala-cort', 'Ala-scalp', 'Alphaderm', 'Anflam', 'Anucort-Hc', 'Anugesic hc', 'Anusol-Hc', 'Anusol hc', 'Anusol plus hc', 'Anusol soothing relief', 'Balneol-hc', 'Beta-hc', 'Calmurid hc', 'Canesten hc', 'Cetacort', 'Cipro hc', 'Cobadex', 'Colocort', 'Corlan', 'Cort-dome', 'Cortef', 'Cortenem', 'Cortenema', 'Cortril', 'Daktacort', 'Daktacort hydrocort', 'Derma care hydrocort', 'Dermacort', 'Dermaspray demang', 'Dioderm', 'Dome-cort', 'Econacort', 'Efcortelan p', 'Eldecort', 'Epicort', 'Eurax-hc', 'Eurax-hydrocort', 'Evacort', 'Exe-cort', 'Flexicort', 'Germoloids hc', 'Glycort', 'Gregoderm', 'Hc #1', 'Hc #4', 'Hc (hydrocortisone)', 'H-cort', 'Hi-cor', 'Hydrocort in calamine oily', 'Hydrocort in cetomacrogol for a', 'Hydrocort in wte soft paraf', 'Hydrocortisone', 'Hydrocortisone in absorbase', 'Hydrocortone', 'Hydroderm', 'Hydroderm hc', 'Hydro-rx', 'Hytone', 'Jungle for', 'Locoid', 'Medicort', 'Mildison lipocream', 'Nogenic hc', 'Nutracort', 'Nybadex', 'Nystaform-hc', 'Otoseptil', 'Otosporin', 'Penecort', 'Perinal', 'Plenadren', 'Proctocort', 'Proctocream hc', 'Proctofoam hc', 'Proctosedyl', 'Quinocort', 'Sential hc', 'Stie-cort', 'Synacort', 'Terra-cortril nystatin', 'Texacort', 'Timocort', 'Timodine', 'Topisone', 'Tri-cicatrin', 'Uniroid', 'Uniroid hc', 'Xyloproct', 'Zenoxone"	"CHEMBL389621"	1952
+"HYDROXYPROGESTERONE CAPROATE"	"Delalutin', 'Hydroxyprogesterone caproate', 'Makena', 'Makena (autoinjector)', 'Makena preservative free', 'Proluton depot"	"CHEMBL1200848"	1975
+"ISOTRETINOIN"	"Absorica', 'Absorica ld', 'Accutane', 'Amnesteem', 'Claravis', 'Isotrex', 'Myorisan', 'Roaccutane', 'Sotret', 'Zenatane"	"CHEMBL547"	1982
+"LASOFOXIFENE"	"N/A"	"CHEMBL328190"	"N/A"
+"LEVONORGESTREL"	"Athentia next', 'Emerres', 'Emerres una', 'Ezinelle', 'Fallback solo', 'Her style', 'Isteranda', 'Jadelle', 'Jaydess', 'Kyleena', 'Levonelle', 'Levonelle-2', 'Levonelle one step', 'Levonorgestrel', 'Levosert', 'Liletta', 'Microval', 'Mirena', 'Norgeston', 'Norplant', 'Norplant Ii', 'Norplant System', 'Opcicon one-step', 'Ovrette', 'Plan B', 'Plan b one-step', 'Postinor-2', 'Skyla', 'Upostelle"	"CHEMBL1389"	1982
+"LEVOTHYROXINE SODIUM"	"Eltroxin', 'Euthyrox', 'Evotrox', 'Levolet', 'Levo-t', 'Levothroid', 'Levothyroid', 'Levothyroxine sodium', 'Levoxine', 'Levoxyl', 'L-thyroxine henning', 'Novothyrox', 'Soloxine', 'Synthroid', 'Thyrol L', 'Thyro-tabs', 'Thyroxine', 'Tirosint', 'Tirosint-sol', 'Unithroid"	"CHEMBL2103741"	2000
+"LIOTHYRONINE SODIUM"	"Cynomel', 'Cytomel', 'Liothyronine sodium', 'Tertroxin', 'Thybon', 'Triiodothyronine', 'Triiodothyronine,evans', 'Triostat"	"CHEMBL1201119"	1956
+"LIOTHYRONINE"	"Cytomel', 'Tertroxin"	"CHEMBL1544"	1956
+"LOTEPREDNOL ETABONATE"	"Airex', 'Alrex', 'Inveltys', 'Lotemax', 'Lotemax sm"	"CHEMBL1200865"	1998
+"MEDROXYPROGESTERONE ACETATE"	"Adgyn medro', 'Amen', 'Climanor', 'Curretab', 'Cycrin', 'Depo-progevera', 'Depo-provera', 'Depo-provera oncology', 'Depo-subq provera 104', 'Farlutal', 'Farlutal 100', 'Farlutal 200', 'Farlutal 250', 'Farlutal 500', 'Lunelle', 'Medroxyprogesterone acetate', 'Provera', 'Sayana press"	"CHEMBL717"	1959
+"MEDRYSONE"	"N/A"	"CHEMBL1201173"	1969
+"MEGESTROL ACETATE"	"Megace', 'Megace es', 'Megestrol acetate', 'Ovaban"	"CHEMBL1201139"	1971
+"MEPREDNISONE"	"Betapar"	"CHEMBL1201148"	1982
+"MESALAMINE"	"Apriso', 'Asacol', 'Asacol hd', 'Canasa', 'Coltec ec', 'Delzicol', 'Ipocol', 'Lialda', 'Mesalamine', 'Mesren mr', 'Mezavant xl', 'Octasa', 'Pentasa', 'Pentasa sr', 'Rowasa', 'Salofalk', 'Sfrowasa"	"CHEMBL704"	1987
+"MESTRANOL"	"N/A"	"CHEMBL1201151"	1961
+"METHANDROSTENOLONE"	"Dianabol"	"CHEMBL1418176"	"N/A"
+"METHYLPREDNISOLONE ACETATE"	"Depmedalone', 'Depo-medrol', 'Depo-medrone', 'Medrol', 'Medrol acetate', 'Methylprednisolone acetate', 'M-predrol', 'Neo-medrone"	"CHEMBL1364144"	1959
+"METHYLPREDNISOLONE SODIUM SUCCINATE"	"A-methapred', 'Methylprednisolone', 'Methylprednisolone sodium succinate', 'Min-i-mix', 'Solu-medrol', 'Solu-medrone', 'Urbasone"	"CHEMBL1201081"	1959
+"METHYLPREDNISOLONE"	"Medrol', 'Medrone', 'Methylprednisolone"	"CHEMBL650"	1957
+"METHYLTESTOSTERONE"	"Android 10', 'Android 25', 'Android 5', 'Metandren', 'Methitest', 'Methyltestosterone', 'Oreton', 'Oreton methyl', 'Perandren', 'Plex hormone', 'Potensan fte', 'Testovis', 'Testred', 'Virilon"	"CHEMBL1395"	1973
+"MIFEPRISTONE"	"Korlym', 'Mifegyne', 'Mifeprex"	"CHEMBL1276308"	2000
+"MIFEPRISTONE"	"Korlym', 'Mifegyne', 'Mifeprex"	"CHEMBL1276308"	2000
+"MOMETASONE FUROATE"	"Asmanex', 'Asmanex hfa', 'Asmanex twisthaler', 'Elocon', 'Mometasone furoate', 'Nasonex', 'Sinuva"	"CHEMBL1161"	1987
+"NANDROLONE DECANOATE"	"Deca-durabolin', 'Durabolin', 'Nandrolone decanoate"	"CHEMBL1200946"	1983
+"NANDROLONE PHENPROPIONATE"	"Durabolin', 'Nandrolone phenpropionate"	"CHEMBL1200412"	1959
+"NILUTAMIDE"	"Anadron', 'Nilandron', 'Nilutamide"	"CHEMBL1274"	1996
+"NIMODIPINE"	"Nimodipine', 'Nimotop', 'Nymalize"	"CHEMBL1428"	1988
+"NORELGESTROMIN"	"Evra', 'Ortho evra"	"CHEMBL1200807"	2001
+"NORETHINDRONE ACETATE"	"Aygestin', 'Norethidrone Acetate', 'Norethindrone acetate', 'Norlutate"	"CHEMBL1201146"	1973
+"NORETHINDRONE"	"Aygestin', 'Camila', 'Errin', 'Heather', 'Incassia', 'Jencycla', 'Menzol', 'Micronor', 'Micronor hrt', 'Norethidrone', 'Norethindrone', 'Noriday', 'Norlutin', 'Nor-qd', 'Primolut n', 'Utovlan"	"CHEMBL1162"	1962
+"NORETHYNODREL"	"N/A"	"CHEMBL1387"	1961
+"NORGESTIMATE"	"N/A"	"CHEMBL1200934"	1989
+"NORGESTREL"	"Opill', 'Ovrette"	"CHEMBL2107797"	1968
+"OBETICHOLIC ACID"	"Ocaliva"	"CHEMBL566315"	2016
+"OLSALAZINE SODIUM"	"Dipentum"	"CHEMBL1201013"	1990
+"ONAPRISTONE"	"N/A"	"CHEMBL1908373"	"N/A"
+"OSPEMIFENE"	"Osphena', 'Senshio"	"CHEMBL2105395"	2013
+"OXANDROLONE"	"Anavar', 'Oxandrin', 'Oxandrolone"	"CHEMBL1200436"	1964
+"OXYMETHOLONE"	"Anadrol', 'Anadrol-50', 'Anapolon 50"	"CHEMBL1200585"	1972
+"PARAMETHASONE ACETATE"	"Haldrone"	"CHEMBL1200342"	1982
+"PARICALCITOL"	"Paricalcitol', 'Zemplar"	"CHEMBL1200622"	1998
+"PIOGLITAZONE HYDROCHLORIDE"	"Actos', 'Diabiom', 'Glidipion', 'Glizofar', 'Pioglitazone hydrochloride"	"CHEMBL1715"	1999
+"POLYESTRADIOL PHOSPHATE"	"Estradurin', 'Polyest phos"	"CHEMBL1201477"	1957
+"PREDNICARBATE"	"Dermatop', 'Dermatop e emollient', 'Prednicarbate"	"CHEMBL1200386"	1991
+"PREDNISOLONE ACETATE"	"Econopred', 'Flo-pred', 'Meticortelone', 'Omnipred', 'Pred forte', 'Pred fte', 'Pred mild', 'Prednisolone acetate', 'Sterane', 'Ultracortenol"	"CHEMBL1152"	1955
+"PREDNISOLONE SODIUM PHOSPHATE"	"Codelsol', 'Cortisate', 'Hydeltrasol', 'Inflamase', 'Inflamase forte', 'Inflamase mild', 'Metreton', 'Orapred', 'Orapred odt', 'Pediapred', 'Predair', 'Predair forte', 'Prednisolone sodium phosphate', 'Predsol', 'Predsol-n"	"CHEMBL1201014"	1973
+"PREDNISOLONE TEBUTATE"	"Hydeltra-tba', 'Prednisolone tebutate"	"CHEMBL1200909"	1956
+"PREDNISOLONE"	"Cortalone', 'Dekotil', 'Delta-cortef', 'Deltacortril', 'Deltalone', 'Dilacort', 'Fernisolone-p', 'Hydeltra', 'Meticortelone', 'Meti-derm', 'Pevanti', 'Precortisyl', 'Precortisyl fte', 'Prednisolone', 'Prelone', 'Scheriproct', 'Servisone', 'Sterane"	"CHEMBL131"	1955
+"PREDNISONE"	"Cortan', 'Cortancyl', 'Decortisyl', 'Delta-dome', 'Deltasone', 'Fernisone', 'Liquid pred', 'Lodotra', 'Meticorten', 'Orasone', 'Paracort', 'Prednicen-m', 'Prednisone', 'Prednisone intensol', 'Rayos', 'Servisone', 'Sterapred"	"CHEMBL635"	1955
+"PROGESTERONE"	"Crinone', 'Cyclogest', 'Endometrin', 'Gesterol', 'Lutigest', 'Milprosa', 'Prochieve', 'Progesta-care', 'Progestasert', 'Progesterone', 'Progestin', 'Prometrium', 'Regumate', 'Serenity for women', 'Syngestrone', 'Utrogestan"	"CHEMBL103"	1976
+"QUINESTROL"	"Estrovis"	"CHEMBL1201165"	1982
+"RALOXIFENE HYDROCHLORIDE"	"Evirex', 'Evista', 'Optruma', 'Ostiral', 'Raloxifene hydrochloride', 'Razylan"	"CHEMBL1116"	1997
+"RIMEXOLONE"	"Vexol"	"CHEMBL1200617"	1994
+"ROSIGLITAZONE MALEATE"	"Avandia', 'Rosiglitazone maleate"	"CHEMBL843"	1999
+"SEGESTERONE ACETATE"	"Nestorone"	"CHEMBL3707377"	2018
+"SPIRONOLACTONE"	"Abbolactone', 'Aldactone', 'Carospir', 'Diatensec', 'Gx spironol', 'Laractone', 'Spiretic', 'Spiroctan 100', 'Spiroctan 25', 'Spiroctan 50', 'Spironolactone', 'Spirospare 100', 'Spirospare 25"	"CHEMBL1393"	1960
+"STANOZOLOL"	"Stromba', 'Tevabolin', 'Winstrol"	"CHEMBL2079587"	1962
+"SYNTHETIC CONJUGATED ESTROGENS, B"	"Enjuvia"	"CHEMBL1201467"	2004
+"TAMOXIFEN CITRATE"	"Emblon', 'Fentamox 10', 'Fentamox 20', 'Kentadex', 'Kessar', 'Kessar 10', 'Kessar 20', 'Noltam', 'Nolvadex', 'Nolvadex d', 'Nolvadex fte', 'Oestrifen-10', 'Oestrifen-20', 'Oestrifen-40', 'Soltamox', 'Tamofen', 'Tamoxifen citrate', 'Zynoplex"	"CHEMBL786"	1977
+"TAZAROTENE"	"Arazlo', 'Avage', 'Fabior', 'Tazorac', 'Zorac"	"CHEMBL1657"	1997
+"TESTOSTERONE CYPIONATE"	"Andro-Cyp', 'Depandro', 'Depotest', 'Depo-testosterone', 'Testosterone', 'Testosterone cypionate"	"CHEMBL1201101"	1978
+"TESTOSTERONE ENANTHATE"	"Delatestryl', 'Primoteston depot', 'Testosterone enanthate', 'Xyosted (autoinjector)"	"CHEMBL1200335"	1953
+"TESTOSTERONE PROPIONATE"	"Testosterone propionate"	"CHEMBL1170"	1974
+"TESTOSTERONE UNDECANOATE"	"Andriol', 'Aveed', 'Jatenzo', 'Nebido', 'Restandol', 'Restandol testocap', 'Undestor"	"CHEMBL2107067"	2014
+"TESTOSTERONE"	"Androderm', 'Androgel', 'Androgel 1%', 'Andropatch', 'Axiron', 'Fortesta', 'Intrinsa', 'Natesto', 'Striant', 'Striant sr', 'Testim', 'Testim 1%', 'Testoderm', 'Testoderm tts', 'Testogel', 'Testopatch', 'Testopel', 'Testoral', 'Testosterone', 'Tostran', 'Vogelxo"	"CHEMBL386630"	1972
+"TOREMIFENE CITRATE"	"Fareston"	"CHEMBL1200675"	1997
+"TRETINOIN"	"Acticin', 'Altreno', 'Atralin', 'Avita', 'Renova', 'Retin-a', 'Retin-a micro', 'Retin-a-micro', 'Tretinoin', 'Tretin-X', 'Vesanoid"	"CHEMBL38"	1971
+"TRIAMCINOLONE ACETONIDE"	"Adcortyl', 'Adcortyl in orabase', 'Allernaze', 'Aristocort', 'Aristocort a', 'Aristogel', 'Audicort', 'Aureocort', 'Azmacort', 'Flutex', 'Gppe ear dps cap', 'Gppe ear oint', 'Kenacort', 'Kenalog', 'Kenalog-10', 'Kenalog-40', 'Kenalog-80', 'Kenalog-h', 'Kenalog in orabase', 'Nasacort', 'Nasacort allergy 24 hour', 'Nasacort aq', 'Nasacort hfa', 'Nystadermal', 'Oracort', 'Oralone', 'Pevaryl t.c.', 'Remiderm', 'Remotic', 'Silderm', 'Triacet', 'Triacort', 'Tri-adcortyl', 'Triamcinolone acetonide', 'Triamcinolone acetonide in absorbase', 'Triatex', 'Triderm', 'Triesence', 'Tri-Nasal', 'Trivaris', 'Trymex', 'Vetalog', 'Zilretta"	"CHEMBL1504"	1960
+"TRIAMCINOLONE DIACETATE"	"Aristocort', 'Kenacort', 'Triamcinolone diacetate"	"CHEMBL1200449"	1959
+"TRIAMCINOLONE HEXACETONIDE"	"Aristospan', 'Lederspan"	"CHEMBL1200878"	1969
+"TRIAMCINOLONE"	"Aristocort', 'Aristocort A', 'Delphicort', 'Kenacort', 'Kenalog', 'Triamcinolone', 'Volon"	"CHEMBL1451"	1957
+"TRIFAROTENE"	"Aklief"	"CHEMBL3707313"	2019
+"TROGLITAZONE"	"Prelay', 'Rezulin', 'Romozin"	"CHEMBL408"	1997
+"ULIPRISTAL ACETATE"	"Ella', 'Ellaone', 'Esmya"	"CHEMBL260538"	2010
+"ULIPRISTAL"	"N/A"	"CHEMBL2103846"	"N/A"
+"URSODIOL"	"Actigall', 'Cholurso', 'Destolit', 'Urdox', 'Urso', 'Urso 250', 'Ursodiol', 'Ursofalk', 'Urso forte', 'Ursogal"	"CHEMBL1551"	1987

@@ -32,17 +32,36 @@
                 <p class="card-text"><strong>Strand: </strong>{{htf.strand}}</p>
                 <p class="card-text"><strong>Function: </strong>{{htf.function}}</p>
                 <p class="card-text"><strong>Subcellular Location: </strong>{{htf.sub_cell_location}}</p>
-                <p class="card-text"><strong>Up-regulates: </strong>{{htf.up_reg_gene}}</p>
-                <p class="card-text"><strong>Down-regulates: </strong>{{htf.down_reg_gene}}</p>
-                <p class="card-text"><strong>Unknown Interactions: </strong>{{htf.unknown_interaction}}</p>
+                <p class="card-text"><strong>Up-regulates: </strong></p>
+                  {% if htf.up_reg_gene == 'N/A' %}
+                    <p>N/A</p>
+                  {% else %}
+                    {% for i in up_reg %}
+                      <a href="http://www.ensembl.org/Multi/Search/Results?q={{ i }}">{{i}}</a>
+                    {% endfor %}
+                  {% endif %}
+                <p class="card-text"><strong>Down-regulates: </strong></p>
+                  {% if htf.down_reg_gene == 'N/A' %}
+                    <p>N/A</p>
+                  {% else %}
+                    {% for i in down_reg %}
+                      <a href="http://www.ensembl.org/Multi/Search/Results?q={{ i }}">{{i}}</a>
+                    {% endfor %}
+                  {% endif %}
+                <p class="card-text"><strong>Unknown Interactions: </strong></p>                
+                  {% if htf.unknown_interaction == 'N/A' %}
+                    <p>N/A</p>
+                  {% else %}
+                    {% for i in unknown_interaction %}
+                      <a href="http://www.ensembl.org/Multi/Search/Results?q={{ i }}">{{i}}</a>
                 <p class="card-text"><strong>Associated Drug Compounds: </strong></p>
-                {% if htf.drug_chembl_id == 'N/A' %}
-                N/A
-                {% else %}
-                {% for i, j in zipped %}
-                <a href="https://www.ebi.ac.uk/chembl/compound_report_card/{{ i }}/">{{ i }}</a>: <a href="/drug_search/?Drug={{ j }}&Trade_name=&year_approved=&q=Submit+Query/">{{ j }}</a>,
-                {% endfor %}
-                {% endif %}
+                  {% if htf.drug_chembl_id == 'N/A' %}
+                    <p>N/A</p>
+                  {% else %}
+                    {% for i, j in zipped %}
+                      <a href="https://www.ebi.ac.uk/chembl/compound_report_card/{{ i }}/">{{ i }}</a>: <a href="/drug_search/?Drug={{ j }}&Trade_name=&year_approved=&q=Submit+Query/">{{ j }}</a>,
+                    {% endfor %}
+                  {% endif %}
             </div>
         </div>
     </main>

@@ -56,8 +56,14 @@ def htf_detail(request, gene_name):
     drug_name = str(htf.drug_name).split(',')
     drug_chembl_id = str(htf.drug_chembl_id).split(',')
     zipped = zip(drug_chembl_id, drug_name)
+    up_reg = str(htf.up_reg_gene).split(',')
+    down_reg = str(htf.down_reg_gene).split(',')
+    unknown_interaction = str(htf.unknown_interaction).split(',')
+
     context={
-        "htf":htf, 'zipped':zipped
+        "htf":htf, 'zipped':zipped,
+        "up_reg":up_reg, "down_reg":down_reg,
+        "unknown_interaction":unknown_interaction,
     }
     # Use this context dictionary as an example of another way of releasing this variable
     # for the HTML page to access. Could do {'htf": htf} instead of context.
