@@ -257,7 +257,7 @@ server <- function(input, output) {
 
     # Plot PCA scores
     pca_scores <- reactive({
-        scores <- pca()$x # class matrix expected, correct!
+        scores <- pca()$x
         plot(scores[,1],
              scores[,2],
              xlab = "PC1",
@@ -268,40 +268,20 @@ server <- function(input, output) {
         )
     })
 
-    # Set colours by sample type
+    # Set colours by sample type # TODO: still in progress
     my_cols <- reactive({
-        pDat_col_name <- names(pDat()[input$pca_cols]) # test passed: this prints!
-        pDat_choice <- pDat()[input$pca_cols] # test passed: prints entire column selected by user
+        pDat_col_name <- names(pDat()[input$pca_cols])
+        pDat_choice <- pDat()[input$pca_cols]
         num_sample_types <- length(unique(pDat_choice$pDat_col_name))
 
-        rows <- pDat()[,input$pca_cols] # Test: print all rownames - passed
-        num_rows <- length(unique(rows)) # Test: print num factors - PASSED!
-        unique_rows <- unique(rows) # Test: print unique rows -
+        rows <- pDat()[,input$pca_cols]
+        num_rows <- length(unique(rows))
+        unique_rows <- unique(rows)
         unique_rows
 
-        x <- colnames(pDat()[2]) # Test: print infection - passed!
-        treatment_name <- input$treatment_name # passed!
-        control_name <- input$control_name # passed!
-
-        #print(pDat_col_name) # should print name, test passed!
-        #print(class(pDat_col_name)) # class character
-        #print(pDat_choice) # should print entire column - yes but includes sample names
-        #print(class(pDat_choice)) # class df
-        #print(num_sample_types) # should print num factor levels (2) - failed: prints "0"
-        #print(class(num_sample_types)) # class integer
-        #print(rows) # prints all rownames + includes line of levels (correctly identified)
-        #print(class(rows)) # class factor
-        print(num_rows) # 2
-        #print(class(num_rows)) # integer
-        print(unique_rows) # [1] influenza A      no virus control      Levels: influenza A no virus control
-        #print(class(unique_rows)) # factor
-        #print(x) # infection - passed!
-        #print(treatment_name) # passed!
-        #print(class(treatment_name)) # passed!
-        #print(control_name) # passed!
-        #print(class(control_name)) # passed!
-
-        #my_cols <-
+        x <- colnames(pDat()[2])
+        treatment_name <- input$treatment_name
+        control_name <- input$control_name
 
         #my_cols <- c("#0096FF", "#F8766D", "#E76CF3", "#00BA38")
         #names(my_cols) <- c("Convalescent", "Dengue Hemorrhagic Fever", "Dengue Fever", "healthy control")
