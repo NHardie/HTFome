@@ -32,8 +32,8 @@
                     <a class="nav-link" href="{% url 'documentation' %}">Documentation</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search HTFome..." aria-label="Search">
+            <form class="d-flex" action="{% url 'htf_results' %}" method="get">
+                <input class="form-control me-2" name="q" type="search" placeholder="Search HTFs..." aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
