@@ -3,12 +3,14 @@
 {% block content %}
 
     <main role="main" class="container">
+
         <h1 class="mt-4">HTF Data Search</h1>
         <div class="container">
             <form action="{% url 'htf_results' %}" method="get">
                 <input name="q" type="text" placeholder="Search HTFs...">
             </form>
         </div>
+
         <button onclick="goBack()">Go Back</button>
             <script>
                 function goBack() {
@@ -16,24 +18,24 @@
                 }
             </script>
 
-
-        <div class="card mb-4">
-            <div class="card-body" style="margin-left:15px; font-size:19px">
-                <h5 style="font-weight:600">{{ htf.gene_name }}</h5><hr>
-                <p class="card-text text-muted h6"> Ensemble ID: <a href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g={{ htf.ensemble_id }};r=11:2268495-2270952;t=ENST00000331289/"> {{ htf.ensemble_id }} </a></p>
-                <p class="card-text"> UniProt ID: <a href="https://www.uniprot.org/uniprot/{{htf.uniprot_id}}/">{{htf.uniprot_id}}</a></p>
-                <p class="card-text">Protein name: {{htf.prot_name}}</p>
-                <p class="card-text">DBD name: {{htf.dbd}}</p>
-                <p class="card-text">Chromosome: {{htf.chromosome_name}}</p>
-                <p class="card-text">Gene Start: {{htf.gene_start}}</p>
-                <p class="card-text">Gene End: {{htf.gene_end}}</p>
-                <p class="card-text">Strand: {{htf.strand}}</p>
-                <p class="card-text">Function: {{htf.function}}</p>
-                <p class="card-text">Subcellular Location: {{htf.sub_cell_location}}</p>
-                <p class="card-text">Up-regulates: {{htf.up_reg_gene}}</p>
-                <p class="card-text">Down-regulates: {{htf.down_reg_gene}}</p>
-                <p class="card-text">Unknown Interactions: {{htf.unknown_interaction}}</p>
-                <p class="card-text">Associated Drug Compounds: </p>
+        <div class="info card mb-4">
+            <div class="info card-body">
+                <h2>{{ htf.gene_name }}</h2>
+                <hr>
+                <p class="card-text text-muted h6"><strong>Ensemble ID: </strong><a href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g={{ htf.ensemble_id }};r=11:2268495-2270952;t=ENST00000331289/"> {{ htf.ensemble_id }} </a></p>
+                <p class="card-text"><strong>UniProt ID: </strong><a href="https://www.uniprot.org/uniprot/{{htf.uniprot_id}}/">{{htf.uniprot_id}}</a></p>
+                <p class="card-text"><strong>Protein name: </strong>{{htf.prot_name}}</p>
+                <p class="card-text"><strong>DBD name: </strong>{{htf.dbd}}</p>
+                <p class="card-text"><strong>Chromosome: </strong>{{htf.chromosome_name}}</p>
+                <p class="card-text"><strong>Gene Start: </strong>{{htf.gene_start}}</p>
+                <p class="card-text"><strong>Gene End: </strong>{{htf.gene_end}}</p>
+                <p class="card-text"><strong>Strand: </strong>{{htf.strand}}</p>
+                <p class="card-text"><strong>Function: </strong>{{htf.function}}</p>
+                <p class="card-text"><strong>Subcellular Location: </strong>{{htf.sub_cell_location}}</p>
+                <p class="card-text"><strong>Up-regulates: </strong>{{htf.up_reg_gene}}</p>
+                <p class="card-text"><strong>Down-regulates: </strong>{{htf.down_reg_gene}}</p>
+                <p class="card-text"><strong>Unknown Interactions: </strong>{{htf.unknown_interaction}}</p>
+                <p class="card-text"><strong>Associated Drug Compounds: </strong></p>
                 {% if htf.drug_chembl_id == 'N/A' %}
                 N/A
                 {% else %}
