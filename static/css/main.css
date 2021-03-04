@@ -172,9 +172,13 @@ a.custom-card:hover {
   font-size: 19px;
 }
 
+.drug .info .card-body {
+  height: 850px;
+}
+
 #chembl-object {
   width: 100%;
-  height: 300%;
+  height: 100%;
 }
 
 /*---------------------------------------------------
