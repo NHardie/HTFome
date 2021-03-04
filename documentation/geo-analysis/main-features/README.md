@@ -1,4 +1,4 @@
-#2.5.2. Main features
+# 2.5.2. Main features
 
 Below shows the server reactives along with their associated reactive outputs for each tab item in the dashboard, a description of the reactive functions are also included.
 
