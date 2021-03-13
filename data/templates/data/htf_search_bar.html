@@ -1,0 +1,37 @@
+<!-- Search bar -->
+        <div class="input-group mb-4">
+            <form class="form-floating form-group w-75" action="{% url 'htf_results' %}" method="get">
+                <input name="q" type="text" class="form-control" id="floatingInput" placeholder="Search for HTF..." aria-label="Search for HTF" aria-describedby="basic-addon2">
+                <label for="floatingInput">Search for HTF...</label>
+            </form>
+            <button class="btn btn-outline-secondary btn-lg" type="submit" style="border-radius: .25rem;">
+                <i class="bi bi-search"></i> Search
+            </button>
+
+            <!-- Advanced Search -->
+            <p>
+                <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch">
+                    Advanced Search With Filters
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            </p>
+            <div class="collapse" id="collapseSearch">
+                <div class="advanced card card-body mb-4">
+                    <form action="/htf_search/" method="get">
+                        <div class="row">
+                            <div class="form-group col-md-4 mb-3"> <input name="Gene" id="id_Gene" type="text" class="form-control" placeholder="Gene name"> </div>
+                            <div class="form-group col-md-4 mb-3"> <input name="Chromosome" id="id_Chromosome" type="text" class="form-control" placeholder="Chromosome"> </div>
+                            <div class="form-group col-md-4 mb-3"> <input name="Protein" id="id_Protein" type="text" class="form-control" placeholder="Protein name"> </div>
+                            <div class="form-group col-md-6 mb-3"> <input name="Function" id="id_Function" type="text" class="form-control" placeholder="Function"> </div>
+                            <div class="form-group col-md-6 mb-3"> <input name="Location" id="id_Location" type="text" class="form-control" placeholder="Subcellular location"> </div>
+                            <div class="form-group col-md-4 mb-3"> <input name="Up_Reg" id="id_Up_Reg" type="text" class="form-control" placeholder="Up-regulates gene name"> </div>
+                            <div class="form-group col-md-4 mb-3"> <input name="Down_Reg" id="id_Down_Reg" type="text" class="form-control" placeholder="Down-regulates gene name"> </div>
+                            <div class="form-group col-md-4 mb-3"> <input name="Drug_Name" id="id_Drug_Name" type="text" class="form-control" placeholder="Drug name"> </div>
+                        </div>
+                        <input name="q" type="submit" class="btn btn-primary me-md-2">
+                    </form>
+                </div>
+            </div>
+        </div>
