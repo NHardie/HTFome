@@ -3,20 +3,20 @@
 {% block content %}
 
     <main role="main" class="drug container">
-        <h1 class="mt-4">Drug Data Search</h1>
-        <div class="container">
-            <form action="{% url 'drug_results' %}" method="get">
-                <input name="q" type="text" placeholder="Search drugs...">
-            </form>
-        </div>
-        <button onclick="goBack()">Go Back</button>
+
+        <!-- Title -->
+        <h1 class="mt-4">Drug Search</h1>
+        <p class="lead">Search for drugs that target human transcription factors</p>
+
+        <!-- Back button -->
+        <button type="button" class="return btn btn-link" onclick="goBack()"><i class="bi bi-arrow-left"></i> Back to search results</button>
             <script>
                 function goBack() {
                 window.history.back();
                 }
             </script>
 
-
+        <!-- Drug Info Card -->
         <div class="drug info card mb-4">
             <div class="info card-body">
                 <h2>{{ drug.drug_name }}</h2>
