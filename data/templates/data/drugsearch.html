@@ -3,93 +3,124 @@
 {% block content %}
 
     <main role="main" class="container">
-        <h1 class="mt-4">Drug Data Search</h1>
-        <div class="container">
-            <form action="{% url 'drug_results' %}" method="get">
-                {{ filter.form.as_table }}
-                <input name="q" type="submit">
-            </form>
+
+
+        <!-- Title -->
+        <h1 class="mt-4">Drug Search</h1>
+        <p class="lead">Search for drugs that target human transcription factors</p>
+
+        {% include 'data/drug_search_bar.html' %}
+
+        <!--
+        <div class="collapse" id="collapseSearch">
+            <div class="advanced card card-body mb-4">
+                <div class="col">
+                    <div class="form-group col-md-4 mb-3">
+                        <form action="{% url 'drug_results' %}" method="get">
+                            <div class="form-group col-md-4 mb-3">
+                                {{ filter.form.as_table }}
+                            </div>
+                            <input name="q" type="submit" placeholder="">
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="container">
-            <form action="{% url 'drug_results' %}" method="get">
-                <input name="q" type="text" placeholder="Search All...">
-            </form>
-        </div>
-            <button onclick="goBack()">Go Back</button>
+        -->
+
+        <!-- Back button -->
+        <button type="button" class="return btn btn-link" onclick="goBack()"><i class="bi bi-arrow-left"></i> Go back</button>
             <script>
                 function goBack() {
                 window.history.back();
                 }
             </script>
 
-        <h1>Drug Data Repo</h1>
+        <!-- Drug Search Result Cards -->
         {% if page_obj %}
-        Search Results for: {{ request.GET.q }}
+            <h5>Search Results for: {{ request.GET.q }}</h5>
             {% for drug in page_obj %}
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5>Name: <a href="/drug/{{ drug.drug_name }}/">{{ drug.drug_name }}</a></h5>
-                    <p class="card-text">ChEMBL ID: {{ drug.drug_chembl_id }} </p>
-                    <p class="card-text">Trade name(s): {{drug.trade_name}}</p>
-                    <p class="card-text">Year Approved: {{drug.year_approved}}</p>
+                <div class="search-result card mb-4">
+                    <a href="/drug/{{ drug.drug_name }}/" class="link-text">
+                        <div class="search-result card-body">
+                            <h5>{{ drug.drug_name }}</h5>
+                            <p class="card-text text-muted h6">ChEMBL ID: {{ drug.drug_chembl_id }} </p>
+                            <p class="card-text">Trade name(s): {{drug.trade_name}}</p>
+                            <p class="card-text">Year Approved: {{drug.year_approved}}</p>
+                        </div>
+                    </a>
                 </div>
-            </div>
-                {% empty %}
-                    <h5>No results found</h5>
-            {% endfor %}
-        {% else %}
-            Search Results for: {% if request.GET.Drug %}
-            Drug: "{{ request.GET.Drug }}"
-            {% endif %} {% if request.GET.Trade_name %}
-            Trade name: "{{ request.GET.Trade_name }}" {% endif %}
-            {% if request.GET.year_approved %}
-            Molecule Type: "{{ request.GET.Year_approved }}" {% endif %}
 
-        {% for drug in page_obj_1 %}
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5>Name: <a href="/drug/{{ drug.drug_name }}/">{{ drug.drug_name }}</a></h5>
-                    <p class="card-text">ChEMBL ID: {{ drug.drug_chembl_id }}</p>
-                    <p class="card-text">Trade name(s): {{drug.trade_name}}</p>
-                </div>
-            </div>
+            <!-- If no results -->
             {% empty %}
-                <h5>No results found</h5>
-        {% endfor %}
+                <h4>No results found</h4>
+            {% endfor %}
+
+        <!-- Get Drug Info -->
+        {% else %}
+            <h5>Search Results for:
+                {% if request.GET.Drug %}
+                    Drug: "{{ request.GET.Drug }}"
+                {% endif %}
+                {% if request.GET.Trade_name %}
+                    Trade name: "{{ request.GET.Trade_name }}"
+                {% endif %}
+                {% if request.GET.year_approved %}
+                    Molecule Type: "{{ request.GET.Year_approved }}"
+                {% endif %}
+            </h5>
+
+            {% for drug in page_obj_1 %}
+                <div class="search-result card mb-4">
+                    <a href="/drug/{{ drug.drug_name }}/" class="link-text">
+                        <div class="search-result card-body">
+                            <h5>{{ drug.drug_name }}</h5>
+                            <p class="card-text text-muted h6">ChEMBL ID: {{ drug.drug_chembl_id }}</p>
+                            <p class="card-text">Trade name(s): {{drug.trade_name}}</p>
+                        </div>
+                    </a>
+                </div>
+
+            <!-- If no results -->
+            {% empty %}
+                <h4>No results found</h4>
+            {% endfor %}
         {% endif %}
 
-        <div class="pagination">
-            <span class="step-links">
+        <!-- Pagination -->
+        <nav aria-label="page navigation">
+            <ul class="pagination">
                 {% if page_obj %}
                     {% if page_obj.has_previous %}
-                        <a href="?page=1&q={{ new_request }}">&laquo; first</a>
-                        <a href="?page={{ page_obj.previous_page_number }}&q={{ new_request }}">previous</a>
+                        <li class="page-item"><a class="page-link" href="?page=1&q={{ new_request }}">&laquo; first</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ new_request }}">previous</a></li>
                     {% endif %}
                 {% else %}
                     {% if page_obj_1.has_previous %}
-                        <a href="?page=1&q={{ new_request }}">&laquo; first</a>
-                        <a href="?page={{ page_obj_1.previous_page_number }}&q={{ new_request }}">previous</a>
+                        <li class="page-item"><a class="page-link" href="?page=1&q={{ new_request }}">&laquo; first</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj_1.previous_page_number }}&q={{ new_request }}">previous</a></li>
                     {% endif %}
                 {% endif %}
                 <span class="current">
                     {% if page_obj %}
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        <li class="page-item"><a class="htf-drug page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a></li>
                     {% else %}
-                        Page {{ page_obj_1.number }} of {{ page_obj_1.paginator.num_pages }}.
+                        <li class="page-item"><a class="htf-drug page-link">Page {{ page_obj_1.number }} of {{ page_obj_1.paginator.num_pages }}</a></li>
                     {% endif %}
                 </span>
                 {% if page_obj %}
                     {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}&q={{ new_request }}">next</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ new_request }}">next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a></li>
                     {% endif %}
                 {% else %}
                     {% if page_obj_1.has_next %}
-                        <a href="?page={{ page_obj_1.next_page_number }}&q={{ new_request }}">next</a>
-                        <a href="?page={{ page_obj_1.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj_1.next_page_number }}&q={{ new_request }}">next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj_1.paginator.num_pages }}&q={{ new_request }}">last &raquo;</a></li>
                     {% endif %}
                 {% endif %}
-            </span>
-        </div>
+            </ul>
+        </nav>
+
     </main>
 {% endblock content %}

@@ -4,20 +4,19 @@
 
     <main role="main" class="container">
 
-        <h1 class="mt-4">HTF Data Search</h1>
-        <div class="container">
-            <form action="{% url 'htf_results' %}" method="get">
-                <input name="q" type="text" placeholder="Search HTFs...">
-            </form>
-        </div>
+        <!-- Title -->
+        <h1 class="mt-4">HTF Search</h1>
+        <p class="lead">Search for human transcription factors</p>
 
-        <button onclick="goBack()">Go Back</button>
+        <!-- Back button -->
+        <button type="button" class="return btn btn-link" onclick="goBack()"><i class="bi bi-arrow-left"></i> Back to search results</button>
             <script>
                 function goBack() {
                 window.history.back();
                 }
             </script>
 
+        <!-- HTF Info Card -->
         <div class="info card mb-4">
             <div class="info card-body">
                 <h2>{{ htf.gene_name }}</h2>

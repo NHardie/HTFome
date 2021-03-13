@@ -1,42 +1,41 @@
 {% extends "data/base.html" %}
 
 {% block content %}
-
     <main role="main" class="container">
+
+        <!-- Title -->
         <h1 class="mt-4">{{ title }}</h1>
         <p class="lead">Search for human transcription factors</p>
-        <div class="container">
-            <form action="{% url 'htf_results' %}" method="get">
-                <input name="q" type="text" placeholder="Search HTFs...">
-            </form>
-        </div>
 
+        {% include 'data/htf_search_bar.html' %}
+
+        <!-- HTF Cards -->
         {% for htf in page_obj %}
             <div class="search-result card mb-4">
-                <div class="search-result card-body">
-                    <h5>Name: <a href="/htf/{{ htf.gene_name }}/">{{ htf.gene_name }}</a></h5>
-                    <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
-                    <p class="card-text">Protein name: {{htf.prot_name}}</p>
-                </div>
+                <a href="/htf/{{ htf.gene_name }}/" class="link-text">
+                    <div class="search-result card-body">
+                        <h5>{{ htf.gene_name }}</h5>
+                        <p class="card-text text-muted h6">Ensemble ID: {{ htf.ensemble_id }} </p>
+                        <p class="card-text">Protein name: {{htf.prot_name}}</p>
+                    </div>
+                </a>
             </div>
         {% endfor %}
 
-        <div class="pagination">
-            <span class="step-links">
+        <!-- Pagination -->
+        <nav aria-label="page navigation">
+            <ul class="pagination">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
                 {% endif %}
-
-                <span class="current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span>
-
+                <li class="page-item"><a class="htf-drug page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a></li>
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
                 {% endif %}
-            </span>
-        </div>
+            </ul>
+        </nav>
+
     </main>
 {% endblock content %}
