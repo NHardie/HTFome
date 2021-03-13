@@ -1,0 +1,32 @@
+<!-- Search bar -->
+        <div class="input-group mb-4">
+            <form class="form-floating form-group w-75" action="{% url 'drug_results' %}" method="get">
+                <input name="q" type="text" class="form-control" id="floatingInput" placeholder="Search for drug..." aria-label="Search for drug" aria-describedby="basic-addon2">
+                <label for="floatingInput">Search for drug...</label>
+            </form>
+            <button class="btn btn-outline-secondary btn-lg" type="button" style="border-radius: .25rem;">
+                <i class="bi bi-search"></i> Search
+            </button>
+
+            <!-- Advanced Search -->
+            <p>
+                <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch">
+                    Advanced Search With Filters
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            </p>
+            <div class="collapse" id="collapseSearch">
+                <div class="advanced card card-body mb-4">
+                    <form action="/drug_search/" method="get">
+                        <div class="row">
+                            <div class="form-group col-md-4 mb-3"> <input name="Drug" id="id_Drug" type="text" class="form-control" placeholder="Drug name"> </div>
+                            <div class="form-group col-md-4 mb-3"> <input name="Trade_name" id="id_Trade_name" type="text" class="form-control" placeholder="Trade name"> </div>
+                            <div class="form-group col-md-4 mb-3"> <input name="Year_approved" id="id_Year_approved" type="text" class="form-control" placeholder="Year approved"> </div>
+                        </div>
+                        <input name="q" type="submit" class="btn btn-primary me-md-2">
+                    </form>
+                </div>
+            </div>
+        </div>
