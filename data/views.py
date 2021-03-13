@@ -29,7 +29,7 @@ from .filters import Htffilter, Drugfilter
 
 def home(request):
     # Define function, what to do when a request comes
-    return render(request, "data/home.html", {'title': 'The Human Transcription Factor Database'})
+    return render(request, "data/home.html", {'title': 'The Human Transcription Factor Explorer'})
     # return render of template located in data/templates/data/home.html
 
 def htf(request):
