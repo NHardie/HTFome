@@ -4,7 +4,7 @@
 
 _[HTFome](https://htfome.com/) is a publicly available web application that provides 
 up-to-date information on Human Transcription Factors (HTFs), drugs which target HTFs, 
-and allows users to upload gene expression data for further HTF analysis._
+and allows users to upload gene expression data for further HTF analysis. Gene expresion data analyser is available at [geostuff.shinyapps.io](https://geostuff.shinyapps.io/HTFome-GEO-Analyser/?_ga=2.21754107.1771952832.1622901748-1004923329.1614783311)_
 
 <hr>
 
